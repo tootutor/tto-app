@@ -1,0 +1,227 @@
+<div ng-show="!itemDetail.editMode">
+	<md-content>
+		<md-card>
+			<md-toolbar>
+				<div class="md-toolbar-tools">
+					<span flex></span>
+					<md-button class="md-icon-button" ng-click="enableEdit(itemDetail)">
+						<md-icon>create</md-icon>
+					</md-button>
+				</div>
+			</md-toolbar>
+			<md-card-content layout="column">
+				<h2 class="md-title" ng-if="itemDetail.showOption == '1'">Explanation</h2>
+				<!-- Use markdown katex for all type except type 6 and 7 (JSXGraph, Yoututbe) -->
+				<div ng-if="itemDetail.itemTypeId < 5" layout="column" layout-align="start start">
+					<tto-mark ng-model="itemDetail.content" process="['ams']"></tto-mark>
+				</div>
+				<!-- Use SVG for type 5 -->
+				<div ng-if="itemDetail.itemTypeId == 5" layout="column" layout-align="center center">
+					<ktx ng-model="itemDetail.content"></ktx>
+				</div>
+				<!-- Use JSXGraph logic for type 6 -->
+				<div ng-if="itemDetail.itemTypeId == 6" layout="column" layout-align="center center">
+					<jsx-jc dump="true" ng-model="itemDetail.content"></jsx-jc>
+				</div>
+				<!-- Use Youtube for type 7 -->
+				<div ng-if="itemDetail.itemTypeId == 7">
+					<youtube-video video-id="itemDetail.content" player-width="'100%'"></youtube-video>	
+				</div>
+				<!-- Use Slide for type 8 -->
+				<div ng-if="itemDetail.itemTypeId == 8">
+					<slide ng-model="itemDetail.content"></slide>	
+				</div>
+				<!-- Use Image with DataURI for type 9 -->
+				<div ng-if="itemDetail.itemTypeId == 9" layout="column" layout-align="center center">
+					<img ng-src="{{itemDetail.content}}" style="max-width:100%; max-height:100%;">
+				</div>
+				<!-- Type == Radio -->
+				<div ng-if="itemDetail.itemTypeId == 1">
+					<md-radio-group ng-model="itemDetail.userItemRadioId">
+						<md-radio-button ng-repeat="itemRadio in itemDetail.allItemRadio" layout-lign="start center"
+							value="{{itemRadio.itemRadioId}}" disabled="disabled" aria-label="radio-button"
+						>
+							<i class="fa fa-times-circle" style="color:red" ng-if="itemRadio.isAnswer==0"></i>
+							<i class="fa fa-check-circle" style="color:green" ng-if="itemRadio.isAnswer==1"></i>
+							<ktx ng-model="itemRadio.content"></ktx>
+						</md-radio-button>
+					</md-radio-group>
+				</div>
+				<!-- Type == Select -->
+				<div ng-if="itemDetail.itemTypeId == 3">
+					<div ng-repeat="itemSelect in itemDetail.allItemSelect" layout="row" layout-align="start center">
+						<md-checkbox ng-model="itemSelect.userIsAnswer" disabled="disabled"	aria-label="checkbox">
+						</md-checkbox>
+						<i class="fa fa-times-circle" style="color:red" ng-if="itemSelect.isAnswer==0"></i>
+						<i class="fa fa-check-circle" style="color:green" ng-if="itemSelect.isAnswer==1"></i>
+						<ktx ng-model="itemSelect.content"></ktx>
+					</div>
+				</div>
+				<!-- Type == Input -->
+				<div ng-if="itemDetail.itemTypeId == 4" layout="column">
+					<div ng-repeat="itemInput in itemDetail.allItemInput">
+						<md-ktx ng-model="itemInput.question"></md-ktx>
+						<div layout="row">
+							<md-input-container flex>
+								<label>Your answer</label>
+								<input ng-model="itemInput.userAnswer" disabled="disabled">
+							</md-input-container>
+							<md-input-container flex>
+								<label>Correct answer</label>
+								<input ng-model="itemInput.answer" disabled="disabled">
+							</md-input-container>
+							<i class="fa fa-times-circle" style="color:red" ng-if="itemDetail.status=='done' && itemInput.answer!=itemInput.userAnswer"></i>
+							<i class="fa fa-check-circle" style="color:green" ng-if="itemDetail.status=='done' && itemInput.answer==itemInput.userAnswer"></i>
+						</div>
+					</div>
+				</div>
+				
+				<div ng-show="itemDetail.status == 'done'" class="md-title" layout="row" layout-align="end center">
+					<p style="color:green" ng-if="itemDetail.point>0">{{itemDetail.point}} &#9733;</p>
+					<p style="color:red" ng-if="itemDetail.point<=0">{{itemDetail.point}} &#9733;</p>
+				</div>
+				
+				<small><small>{{itemDetail.code}} - {{itemDetail.itemDetailId}} - {{itemDetail.seq}}</small></small>
+			</md-card-content>
+		</md-card>
+
+	</md-content>
+</div>
+
+<div ng-show="itemDetail.editMode">
+	<md-content>
+		<md-card>
+			<md-toolbar class="md-accent">
+				<div class="md-toolbar-tools">
+					<md-button class="md-icon-button"	ng-click="disableEdit(itemDetail)">
+						<md-icon>visibility</md-icon>
+					</md-button>
+					<span flex></span>
+					<md-button class="md-icon-button" ng-click="saveToLocalStorage(itemDetail);">
+						<md-icon>content_copy</md-icon>
+					</md-button>
+					<md-button class="md-icon-button" ng-click="loadFromLocalStorage(itemDetail);">
+						<md-icon>content_paste</md-icon>
+					</md-button>
+					<md-button class="md-icon-button" ng-click="loadDataURI(itemDetail);">
+						<md-icon>photo</md-icon>
+					</md-button>
+					<span flex></span>
+					<md-button class="md-icon-button"	ng-click="updateItemDetail(itemDetail)">
+						<md-icon>check</md-icon>
+					</md-button>
+				</div>
+			</md-toolbar>
+			<md-card-content>
+				<div layout="row">
+					<div flex="25" layout="column">
+						<md-input-container flex>
+							<label>Seq</label>
+							<input ng-model="itemDetail.seq">
+						</md-input-container>
+					</div>
+					<div flex="25" layout="column">
+						<md-input-container flex>
+							<label>ItemType</label>
+							<md-select placeholder="Type" ng-model="itemDetail.itemTypeId">
+								<md-option ng-repeat="itemType in $root.allItemType" value="{{itemType.itemTypeId}}">
+									{{itemType.name}} 
+								</md-option>
+							</md-select>
+						</md-input-container>
+					</div>
+					<div flex="25" layout="column">
+						<md-input-container flex>
+							<label>IsAction</label>
+							<input ng-model="itemDetail.isAction">
+						</md-input-container>
+					</div>
+					<div flex="25" layout="column">
+						<md-input-container flex>
+							<label>showOption</label>
+							<input ng-model="itemDetail.showOption">
+						</md-input-container>
+					</div>
+				</div>
+
+				<div layout layout-sm="column">
+					<md-input-container flex>
+						<label>Code</label>
+						<input ng-model="itemDetail.code">
+					</md-input-container>
+				</div>
+				<div layout layout-sm="column">
+					<md-input-container flex>
+						<label>Content</label>
+						<textarea ng-model="itemDetail.content"></textarea>
+					</md-input-container>
+				</div>
+				<div ng-if="itemDetail.itemTypeId == 1" layout="column">
+					<div ng-repeat="itemRadio in itemDetail.allItemRadio" layout="row">
+						<md-input-container flex="70">
+							<label>Content</label>
+							<input ng-model="itemRadio.content">
+						</md-input-container>
+						<md-input-container flex="10">
+							<label>Ans</label>
+							<input ng-model="itemRadio.isAnswer">
+						</md-input-container>
+						<md-input-container flex="10">
+							<label>Pts</label>
+							<input ng-model="itemRadio.point">
+						</md-input-container>
+						<md-button class="md-icon-button" aria-label="Edit" 
+							ng-click="updateItemRadio(itemRadio)">
+							<md-icon>check_circle</md-icon>
+						</md-button>
+					</div>
+				</div>
+				<div ng-if="itemDetail.itemTypeId == 3" layout="column">
+					<div ng-repeat="itemSelect in itemDetail.allItemSelect" layout="row">
+						<md-input-container flex="70">
+							<label>Content</label>
+							<input ng-model="itemSelect.content">
+						</md-input-container>
+						<md-input-container flex="10">
+							<label>Ans</label>
+							<input ng-model="itemSelect.isAnswer">
+						</md-input-container>
+						<md-input-container flex="10">
+							<label>Pts</label>
+							<input ng-model="itemSelect.point">
+						</md-input-container>
+						<md-button class="md-icon-button" aria-label="Edit" 
+							ng-click="updateItemSelect(itemSelect)">
+							<md-icon>check_circle</md-icon>
+						</md-button>
+					</div>
+				</div>
+				<div ng-if="itemDetail.itemTypeId == 4" layout="column">
+					<div ng-repeat="itemInput in itemDetail.allItemInput" layout="row">
+						<md-input-container flex="50">
+							<label>Question</label>
+							<input ng-model="itemInput.question">
+						</md-input-container>
+						<md-input-container flex="20">
+							<label>Ans</label>
+							<input ng-model="itemInput.answer">
+						</md-input-container>
+						<md-input-container flex="10">
+							<label>Type</label>
+							<input ng-model="itemInput.answerType">
+						</md-input-container>
+						<md-input-container flex="10">
+							<label>Pts</label>
+							<input ng-model="itemInput.point">
+						</md-input-container>
+						<md-button class="md-icon-button" aria-label="Edit" 
+							ng-click="updateItemInput(itemInput)">
+							<md-icon>check_circle</md-icon>
+						</md-button>
+					</div>
+				</div>
+
+			</md-card-content>
+		</md-card>
+	</md-content>
+</div>

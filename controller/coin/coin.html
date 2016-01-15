@@ -1,0 +1,116 @@
+<md-content layout="column" layout-align="center center" ng-cloak>
+  <div flex style="max-width: 500px;" layout-padding>
+		<form name="newCoinForm" ng-submit="coinNewOrder();">
+			<md-card>
+				<md-toolbar>
+					<div class="md-toolbar-tools">
+						<h4>
+							<span class="fa-stack fa-lg">
+								<i class="fa fa-star fa-stack-1x"></i>
+							</span>
+							My Coins : {{myCoin}}
+						</h4>
+						<span flex></span>
+						<md-button ng-if="neworder.amount" class="md-icon-button" aria-label="Submit" type="submit">
+							<md-icon>shopping_cart</md-icon>
+						</md-button>  
+					</div>
+				</md-toolbar>
+				<md-card-content flex layout="column" layout-align="center center">
+					<md-input-container layout-fill>
+						<label>เลือก package เพื่อเติม &starf; แล้วกดปุ่มรถเข็น</label>
+						<md-select ng-model="neworder.amount" required>
+							<md-option ng-repeat="package in allPackage" value={{package.amount}}>
+								{{package.amount}} Baht : {{package.coin}} + {{package.bonus}} Coins
+							</md-option>
+						</md-select>
+					</md-input-container>
+				</md-card-content>
+			</md-card>
+    </form>    	
+
+		<div ng-repeat="order in orderList | orderBy:'-status'">
+			<div ng-if="order.status == 'order'">
+				<form name="coinForm" ng-submit="coinConfirmOrder(order)">
+					<md-card class="{{order.status}}">
+						<md-toolbar class="md-warn">
+							<div class="md-toolbar-tools">
+								<h4>
+									<span class="fa-stack fa-lg">
+										<i class="fa fa-money fa-stack-1x"></i>
+									</span>
+									แจ้งโอนเงินได้ที่นี่
+								</h4>
+								<span flex></span>
+								<md-button ng-if="coinForm.$valid" class="md-icon-button" aria-label="Submit" type="submit">
+									<md-icon>check</md-icon>
+								</md-button>  
+							</div>
+						</md-toolbar>
+						<md-card-content layout="column" layout-align="start start">
+							<div layout="column">
+								<h4>{{ order.amount }} Bath :  {{ order.coin }} + {{order.bonus}} coins</h4>
+								<md-radio-group ng-model="order.bankId" required flex>
+									<md-radio-button ng-repeat="bank in allBank" value="{{bank.bankId}}" ng-disabled="itemDetail.status == 'done'">
+										{{bank.account}} - {{bank.name}} - {{bank.bank}} ({{bank.branch}})
+									</md-radio-button>
+								</md-radio-group>
+								<div layout="row" layout-xs="column">
+									<md-input-container layout-fill>
+										<label>Transfer Date</label>
+										<input type="date" ng-model="order.updatedTransferDate" ng-required="true">
+									</md-input-container>
+									<md-input-container layout-fill>
+										<label>Transfer Amount (Baht)</label>
+										<input type="text" ng-model="order.updatedTransferAmount" ng-required="true">
+									</md-input-container>
+								</div>
+							</div>
+							<small><small>Order created @ {{ order.timestamp }}</small></small>
+						</md-card-content>
+					</md-card>
+				</form>
+			</div>
+
+			<div ng-if="order.status == 'confirm'">
+				<md-card class="{{order.status}}">
+					<md-toolbar>
+						<div class="md-toolbar-tools">
+							<h4>
+								<span class="fa-stack fa-lg">
+									<i class="fa fa-clock-o fa-stack-1x"></i>
+								</span>
+								ได้รับการยืนยัน กำลังรอดำเนินการ
+							</h4>
+							<span flex></span>
+						</div>
+					</md-toolbar>
+					<md-card-content layout="column" layout-align="start start">
+						<p>{{order.transferAmount}} Baht : {{order.coin}} + {{order.bonus}} coins; Transfer @ {{order.transferDate}}</p>
+						<small><small>Order created @ {{ order.timestamp }}</small></small>
+					</md-card-content>
+				</md-card>>
+			</div>
+	
+			<div ng-if="order.status == 'approve'">
+				<md-card class="{{order.status}}">
+					<md-toolbar>
+						<div class="md-toolbar-tools">
+							<h4>
+								<span class="fa-stack fa-lg">
+									<i class="fa fa-check-circle-o fa-stack-1x"></i>
+								</span>
+								ดำเนินการเรียบร้อยแล้ว
+							</h4>
+							<span flex></span>
+						</div>
+					</md-toolbar>
+					<md-card-content layout="column" layout-align="start start">
+						<p>{{order.transferAmount}} Baht : {{order.coin}} + {{order.bonus}} coins; Transfer @ {{order.transferDate}}</p>
+						<small><small>Order created @ {{ order.timestamp }}</small></small>
+					</md-card-content>
+				</md-card>
+			</div>
+		</div>
+	</div>
+</md-content>

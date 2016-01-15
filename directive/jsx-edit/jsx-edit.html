@@ -1,0 +1,235 @@
+<div flex class="md-actions" layout="row" layout-align="space-between center">
+	<md-button class="md-icon-button" ng-show="!isShowOption" ng-click="isShowOption=!isShowOption">
+		<md-icon>settings</md-icon>
+	</md-button>
+	<md-button class="md-icon-button md-accent" ng-show="isShowOption" ng-click="isShowOption=!isShowOption">
+		<md-icon>settings</md-icon>
+	</md-button>
+
+	<md-button class="md-icon-button" ng-click="refreshJSX();">
+		<md-icon>refresh</md-icon>
+	</md-button>
+
+	<md-button class="md-icon-button" ng-show="!isActionMode" ng-click="isActionMode=!isActionMode">
+		<md-icon>add_circle</md-icon>
+	</md-button>
+	<md-button class="md-icon-button md-accent" ng-show="isActionMode" ng-click="isActionMode=!isActionMode">
+		<md-icon>add_circle</md-icon>
+	</md-button>
+
+	<md-button class="md-icon-button" ng-show="!isEditMode" ng-click="isEditMode=!isEditMode">
+		<md-icon>create</md-icon>
+	</md-button>
+	<md-button class="md-icon-button md-accent" ng-show="isEditMode" ng-click="isEditMode=!isEditMode">
+		<md-icon>create</md-icon>
+	</md-button>
+
+	<md-button class="md-icon-button" ng-click="undoJSX();">
+		<md-icon>undo</md-icon>
+	</md-button>
+
+	<md-button class="md-icon-button" ng-click="loadJSX();">
+		<md-icon>folder_open</md-icon>
+	</md-button>
+
+	<md-button class="md-icon-button" ng-click="dumpJSX();">
+		<md-icon>save</md-icon>
+	</md-button>
+</div>
+
+<md-divider></md-divider>
+
+<div flex ng-show="isShowOption" layout="column">
+	<div class="md-actions" layout="row" layout-align="start start">
+	  <div flex="20" layout="column">
+	    <md-input-container flex>
+	      <label>Width</label>
+	      <input ng-model="option.style.width">
+	    </md-input-container>
+	  </div>
+	  <div flex="20" layout="column">
+	    <md-input-container flex>
+	      <label>Height</label>
+	      <input ng-model="option.style.height">
+	    </md-input-container>
+	  </div>
+	  <div flex="15" layout="column">
+	    <md-input-container flex>
+	      <label>X1</label>
+	      <input ng-model="option.jsxgraph.boundingbox[0]" type="number">
+	    </md-input-container>
+	  </div>
+	  <div flex="15" layout="column">
+	    <md-input-container flex>
+	      <label>Y1</label>
+	      <input ng-model="option.jsxgraph.boundingbox[1]" type="number">
+	    </md-input-container>
+	  </div>
+	  <div flex="15" layout="column">
+	    <md-input-container flex>
+	      <label>X2</label>
+	      <input ng-model="option.jsxgraph.boundingbox[2]" type="number">
+	    </md-input-container>
+	  </div>
+	  <div flex="15" layout="column">
+	    <md-input-container flex>
+	      <label>Y2</label>
+	      <input ng-model="option.jsxgraph.boundingbox[3]" type="number">
+	    </md-input-container>
+	  </div>
+	</div>
+	<div class="md-actions" layout="row" layout-align="start start">
+	  <md-checkbox ng-model="option.jsxgraph.axis">Axis</md-checkbox>
+	  <md-checkbox ng-model="option.jsxgraph.keepaspectratio">Ratio</md-checkbox>
+	  <md-checkbox ng-model="option.jsxgraph.showCopyright">Copy</md-checkbox>
+	  <md-checkbox ng-model="option.jsxgraph.showNavigation">Nav</md-checkbox>
+	</div>
+</div>
+
+<div ng-show="isActionMode">
+	<md-divider></md-divider>
+	
+	<div class="md-actions" layout="row" layout-align="space-between center">
+	  <div flex="50" layout="row">
+	    <md-input-container flex>
+	      <label>Action</label>
+			  <md-select placeholder="Type" ng-model="selectedAction">
+			    <md-option ng-repeat="action in allAction" value="{{action.name}}">
+			    	{{action.name}}
+			    </md-option>
+			  </md-select>
+	    </md-input-container>
+	  </div>
+	  <div flex="10" layout="column">
+	    <md-input-container flex>
+	      <label>X</label>
+	      <input ng-model="initVal.x" type="number">
+	    </md-input-container>
+	  </div>
+	  <div flex="10" layout="column">
+	    <md-input-container flex>
+	      <label>Y</label>
+	      <input ng-model="initVal.y" type="number">
+	    </md-input-container>
+	  </div>
+	  <div flex="10" layout="column">
+	    <md-input-container flex>
+	      <label>N</label>
+	      <input ng-model="initVal.n" type="number">
+	    </md-input-container>
+	  </div>
+	  <div flex="10" layout="column">
+			<md-button class="md-fab md-mini md-primary" aria-label='action' ng-click="actionJSX();">
+			  <md-icon>check</md-icon>
+			</md-button>
+	  </div>
+	</div>
+	
+	<div class="md-actions" layout="row" layout-align="space-between center">
+	  <div flex layout="column" ng-show="selectedAction=='addText'">
+	    <md-input-container flex>
+	      <label>Text</label>
+	      <input ng-model="initVal.text">
+	    </md-input-container>
+	  </div>
+    <div flex layout="column" ng-show="selectedAction=='addImage'">
+		  <div flex layout="column">
+		    <md-input-container flex>
+		      <label>Image</label>
+		      <input ng-model="initVal.image">
+		    </md-input-container>
+	    </div>
+    	<div flex layout="row" layout-align="space-between center">
+		    <md-input-container flex>
+		      <label>Action</label>
+				  <md-select placeholder="Source" ng-model="selectedImageSource">
+				    <md-option ng-repeat="imageSource in allImageSource" value="{{imageSource.source}}">
+				    	{{imageSource.name}}
+				    </md-option>
+				  </md-select>
+		    </md-input-container>
+				<md-button class="md-icon-button md-accent" aria-label='load' ng-click="loadDataURI();">
+				  <md-icon>content_paste</md-icon>
+				</md-button>
+    	</div>
+	  </div>
+	  <div flex layout="column" ng-show="selectedAction=='addJessie'">
+	    <md-input-container flex>
+	      <label>Jessie Code</label>
+	      <input ng-model="initVal.jessie">
+	    </md-input-container>
+	  </div>
+	</div>
+</div>
+
+<md-divider></md-divider>
+
+<div class="jsxmain" layout="column" layout-align="center center">
+	<!--This DIV must be here, any changes need to be in sync with javascript-->
+	<div id="dummy-id" class="dummy jxgbox"></div>
+</div>
+
+<div ng-show="isEditMode">
+	<md-divider></md-divider>
+
+	<div flex layout="row" layout-wrap>
+	  <md-input-container ng-show="editAttr.name != undefined">
+	    <label>Name ({{selectedObj.getType();}})</label>
+	    <input ng-model="editAttr.name">
+	  </md-input-container>
+	  <md-input-container ng-show="editAttr.size != undefined">
+	    <label>Size</label>
+	    <input ng-model="editAttr.size" type="number">
+	  </md-input-container>
+	  <md-input-container ng-show="editAttr.strokecolor != undefined">
+	    <label>StrokeColor</label>
+	    <input ng-model="editAttr.strokecolor">
+	  </md-input-container>
+	  <md-input-container ng-show="editAttr.strokewidth != undefined">
+	    <label>StrokeWidth</label>
+	    <input ng-model="editAttr.strokewidth" type="number">
+	  </md-input-container>
+	  <md-input-container ng-show="editAttr.fillcolor != undefined">
+	    <label>FillColor</label>
+	    <input ng-model="editAttr.fillcolor">
+	  </md-input-container>
+	  <md-input-container ng-show="editAttr.radius != undefined">
+	    <label>Radius</label>
+	    <input ng-model="editAttr.radius" type="number">
+	  </md-input-container>
+	  <md-input-container ng-show="editAttr.fontsize != undefined">
+	    <label>FontSize</label>
+	    <input ng-model="editAttr.fontsize" type="number">
+	  </md-input-container>
+	  <md-input-container ng-show="editAttr.rotate != undefined">
+	    <label>Rotate</label>
+	    <input ng-model="editAttr.rotate" type="number">
+	  </md-input-container>
+	  <md-input-container ng-show="editAttr.dash != undefined">
+	    <label>Dash</label>
+	    <input ng-model="editAttr.dash" type="number">
+	  </md-input-container>
+	</div>
+
+	<div class="md-actions" layout="row" layout-align="start start" layout-wrap>
+	  <md-checkbox ng-model="editAttr.withlabel" ng-show="editAttr.withlabel != undefined">withLabel</md-checkbox>
+	  <md-checkbox ng-model="editAttr.fixed" ng-show="editAttr.fixed != undefined">Fixed</md-checkbox>
+	  <md-checkbox ng-model="editAttr.priv" ng-show="editAttr.priv != undefined">Priv</md-checkbox>
+	  <md-checkbox ng-model="editAttr.visible" ng-show="editAttr.visible != undefined">Visible</md-checkbox>
+	  <md-checkbox ng-model="editAttr.snaptogrid" ng-show="editAttr.snaptogrid != undefined">SnapToGrid</md-checkbox>
+	  <md-checkbox ng-model="editAttr.straightfirst" ng-show="editAttr.straightfirst != undefined">StraightFirst</md-checkbox>
+	  <md-checkbox ng-model="editAttr.straightlast" ng-show="editAttr.straightlast != undefined">StraightLast</md-checkbox>
+	  <md-checkbox ng-model="editAttr.trace" ng-show="editAttr.trace != undefined">Trace</md-checkbox>
+	  <md-checkbox ng-model="editAttr.firstarrow" ng-show="editAttr.firstarrow != undefined">FirstArrow</md-checkbox>
+	  <md-checkbox ng-model="editAttr.lastarrow" ng-show="editAttr.lastarrow != undefined">LastArrow</md-checkbox>
+	  <md-checkbox ng-model="editAttr.point1.visible" ng-show="editAttr.point1.visible != undefined">Point1</md-checkbox>
+	  <md-checkbox ng-model="editAttr.point2.visible" ng-show="editAttr.point2.visible != undefined">Point2</md-checkbox>
+	  <md-checkbox ng-model="editAttr.withticks" ng-show="editAttr.withticks != undefined">withTicks</md-checkbox>
+	</div>
+
+	<div class="md-actions" layout="row" layout-align="end center">
+		<md-button class="md-fab md-mini" ng-click="updateJSX();">
+			<md-icon>check</md-icon>
+		</md-button>
+	</div>
+</div>

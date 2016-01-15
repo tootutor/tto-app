@@ -1,0 +1,29 @@
+<md-content layout layout-align="center center">
+  <div flex style="max-width: 500px;">
+		<md-content ng-repeat="category in allCategory">
+			<md-card>
+				<md-toolbar>
+					<div class="md-toolbar-tools">
+						<h5>
+							<span class="fa-stack fa-lg">
+								<i class="fa fa-book fa-stack-1x"></i>
+							</span>
+							{{category.name}}
+						</h5>
+						<span flex></span>
+						<md-button class="md-icon-button" aria-label="Play" 
+							ng-click="$root.goRoute('user-course-section/'+userCourse.courseId, 'keep');"
+						>
+							<md-icon>play_arrow</md-icon>
+						</md-button>
+					</div>
+				</md-toolbar>
+				<md-card-content layout="column" layout-align="start start">
+					<div layout="row" layout-align="start center">
+						<md-ktx ng-model="category.name"></md-ktx>
+					</div>
+				</md-card-content>
+			</md-card>
+		</md-content>
+  </div>
+</md-content>

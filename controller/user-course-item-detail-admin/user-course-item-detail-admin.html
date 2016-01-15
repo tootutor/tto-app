@@ -1,0 +1,108 @@
+<div layout="row" layout-align="center start" ng-controller="userCourseItemDetailAdminCtrl">
+<!--<div layout="row" ng-controller="userCourseItemDetailAdminCtrl">-->
+	<!--<div flex="10" flex-sm="0"></div>-->
+	<div flex layout="column" style="max-width: 500px;">
+		<div flex layout="column">
+			<md-content ng-show="!item.editMode">
+				<md-card class="hero" hero-id="hero-test-{{item.itemId}}">
+					<md-toolbar>
+						<div class="md-toolbar-tools">
+							<span flex></span>
+							<md-button class="md-icon-button" aria-label="Edit" 
+								ng-click="enableEdit(item)">
+								<md-icon>create</md-icon>
+							</md-button>
+						</div>
+					</md-toolbar>
+					<md-card-content layout="column" layout-align="start start">
+						<h2 ng-if="item.itemGroupId == 1" class="md-title">Question</h2>
+						<h2 ng-if="item.itemGroupId == 2" class="md-title">Learning</h2>
+						<md-ktx ng-model="item.content"></md-ktx>
+						<small><small>{{item.code}} - {{item.itemId}}</small></small>
+					</md-card-content>
+				</md-card>
+			</md-content>
+
+			<md-content ng-show="item.editMode">
+				<md-card>
+					<md-toolbar class="md-accent">
+						<div class="md-toolbar-tools">
+							<md-button class="md-icon-button" aria-label="view" 
+								ng-click="disableEdit(item)">
+								<md-icon>visibility</md-icon>
+							</md-button>
+							<span flex></span>
+							<md-button class="md-icon-button" aria-label="Edit" 
+								ng-click="updateItem(item)">
+								<md-icon>check</md-icon>
+							</md-button>
+						</div>
+					</md-toolbar>
+					<md-card-content>
+						<div layout="column">
+							<div layout="row">
+								<div flex="75" layout="column">
+									<md-input-container>
+										<label>Code</label>
+										<input ng-model="item.code">
+									</md-input-container>
+								</div>
+								<div flex="25" layout="column">
+									<md-input-container>
+										<label>ItemGrp</label>
+										<md-select placeholder="Type" ng-model="item.itemGroupId">
+											<md-option ng-repeat="itemGroup in allItemGroup" value="{{itemGroup.itemGroupId}}">
+												{{itemGroup.name}} 
+											</md-option>
+										</md-select>
+									</md-input-container>
+								</div>
+							</div>
+						</div>
+						<div layout layout-sm="column">
+							<md-input-container flex>
+								<label>Content</label>
+								<textarea ng-model="item.content"></textarea>
+							</md-input-container>
+						</div>
+					</md-card-content>
+				</md-card>
+			</md-content>
+
+			<div ng-repeat="itemDetail in item.allItemDetail | orderBy:'seq'">
+				<user-item-detail item-detail="itemDetail"></user-item-detail>
+			</div>
+		</div>
+
+		<div flex layout="column">
+			<md-content>
+				<md-card>
+					<md-card-content layout="column" >
+						<jsx-edit dump-code="dump"></jsx-edit>
+					</md-card-content>
+				</md-card>
+			</md-content>
+
+			<!--<ng-include src="'view/user-course-item-comment.html'"></ng-include>-->
+			<!--<comment user-id="userId" user-course-item-id="userCourseItemId" content="item.content"></comment>-->
+		</div>
+		<!--<div flex="10" flex-sm="0"></div>-->
+
+	</div>
+
+</div>
+
+<!--
+<script type="text/ng-template" id="dialog.comment.html">
+	<md-dialog flex ng-cloak class="chat">
+
+		<comment 
+			user-id="$root.component.comment.userId" 
+			user-course-item-id="$root.component.comment.userCourseItemId"
+			content="$root.component.comment.content"
+		>
+		</comment>
+
+	</md-dialog>
+</script>
+-->

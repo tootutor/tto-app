@@ -1,0 +1,26 @@
+<div layout layout-align="center start" layout-padding>
+	<div flex style="max-width: 500px;">
+		<md-content ng-repeat="courseItem in $root.userCourseItemList.data">
+			<md-card class="{{courseItem.status}}">
+				<md-toolbar>
+					<div class="md-toolbar-tools">
+						<h4 ng-if="courseItem.itemGroupId == 1">
+							Activity
+						</h4>
+						<h4 ng-if="courseItem.itemGroupId == 2">
+							Learning
+						</h4>
+						<span flex></span>
+						<md-button class="md-icon-button" ng-click="goRoute('user-course-item-detail-admin/'+courseItem.userId+'/'+courseItem.userCourseItemId, 'keep');">
+							<md-icon>play_arrow</md-icon>
+						</md-button>
+					</div>
+				</md-toolbar>
+				<md-card-content layout="column" layout-align="start start">
+					<md-ktx ng-model="courseItem.content"></md-ktx>
+					<small><small>{{courseItem.code}} - {{courseItem.itemId}} - {{courseItemList[$index-1].itemId}}</small></small>
+				</md-card-content>
+			</md-card>
+		</md-content>
+	</div>
+</div>

@@ -1,0 +1,164 @@
+<div layout layout-align="center start" layout-padding>
+	<div flex layout="column" style="max-width: 500px;">
+		<md-button class="md-raised md-primary" ng-click="swal('Any fool can use a computer');">SWAL</md-button>
+
+		<md-button class="md-raised md-primary" ng-click="showAdvanced($event)">DIALOG</md-button>
+	</div>
+</div>
+
+<script type="text/ng-template" id="dialog1.tmpl.html">
+	<md-dialog flex aria-label="Mango (Fruit)"  ng-cloak class="chat" style="max-width: 500px;">
+		<form>
+			<md-toolbar>
+				<div class="md-toolbar-tools">
+					<h2>Mango (Fruit)</h2>
+					<span flex></span>
+					<md-button class="md-icon-button" ng-click="$mdDialog.hide();">
+						X
+					</md-button>
+				</div>
+			</md-toolbar>
+			<md-dialog-content>
+			</md-dialog-content>
+			<md-dialog-actions layout="row">
+				<span flex></span>
+				<md-button ng-click="answer('not useful')">
+				 Not Useful
+				</md-button>
+				<md-button ng-click="answer('useful')" style="margin-right:20px;">
+					Useful
+				</md-button>
+			</md-dialog-actions>
+		</form>
+	</md-dialog>
+</script>
+
+<!--
+<div layout="row" layout-md="column" layout-sm="column">
+	<div flex="50" flex-md="100" flex-sm="100" layout="column">
+		<md-content>
+			<md-card>
+				<md-card-content layout="column" >
+					<jsx-edit dump-code="dump"></jsx-edit>
+				</md-card-content>
+			</md-card>
+		</md-content>
+	</div>
+
+	<div flex="50" flex-md="100" flex-sm="100" layout="column">
+		<md-content>
+			<md-card>
+			<div layout="row" layout-align="center center">
+				<md-button class="md-raised md-primary" ng-click="content=dump;">Load Dump</md-button>
+				<md-button class="md-raised md-primary" ng-click="loadStorage();">Load ttoContent6</md-button>
+			</div>
+				<md-card-content layout="column" >
+					<jsx-jc dump="true" ng-model="content"></jsx-jc>
+				</md-card-content>
+			</md-card>
+		</md-content>
+		<md-content>
+			<md-card>
+				<md-card-content layout="column" >
+		      <md-input-container flex>
+						<textarea ng-model="content"></textarea>
+		      </md-input-container>
+				</md-card-content>
+			</md-card>
+		</md-content>
+	</div>
+</div>
+
+<div layout="row" layout-md="column" layout-sm="column">
+	<div flex layout="column">
+		<md-content>
+			<md-card>
+				<md-card-content layout="column" >
+		      <md-input-container flex>
+		        <label>Enter JSX-JC</label>
+		        <textarea ng-model="jsxjcInput"></textarea>
+		      </md-input-container>
+		      <div class="md-action" layout="row" layout-align="end center">
+			      <md-button class="md-primary md-raised" ng-click="jsxjcContent=jsxjcInput">RENDER</md-button>
+		      </div>
+				</md-card-content>
+			</md-card>
+		</md-content>
+	</div>
+
+	<div flex layout="column">
+		<md-content>
+			<md-card>
+				<md-card-content layout="column" >
+					<jsx-jc ng-model="jsxjcContent"></jsx-jc>
+				</md-card-content>
+			</md-card>
+		</md-content>
+	</div>
+</div>
+
+<div layout="row" layout-md="column" layout-sm="column">
+	<div flex layout="column">
+		<md-content>
+			<md-card>
+				<md-card-content layout="column">
+		      <md-input-container flex>
+		        <label>Enter Slide</label>
+		        <textarea ng-model="slideInput">
+		        </textarea>
+		      </md-input-container>
+		      <div class="md-action" layout="row" layout-align="end center">
+			      <md-button class="md-primary md-raised" ng-click="slideContent=slideInput">RENDER</md-button>
+		      </div>
+				</md-card-content>
+			</md-card>
+		</md-content>
+	</div>
+
+	<div flex layout="column">
+		<md-content>
+			<md-card>
+				<md-card-content layout="column">
+					<slide ng-model="slideContent"></slide>	
+				</md-card-content>
+			</md-card>
+		</md-content>
+	</div>
+</div>
+
+<div flex>
+	<md-content>
+		<md-card>
+			<md-card-content layout="column">
+				<div class="lock-size" layout="row" layout-align="end end">
+			    <md-fab-speed-dial md-open="false" md-direction="up" ngm-class="md-fling">
+			      <md-fab-trigger>
+			        <md-button aria-label="menu" class="md-fab md-warn">
+			          <md-icon>menu</md-icon>
+			        </md-button>
+			      </md-fab-trigger>
+			      <md-fab-actions>
+			        <md-button aria-label="twitter" class="md-fab md-raised md-mini">
+			          <md-icon>menu</md-icon>
+			        </md-button>
+			        <md-button aria-label="facebook" class="md-fab md-raised md-mini">
+			          <md-icon>menu</md-icon>
+			        </md-button>
+			        <md-button aria-label="Google hangout" class="md-fab md-raised md-mini">
+			          <md-icon>menu</md-icon>
+			        </md-button>
+			      </md-fab-actions>
+			    </md-fab-speed-dial>
+				</div>
+			</md-card-content>
+		</md-card>
+	</md-content>
+</div>
+
+
+	<md-content layout-padding>
+		<div layout layout-sm="column">
+		</div>
+	
+	</md-content>
+-->

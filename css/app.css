@@ -1,0 +1,284 @@
+/*
+.tto-background {
+  background-color: #eee;
+}
+
+body {
+  background-color: #eee;
+}
+
+md-content.md-default-theme {
+  background-color: #eee;
+}
+
+md-content.side-nav-background {
+  background-color: #fff;
+}
+
+md-card {
+  background-color: #fff;
+}
+
+md-card h2:first-of-type {
+    margin-top: 0;
+}
+
+
+md-toolbar {
+  .md-button.md-default-theme {
+    border-radius: 99%; // round toolbar buttons
+  }
+}
+
+h2 {
+  font-weight: 400;
+}
+.md-toolbar-tools-bottom {
+  font-size: small;
+  & :last-child {
+    opacity: 0.8;
+  }
+}
+
+md-toolbar:not(.md-hue-1),
+md-toolbar,
+.md-fab {
+  fill: #fff;
+}
+
+md-sidenav {
+  fill: #737373;
+  ng-md-icon {
+    position: relative;
+    top: 5px; // adjust for svg viewbox
+  }
+}
+*/
+
+.user-avatar {
+  border-radius: 99%;
+}
+
+md-grid-list {
+  margin: 8px; }
+  
+.gray {
+  background: #f5f5f5; }
+.green {
+  background: #b9f6ca; }
+.yellow {
+  background: #ffff8d; }
+.blue {
+  background: #84ffff; }
+.purple {
+  background: #b388ff; }
+.red {
+  background: #ff8a80; }
+  
+md-grid-tile {
+  transition: all 400ms ease-out 50ms; 
+}
+
+/* Point order card color */
+.coin {
+	color: #1B5E20;
+	fill: #1B5E20;
+  background: #C8E6C9; }
+.new {
+	color: #E65100;
+	fill: #E65100;
+  background: #FFE0B2; }
+.order {
+	color: #F57F17;
+	fill: #F57F17;
+  background: #FFFF8D; }
+.confirm {
+	color: #006064;
+	fill: #006064;
+  background: #B2EBF2; }
+.approve {
+	color: #B0BEC5;
+	fill: #B0BEC5;
+  background: #FFFFFF; }
+
+/* Course Item Detail */
+.done {
+  background: #E8F5E9; }
+
+
+table
+{
+  font-size: 14px;
+	border-collapse:collapse;
+	margin:20px 0 0;
+	padding:0;
+}
+
+table tr
+{
+	border-top:1px solid #ccc;
+	background-color:#fff;
+	margin:0;
+	padding:0;
+}
+
+table tr:nth-child(2n)
+{
+	background-color:#f8f8f8;
+}
+table tr th[align="center"], table tr td[align="center"] {
+	text-align:center;
+}
+table tr th, table tr td
+{
+	border:1px solid #ccc;
+	text-align:left;
+	margin:0;
+	padding:6px 13px;
+}
+
+.svg-container 
+{
+	display: inline-block;
+	position: relative;
+	width: 100%;
+	padding-bottom: 100%;
+	vertical-align: middle;
+	overflow: hidden;
+}
+
+.svg-content {
+	display: inline-block;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.lock-size {
+  min-width: 300px;
+  min-height: 300px;
+  width: 300px;
+  height: 300px;
+  margin-left: auto;
+  margin-right: auto; 
+}
+
+.embed-responsive {
+  position: relative;
+  display: block;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.embed-responsive.embed-responsive-16by9 {
+  padding-bottom: 56.25%;
+}
+
+.embed-responsive-item {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.jsxnote {
+  margin: -30px;
+  background-color: #ffffff;
+  opacity:0.6;
+}
+
+.jsxmain {
+  position:relative;
+}
+
+.jsxslide {
+  width:100%;
+  height:100%;
+  position:absolute;
+  right:0px;
+  top:0px;
+  background: #ffffff;
+  background:rgba(255,255,255,0.9);
+  z-index: 10;
+}
+
+/* AngularJS animation with animate.css */
+/*
+.ng-enter, .ng-move{
+	-webkit-animation: fadeIn 1s;
+	-moz-animation: fadeIn 1s;
+	-o-animation: fadeIn 1s;
+	animation: fadeIn 1s;
+}
+
+.ng-leave{
+	-webkit-animation: fadeOut 1s;
+	-moz-animation: fadeOut 1s;
+	-o-animation: fadeOut 1s;
+	animation: fadeOut 1s;
+}
+*/
+
+/*
+.ng-enter, .ng-move{
+	-webkit-animation: zoomIn 1s;
+	-moz-animation: zoomIn 1s;
+	-o-animation: zoomIn 1s;
+	animation: zoomIn 1s;
+}
+
+.ng-leave{
+	-webkit-animation: zoomOut 1s;
+	-moz-animation: zoomOut 1s;
+	-o-animation: zoomOut 1s;
+	animation: zoomOut 1s;
+}
+*/
+
+/*
+.ng-enter, .ng-move{
+	-webkit-animation: bounceIn 1s;
+	-moz-animation: bounceIn 1s;
+	-o-animation: bounceIn 1s;
+	animation: bounceIn 1s;
+}
+
+.ng-leave{
+	-webkit-animation: bounceOut 1s;
+	-moz-animation: bounceOut 1s;
+	-o-animation: bounceOut 1s;
+	animation: bounceOut 1s;
+}
+*/
+
+/*
+.ng-enter, .ng-move{
+	-webkit-animation: slideInUp 1s;
+	-moz-animation: slideInUp 1s;
+	-o-animation: slideInUp 1s;
+	animation: slideInUp 1s;
+}
+
+.ng-leave{
+	-webkit-animation: slideOutUp 1s;
+	-moz-animation: slideOutUp 1s;
+	-o-animation: slideOutUp 1s;
+	animation: slideOutUp 1s;
+}
+*/
+
+md-dialog.chat {
+	position: absolute;
+	right: 20px;
+	top: 20px;
+}
+
+.tto-float-bottom-right {
+	position: absolute;
+	right: 20px;
+	bottom: 20px;
+}

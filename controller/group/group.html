@@ -1,0 +1,30 @@
+<md-button class="md-fab md-fab-top-left" aria-label="back" ng-click="goRoute('user-course', 'keep');">
+	<md-icon>arrow_back</md-icon>
+</md-button>
+
+<div layout="row">
+  <div flex="25" hide-sm></div>
+  <div flex>
+		<md-content ng-repeat="group in allGroup">
+			<md-card class="confirm">
+				<md-card-content layout="column" layout-align="start start">
+					<div layout="row">
+						<md-icon>class</md-icon>
+						<h4>{{group.code}}</h4>
+					</div>
+					<div layout="row">
+						<h5>{{course.name}}</h5>
+					</div>
+				</md-card-content>
+				<md-button class="md-fab md-fab-bottom-right" aria-label="Add">
+					<md-icon>star</md-icon>
+					<pre>{{course.coin}}</pre>
+				</md-button>
+			</md-card>
+		</md-content>
+  </div>
+  <div flex="25" hide-sm></div>
+</div>
+
+
+

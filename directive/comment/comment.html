@@ -1,0 +1,40 @@
+<md-toolbar>
+	<div class="md-toolbar-tools">
+		<md-icon>comment</md-icon>
+		<span flex></span>
+		<md-button class="md-icon-button" ng-click="$mdDialog.hide();">
+			<md-icon>close</md-icon>
+		</md-button>
+	</div>
+</md-toolbar>
+<md-dialog-content style="min-width: 320px;">
+	<div ng-repeat="comment in allComment">
+		<div ng-if="comment.userId != $root.userId" layout="row" layout-align="start center" style="color: #E65100; fill: #E65100">
+			<div class="inset">
+				<user-avatar ng-model="comment.avatarId" size="24"></user-avatar>
+			</div>
+			<div class="inset">
+				<md-ktx ng-model="comment.message"></md-ktx>
+			</div>
+		</div>
+		<div ng-if="comment.userId == $root.userId" layout="row" layout-align="end center">
+			<div class="inset">
+				<md-ktx ng-model="comment.message"></md-ktx>
+			</div>
+			<div class="inset">
+				<user-avatar ng-model="comment.avatarId" size="24"></user-avatar>
+			</div>
+		</div>
+	</div>
+</md-dialog-content>
+<md-dialog-actions layout="row">
+	<form name="commentForm">
+		<md-input-container flex="90">
+			<label>Comment</label>
+			<textarea flex ng-model="newMessage" required></textarea>
+		</md-input-container>
+		<md-button layout-fill class="md-raised md-accent" ng-if="commentForm.$valid" aria-label="Submit" ng-click="addNewComment()">
+			<md-icon>comment</md-icon>
+		</md-button>
+	</form>
+</md-dialog-actions>

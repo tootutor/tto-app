@@ -1,0 +1,28 @@
+<form ng-submit="login($event);">
+	<div layout="row" layout-align="center center">
+	  <md-content class="tto-background" flex style="max-width: 400px;">
+		  <md-card>
+
+			  <md-card-content class="sticky-container" layout="column" layout-align="center">
+		    	<img ng-src="{{$root.ttoIcon('tto-logo');}}">
+			    <div class="dialog-content">
+				    <h3>Login</h3>
+					  <md-input-container layout-fill>
+					    <label>Email</label>
+					    <input type="email" ng-model="email" required>
+					  </md-input-container>
+					  <md-input-container layout-fill>
+					    <label>Password</label>
+					    <input type="password" ng-model="password" required>
+					  </md-input-container>
+			    </div>
+			  </md-card-content>
+
+				<md-button class="md-raised md-primary" aria-label="Submit" type="submit">
+					<md-icon>lock</md-icon>
+				</md-button>
+
+		  </md-card>
+		</md-content>
+	</div>
+</form>    	

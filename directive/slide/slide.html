@@ -1,0 +1,17 @@
+<div layout="column" layout-align="center center">
+	<tto-mark class="dummy" ng-model="slide" style="text-align:center;"></tto-mark>
+	<tto-mark style="color:blue;" ng-model="note"></tto-mark>
+</div>
+
+<br>
+<br>
+
+<div class="md-actions" layout="row" layout-align="space-between center">
+	<md-button class="md-fab md-mini md-fab-bottom-left md-primary" aria-label='refresh' ng-click="refreshSlide();">
+    <md-icon>refresh</md-icon>
+  </md-button>
+
+  <md-button class="md-fab md-mini md-fab-bottom-right" aria-label='next' ng-if="!isEnd" ng-click="nextSlide();">
+    <md-icon>arrow_forward</md-icon>
+  </md-button>
+</div>

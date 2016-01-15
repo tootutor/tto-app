@@ -1,0 +1,47 @@
+<div layout="column" layout-align="center start" style="max-width: 500px;">
+	<md-content flex layout-fill>
+		<md-card>
+			<md-card-content layout="row" layout-align="center center">
+				<h3>My Coins : {{ myCoin }} <md-icon style="color:red;">stars</md-icon></h3>
+			</md-card-content>
+		</md-card>
+	</md-content>
+	
+	<md-content flex layout-fill>
+		<md-card>
+			<md-card-content layout="column" layout-align="center center">
+				<h3>Filter course:</h3>
+				<md-radio-group ng-model="filter.categoryId">
+					<md-radio-button ng-repeat="category in allCategory" value="{{category.categoryId}}">
+						{{category.name}}
+					</md-radio-button>
+				</md-radio-group>
+				<md-input-container>
+					<label>Search by name</label>
+					<input type="text" ng-model="filter.name">
+				</md-input-container>
+			</md-card-content>
+		</md-card>
+	</md-content>
+
+	<md-content flex ng-repeat="course in availableCourse | filter:filter" layout-fill>
+		<md-card>
+			<md-card-content layout="column">
+				<div class="md-title" layout="row" layout-align="start start">
+					<h5><md-icon>class</md-icon> {{course.name}}</h5>
+				</div>
+				<div layout="row" layout-align="start center">
+					<md-ktx ng-model="course.description"></md-ktx>
+				</div>
+			</md-card-content>
+			<md-button ng-if="course.itemCount > 0" class="md-raised md-accent" aria-label="Add" ng-click="addUserCourse(course, $event)">
+				<md-icon>stars</md-icon> {{course.coin}} เหรียญ
+			</md-button>
+			<md-button ng-if="course.itemCount <= 0" class="md-raised md-primary" ng-disabled="course.disabled" aria-label="Add" ng-click="notifyCourse(course, $event)">
+				<md-icon>pan_tool</md-icon> สอบถาม
+			</md-button>
+		</md-card>
+	</md-content>
+</div>
+
+

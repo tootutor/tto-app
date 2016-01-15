@@ -1,0 +1,13 @@
+<md-toolbar class="md-tall md-hue-2">
+	<span flex></span>
+	<div layout="column" class="md-toolbar-tools-bottom inset" layout-align="center center">
+		<div layout="row">
+		  <user-avatar ng-model="$root.avatarId" size="96"></user-avatar>
+		  <user-avatar ng-if="$root.asUserMode" ng-model="$root.asAvatarId" size="96"></user-avatar>
+		</div>
+	  <span></span>
+		<div>
+			<small><small>version : {{ $root.version }}</small></small>
+		</div>
+	</div>
+</md-toolbar>

@@ -1,0 +1,132 @@
+<div layout layout-align="center start" layout-padding>
+	<div flex layout="column" style="max-width: 500px;">
+		<md-content>
+			<md-card>
+				<md-card-content layout="column" layout-align="start start">
+					<h2 ng-if="item.itemGroupId == 1" class="md-title">Question</h2>
+					<h2 ng-if="item.itemGroupId == 2" class="md-title">Learning</h2>
+					<md-ktx ng-model="item.content"></md-ktx>
+				</md-card-content>
+			</md-card>
+		</md-content>
+		<div ng-repeat="itemDetail in item.allItemDetail | orderBy:'seq'">
+			<div ng-if="itemDetail.showOption == '0' || (itemDetail.showOption == '1' && item.status == 'done') || (itemDetail.showOption == '2' && item.status != 'done')">
+				<form name="formItemDetail">
+				<md-content>
+					<md-card>
+						<md-card-content layout="column">
+							<h2 class="md-title" ng-if="itemDetail.showOption == '1' && item.status == 'done'">Explanation</h2>
+							<!-- Use markdown katex for all type except type 6 and 7 (JSXGraph, Youtube) -->
+							<div ng-if="itemDetail.itemTypeId < 5" layout="column" layout-align="start start">
+								<tto-mark ng-model="itemDetail.content"></tto-mark>
+							</div>
+							<!-- Use SVG for type 5 -->
+							<div ng-if="itemDetail.itemTypeId == 5" layout="column" layout-align="center center">
+								<ktx ng-model="itemDetail.content"></ktx>
+							</div>
+							<!-- Use JSXGraph logic for type 6 -->
+							<div ng-if="itemDetail.itemTypeId == 6" layout="column" layout-align="center center">
+								<jsx-jc ng-model="itemDetail.content"></jsx-jc>
+							</div>
+							<!-- Use Youtube for type 7 -->
+							<div ng-if="itemDetail.itemTypeId == 7">
+								<youtube-video video-id="itemDetail.content" player-width="'100%'"></youtube-video>	
+							</div>
+							<!-- Use Slide for type 8 -->
+							<div ng-if="itemDetail.itemTypeId == 8">
+								<slide ng-model="itemDetail.content"></slide>	
+							</div>
+							<!-- Use Image with DataURI for type 9 -->
+							<div ng-if="itemDetail.itemTypeId == 9" layout="column" layout-align="center center">
+								<img ng-src="{{itemDetail.content}}" style="max-width:100%; max-height:100%;">
+							</div>
+							<!-- Type == Radio -->
+							<div flex ng-if="itemDetail.itemTypeId == 1" layout="column">
+						    <md-radio-group ng-model="itemDetail.userItemRadioId" ng-change="processItemRadioPoint(itemDetail)" required>
+									<md-radio-button ng-repeat="itemRadio in itemDetail.allItemRadio" layout-lign="start center"
+										value="{{itemRadio.itemRadioId}}" ng-disabled="itemDetail.status == 'done'" aria-label="radio-button"
+									>
+										<ktx ng-model="itemRadio.content"></ktx>
+										<md-icon style="color:red" ng-if="itemDetail.status=='done' && itemRadio.isAnswer==0">
+											cancel
+										</md-icon>
+										<md-icon style="color:green" ng-if="itemDetail.status=='done' && itemRadio.isAnswer==1">
+											check_circle
+										</md-icon>
+									</md-radio-button>
+						    </md-radio-group>
+								<md-button class="md-raised md-accent" aria-label="Submit" type="submit"
+									 ng-show="itemDetail.status == 'start' && formItemDetail.$valid" 
+									 ng-click="processItemRadio(itemDetail);"
+								>
+									<md-icon>check</md-icon>
+								</md-button>
+							</div>
+							<!-- Type == Select -->
+							<div flex ng-if="itemDetail.itemTypeId == 3" layout="column">
+								<div ng-repeat="itemSelect in itemDetail.allItemSelect" layout="row" layout-align="start center">
+							    <md-checkbox ng-model="itemSelect.userIsAnswer" ng-disabled="itemDetail.status == 'done'"
+							    	ng-change="processItemSelectPoint(itemDetail, itemSelect)" aria-label="checkbox"
+							    >
+							    </md-checkbox>
+									<ktx ng-model="itemSelect.content"></ktx>
+									<md-icon style="color:red" ng-if="itemDetail.status=='done' && itemSelect.isAnswer==0">
+										cancel
+									</md-icon>
+									<md-icon style="color:green" ng-if="itemDetail.status=='done' && itemSelect.isAnswer==1">
+										check_circle
+									</md-icon>
+								</div>
+								<md-button class="md-raised md-accent" aria-label="Submit" type="submit"
+									ng-show="itemDetail.status == 'start' && formItemDetail.$valid" 
+									ng-click="processItemSelect(itemDetail);"
+								>
+									<md-icon>check</md-icon>
+								</md-button>
+							</div>
+							<!-- Type == Input -->
+							<div ng-if="itemDetail.itemTypeId == 4" layout="column">
+								<div ng-repeat="itemInput in itemDetail.allItemInput">
+									<md-ktx ng-model="itemInput.question"></md-ktx>
+									<div layout="row">
+							      <md-input-container flex>
+							        <label>Your answer</label>
+							        <input ng-model="itemInput.userAnswer" type="{{itemInput.itemType}}" required ng-disabled="itemDetail.status == 'done'">
+							      </md-input-container>
+							      <md-input-container flex ng-show="itemDetail.status == 'done'">
+							        <label>Correct answer</label>
+							        <input ng-model="itemInput.answer" disabled="disabled">
+							      </md-input-container>
+										<md-icon style="color:red" ng-if="itemDetail.status=='done' && itemInput.answer!=itemInput.userAnswer">
+											cancel
+										</md-icon>
+										<md-icon style="color:green"	ng-if="itemDetail.status=='done' && itemInput.answer==itemInput.userAnswer">
+											check_circle
+										</md-icon>
+									</div>
+								</div>
+								<md-button class="md-raised md-accent" aria-label="Submit" type="submit"
+									 ng-show="itemDetail.status == 'start' && formItemDetail.$valid" 
+									 ng-click="processItemInput(itemDetail);"
+								>
+									<md-icon>check</md-icon>
+								</md-button>
+							</div>
+							
+			        <div ng-show="itemDetail.status == 'done'" class="md-title" layout="row" layout-align="end center">
+			        	<p style="color:green" ng-if="itemDetail.point>0">{{itemDetail.point}} &#9733;</p>
+			        	<p style="color:red" ng-if="itemDetail.point<=0">{{itemDetail.point}} &#9733;</p>
+			        </div>
+						</md-card-content>
+					</md-card>
+				</md-content>
+			</form>
+			</div>
+		</div>
+	</div>
+<!--
+	<div flex layout="column" style="max-width: 500px;">
+		<comment user-id="userId" user-course-item-id="userCourseItemId" content="item.content"></comment>
+	</div>
+-->
+</div>

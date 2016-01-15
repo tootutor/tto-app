@@ -1,0 +1,25 @@
+<div layout layout-align="center start" layout-padding>
+	<div flex style="max-width: 500px;">
+		<md-content ng-repeat="sectionItem in sectionItemList">
+			<md-card class="{{sectionItem.status}}">
+				<md-toolbar>
+					<div class="md-toolbar-tools">
+						<h4 ng-if="sectionItem.itemGroupId == 1">
+							Activity
+						</h4>
+						<h4 ng-if="sectionItem.itemGroupId == 2">
+							Learning
+						</h4>
+						<span flex></span>
+						<md-button class="md-icon-button" ng-click="goRoute('user-item-detail/'+sectionItem.courseItemId, 'keep');">
+							<md-icon>play_arrow</md-icon>
+						</md-button>
+					</div>
+				</md-toolbar>
+				<md-card-content layout="column" layout-align="start start">
+					<md-ktx ng-model="sectionItem.content"></md-ktx>
+				</md-card-content>
+			</md-card>
+		</md-content>
+	</div>
+</div>

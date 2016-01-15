@@ -1,0 +1,11 @@
+<widget id="com.tootutor.app" version="0.0.2">
+  <name>Too.Tutor</name>
+  <description>
+      Too.Tutor Online - Math and Physic - Make it easy.
+  </description>
+  <author email="tootutoronline@gmail.com" href="http://www.tootutoronline.com">
+      Too.Tutor Online
+  </author>
+  <content src="index.html" />
+  <access origin="*" />
+</widget>

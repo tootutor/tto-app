@@ -1,0 +1,20 @@
+<div layout="row">
+  <div flex="25" hide-sm hide-md></div>
+	<div flex="50" flex-sm="100" flex-md="100">
+		<md-content ng-repeat="newCourseItem in newCourseItemList | orderBy : ['-itemGroupId','userCourseItemId']">
+			<md-card>
+				<md-card-content layout="column" layout-align="start start">
+					<h2 ng-if="newCourseItem.itemGroupId == 1" class="md-title">Activity</h2>
+					<h2 ng-if="newCourseItem.itemGroupId == 2" class="md-title">Learning</h2>
+					<md-ktx ng-model="newCourseItem.content"></md-ktx>
+					<small><small>{{newCourseItem.code}} - {{newCourseItem.itemId}}</small></small>
+				</md-card-content>
+				<md-button class="md-fab md-mini md-fab-top-right" aria-label="Add" 
+				           ng-click="addUserCourseItemAdmin(newCourseItem);">
+					<md-icon>playlist_add</md-icon>
+				</md-button>
+			</md-card>
+		</md-content>
+	</div>
+  <div flex="25" hide-sm hide-md></div>
+</div>

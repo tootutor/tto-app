@@ -1,0 +1,157 @@
+<form name="createItemForm">
+	<md-card flex>
+	  <md-card-content>
+	  	<div layout="row">
+			  <div flex="75" layout layout-sm="column">
+			    <md-input-container flex>
+			      <label>Code</label>
+			      <input ng-model="newItem.code">
+			    </md-input-container>
+			  </div>
+			  <div flex="25" layout="column">
+			    <md-input-container flex>
+			      <label>ItemGrp</label>
+					  <md-select ng-model="newItem.itemGroupId">
+					    <md-option ng-repeat="itemGroup in allItemGroup" value="{{itemGroup.itemGroupId}}">
+					    	{{itemGroup.name}} 
+					    </md-option>
+					  </md-select>
+			    </md-input-container>
+			  </div>
+	  	</div>
+		  <div layout layout-sm="column">
+		    <md-input-container flex>
+		      <label><md-ktx ng-model="newItem.content"></md-ktx></label>
+		      <textarea placeholder="Content" ng-model="newItem.content"></textarea>
+		    </md-input-container>
+		  </div>
+	  </md-card-content>
+	</md-card>
+		
+	<div ng-repeat="itemDetail in newItem.allItemDetail">
+		<md-card flex>
+		  <md-card-content>
+		    <div layout layout-sm="column">
+				  <md-select placeholder="Type" ng-model="itemDetail.itemTypeId" flex="10" ng-change="setIsAction(itemDetail);">
+				    <md-option ng-repeat="itemType in allItemType" value="{{itemType.itemTypeId}}">
+				    	{{itemType.name}} 
+				    </md-option>
+				  </md-select>
+		      <md-input-container flex="5">
+		        <label>Seq</label>
+		        <input ng-model="itemDetail.seq">
+		      </md-input-container>
+		      <md-input-container flex="25">
+		        <label>Code</label>
+		        <input ng-model="itemDetail.code">
+		      </md-input-container>
+		      <md-input-container flex="45">
+		        <label><md-ktx ng-model="itemDetail.content"></md-ktx></label>
+		        <textarea placeholder="Content" ng-model="itemDetail.content"></textarea>
+		      </md-input-container>
+			    <md-checkbox aria-label="IsAction" ng-model="itemDetail.isAction">
+			    </md-checkbox>
+					<md-button aria-label="Remove" ng-click="removeItemDetail(itemDetail);" flex="10">
+	          <md-icon>highlight_remove</md-icon>
+					</md-button>
+		    </div>
+				
+				<!-- Type == Radio -->
+				<div ng-if="itemDetail.itemTypeId == 1">
+			    <div layout layout-sm="column" ng-repeat="itemRadio in itemDetail.allItemRadio">
+			    	<div flex="15"></div>
+			      <md-input-container flex="65">
+			        <label><md-ktx ng-model="itemRadio.content"></md-ktx></label>
+			        <textarea placeholder="Radio content" ng-model="itemRadio.content"></textarea>
+			      </md-input-container>
+				    <md-checkbox aria-label="check box" ng-model="itemRadio.isAnswer" ng-change="updatePoint(itemRadio)">
+				    </md-checkbox>
+			      <md-input-container flex="5">
+			        <label>Point</label>
+			        <input ng-model="itemRadio.point" type="number">
+			      </md-input-container>
+						<md-button aria-label="Remove" ng-click="removeItemRadio(itemDetail, itemRadio);" flex="10">
+		          <md-icon>highlight_remove</md-icon>
+						</md-button>
+			    </div>
+			    <div layout layout-sm="column">
+						<md-button class="md-fab md-primary md-mini" aria-label="Add" ng-click="addItemRadio(itemDetail);">
+		          <md-icon>add</md-icon>
+						</md-button>
+			    </div>
+		    </div>
+		    
+				<!-- Type == Select -->
+				<div ng-if="itemDetail.itemTypeId == 3">
+			    <div layout layout-sm="column" ng-repeat="itemSelect in itemDetail.allItemSelect">
+			    	<div flex="15"></div>
+			      <md-input-container flex="65">
+			        <label><md-ktx ng-model="itemSelect.content"></md-ktx></label>
+			        <textarea placeholder="Select content" ng-model="itemSelect.content"></textarea>
+			      </md-input-container>
+				    <md-checkbox aria-label="check box" ng-model="itemSelect.isAnswer" ng-change="updatePoint(itemSelect)">
+				    </md-checkbox>
+			      <md-input-container flex="5">
+			        <label>Point</label>
+			        <input ng-model="itemSelect.point" type="number">
+			      </md-input-container>
+						<md-button aria-label="Remove" ng-click="removeItemSelect(itemDetail, itemSelect);" flex="10">
+		          <md-icon>highlight_remove</md-icon>
+						</md-button>
+			    </div>
+			    <div layout layout-sm="column">
+						<md-button class="md-fab md-primary md-mini" aria-label="Add" ng-click="addItemSelect(itemDetail);">
+		          <md-icon>add</md-icon>
+						</md-button>
+			    </div>
+		    </div>
+		    
+				<!-- Type == Input -->
+				<div ng-if="itemDetail.itemTypeId == 4">
+			    <div layout layout-sm="column" ng-repeat="itemInput in itemDetail.allItemInput">
+			    	<div flex="15"></div>
+			      <md-input-container flex="35">
+			        <label><md-ktx ng-model="itemInput.question"></md-ktx></label>
+			        <textarea placeholder="Question" ng-model="itemInput.question"></textarea>
+			      </md-input-container>
+					  <md-select placeholder="Type" ng-model="itemInput.answerType" flex="10">
+					    <md-option value="text">text</md-option>
+					    <md-option value="number">number</md-option>
+					  </md-select>
+			      <md-input-container flex="25">
+			        <label><md-ktx ng-model="itemInput.answer"></md-ktx></label>
+			        <textarea placeholder="Answer" ng-model="itemInput.answer"></textarea>
+			      </md-input-container>
+			      <md-input-container flex="5">
+			        <label>Point</label>
+			        <input ng-model="itemInput.point" type="number">
+			      </md-input-container>
+						<md-button aria-label="Remove" ng-click="removeItemInput(itemDetail, itemInput);" flex="10">
+		          <md-icon>highlight_remove</md-icon>
+						</md-button>
+			    </div>
+			    <div layout layout-sm="column">
+						<md-button class="md-fab md-primary md-mini" aria-label="Add" ng-click="addItemInput(itemDetail);">
+		          <md-icon>add</md-icon>
+						</md-button>
+			    </div>
+		    </div>
+		    
+		  </md-card-content>
+		</md-card>
+	</div>
+
+  <md-divider></md-divider>
+		
+	<md-card flex>
+	  <md-card-content>
+
+		  <div layout layout-sm="column">
+				<md-button class="md-fab md-primary md-mini" aria-label="Add" ng-click="addItemDetail();">
+          <md-icon>playlist_add</md-icon>
+				</md-button>
+		  </div>
+
+	  </md-card-content>
+	</md-card>
+</form>

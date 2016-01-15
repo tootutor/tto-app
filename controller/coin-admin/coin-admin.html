@@ -1,0 +1,56 @@
+<div layout="row" layout-sm="column">
+  <div flex style="max-width: 500px;">
+		<md-content>
+			<md-card class="new">
+				<md-card-content>
+					<div layout="column" layout-align="center center">
+				    <h3>Select status</h3>
+				    <md-radio-group ng-model="filter.status">
+				      <md-radio-button value="">All</md-radio-button>
+				      <md-radio-button value="order">Order</md-radio-button>
+				      <md-radio-button value="confirm">Confirm</md-radio-button>
+				      <md-radio-button value="approve">Approve</md-radio-button>
+				    </md-radio-group>
+					</div>
+				</md-card-content>
+			</md-card>
+		</md-content>
+  </div>
+
+  <div flex style="max-width: 500px;">
+		<md-content ng-repeat="order in allorder | filter:filter">
+			<md-card class="{{order.status}}">
+				<form ng-submit="coinApproveOrder(order)">
+					<md-card-content layout="column" layout-align="start start">
+						<div class="md-title">
+							<h4><md-icon>stars</md-icon> {{ order.amount }} Bath :  {{ order.coin }} + {{order.bonus}} coins by {{ order.nickname }}</h4>
+						</div>
+
+						<div ng-if="order.status == 'order'">
+							<p>Transfer @ {{order.transferDate}}</p>
+							<p>{{order.transferAmount}} Baht : {{order.coin}} + {{order.bonus}} coins</p>
+							<p>Waiting - ได้รับคำสั่งซื้อ กำลังรอโอนเงิน</p>
+						</div>
+
+						<div ng-if="order.status == 'confirm'">
+							<p>Transfer @ {{order.transferDate}}</p>
+							<p>{{order.transferAmount}} Baht : {{order.coin}} + {{order.bonus}} coins<p>
+							<p>Waiting - ได้รับการยืนยัน กำลังรอดำเนินการ				</p>
+							<md-button class="md-fab md-mini md-fab-bottom-right" aria-label="Submit" type="submit">
+								<md-icon>check</md-icon>
+							</md-button>  
+						</div>
+	
+						<div ng-if="order.status == 'approve'">
+							<p>Transfer @ {{order.transferDate}}</p>
+							<p>{{order.transferAmount}} Baht : {{order.coin}} + {{order.bonus}} coins</p>
+							<p>Processed - ดำเนินการเรียบร้อยแล้ว			</p>
+						</div>
+
+						<small>Order created @ {{ order.timestamp }}</small>
+					</md-card-content>
+		    </form>
+			</md-card>
+		</md-content>
+  </div>
+</div>

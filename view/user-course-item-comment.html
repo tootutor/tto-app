@@ -1,0 +1,48 @@
+<md-content>
+	<md-card>
+		<md-card-content>
+			<h2 class="md-title">Comments</h2>
+			<div ng-repeat="comment in $parent.allComment">
+				<div ng-if="comment.userId != $root.userId" layout="row" layout-align="start center" style="color: #E65100; fill: #E65100">
+	        <div class="inset">
+						<user-avatar ng-model="comment.avatarId" size="24"></user-avatar>
+	        </div>
+	        <div class="inset">
+						<md-ktx ng-model="comment.message"></md-ktx>
+	        </div>
+        </div>
+        <div ng-if="comment.userId == $root.userId" layout="row" layout-align="end center">
+	        <div class="inset">
+						<md-ktx ng-model="comment.message"></md-ktx>
+	        </div>
+	        <div class="inset">
+						<user-avatar ng-model="comment.avatarId" size="24"></user-avatar>
+	        </div>
+        </div>
+			</div>
+		</md-card-content>
+	</md-card>
+</md-content>
+
+<md-content>
+	<md-card>
+		<md-card-content>
+			<form name="commentForm">
+				<div layout layout-sm="column">
+					<md-input-container flex>
+						<label><md-ktx ng-model="$parent.newMessage"></md-ktx></label>
+						<textarea flex="100" ng-model="$parent.newMessage" required></textarea>
+					</md-input-container>
+				</div>
+			</form>
+			You can enter math such as $$ x^2 $$.
+			<br>
+			<a href="http://asciimath.org" target="_blank">See ASCII Math</a>
+			<md-button class="md-fab md-mini md-fab-bottom-right md-primary" aria-label="Submit" 
+				ng-if="commentForm.$valid" ng-click="addNewComment()">
+				<md-icon>comment</md-icon>
+			</md-button>
+
+		</md-card-content>
+	</md-card>
+</md-content>

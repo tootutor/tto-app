@@ -1,0 +1,105 @@
+<div layout layout-align="center start" layout-padding>
+	<div flex style="max-width: 500px;" ng-if="$root.selectedTab == 0">
+		<md-content ng-repeat="learnCourseItem in learnCourseItemList | orderBy:['-status','userCourseItemId']">
+			<md-card class="{{learnCourseItem.status}}">
+				<md-toolbar>
+					<div class="md-toolbar-tools">
+						<h4 ng-if="learnCourseItem.itemGroupId == 1">
+							<span class="fa-stack fa-lg">
+								<i class="fa fa-leanpub fa-stack-1x"></i>
+							</span>
+							Activity
+						</h4>
+						<h4 ng-if="learnCourseItem.itemGroupId == 2">
+							<span class="fa-stack fa-lg">
+								<i class="fa fa-pencil fa-stack-1x"></i>
+							</span>
+							Learning
+						</h4>
+						<span flex></span>
+						<md-button class="md-icon-button" ng-click="goRoute('user-course-item-detail/'+learnCourseItem.userCourseItemId, 'keep');">
+							<md-icon>play_arrow</md-icon>
+						</md-button>
+					</div>
+				</md-toolbar>
+				<md-card-content layout="column" layout-align="start start">
+					<md-ktx ng-model="learnCourseItem.content"></md-ktx>
+				</md-card-content>
+			</md-card>
+		</md-content>
+	</div>
+
+	<div flex style="max-width: 500px;" ng-if="$root.selectedTab == 1">
+		<md-content ng-repeat="startCourseItem in startCourseItemList | orderBy:'userCourseItemId' | limitTo:limitStart">
+			<md-card class="{{startCourseItem.status}}">
+				<md-toolbar>
+					<div class="md-toolbar-tools">
+						<h4 ng-if="startCourseItem.itemGroupId == 1">
+							<span class="fa-stack fa-lg">
+								<i class="fa fa-leanpub fa-stack-1x"></i>
+							</span>
+							Activity
+						</h4>
+						<h4 ng-if="startCourseItem.itemGroupId == 2">
+							<span class="fa-stack fa-lg">
+								<i class="fa fa-pencil fa-stack-1x"></i>
+							</span>
+							Learning
+						</h4>
+						<span flex></span>
+						<md-button class="md-icon-button" ng-click="goRoute('user-course-item-detail/'+startCourseItem.userCourseItemId, 'keep');">
+							<md-icon>play_arrow</md-icon>
+						</md-button>
+					</div>
+				</md-toolbar>
+				<md-card-content layout="column" layout-align="start start">
+					<md-ktx ng-model="startCourseItem.content"></md-ktx>
+				</md-card-content>
+			</md-card>
+		</md-content>
+		<md-content ng-if="limitStart < startCourseItemList.length">
+			<md-card >
+				<md-button ng-click="loadMoreStart();">
+					<md-icon>sync</md-icon> Load More ...
+				</md-button>
+			</md-card>
+		</md-content>
+	</div>
+	
+	<div flex style="max-width: 500px;" ng-if="$root.selectedTab == 2">
+		<md-content ng-repeat="doneCourseItem in doneCourseItemList | orderBy:'userCourseItemId' | limitTo:limitDone">
+			<md-card class="{{doneCourseItem.status}}">
+				<md-toolbar>
+					<div class="md-toolbar-tools">
+						<h4 ng-if="doneCourseItem.itemGroupId == 1">
+							<span class="fa-stack fa-lg">
+								<i class="fa fa-leanpub fa-stack-1x"></i>
+							</span>
+							Activity
+						</h4>
+						<h4 ng-if="doneCourseItem.itemGroupId == 2">
+							<span class="fa-stack fa-lg">
+								<i class="fa fa-pencil fa-stack-1x"></i>
+							</span>
+							Learning
+						</h4>
+						<span flex></span>
+						<md-button class="md-icon-button" ng-click="goRoute('user-course-item-detail/'+doneCourseItem.userCourseItemId, 'keep');">
+							<md-icon>play_arrow</md-icon>
+						</md-button>
+					</div>
+				</md-toolbar>
+				<md-card-content layout="column" layout-align="start start">
+					<md-ktx ng-model="doneCourseItem.content"></md-ktx>
+				</md-card-content>
+			</md-card>
+		</md-content>
+		<md-content ng-if="limitDone < doneCourseItemList.length">
+			<md-card>
+				<md-button ng-click="loadMoreDone();">
+					<md-icon>sync</md-icon> Load More ...
+				</md-button>
+			</md-card>
+		</md-content>
+	</div>
+</div>

@@ -1,0 +1,22 @@
+<div class="jsxmain" layout="column" layout-align="center center">
+	<!--This DIV must be here, any changes need to be in sync with javascript-->
+	<div id="dummy-id" class="dummy"></div>
+	<tto-mark ng-show="enableSlide" class="jsxslide" ng-model="slide" style="text-align:center; vertical-align:middle;"></tto-mark>
+	<tto-mark style="color:blue;" ng-model="note"></tto-mark>
+</div>
+
+<br>
+<br>
+
+<div class="md-actions" layout="row" layout-align="center center">
+	<md-button class="md-icon-botton" ng-show="dump" aria-label='dump' ng-click="dumpJSX();">
+	  <md-icon>save</md-icon>
+	</md-button>
+</div>
+
+<md-button class="md-fab md-mini md-fab-bottom-left md-primary" aria-label='refresh' ng-click="refreshJSX();">
+  <md-icon>refresh</md-icon>
+</md-button>
+<md-button class="md-fab md-mini md-fab-bottom-right md-primary" aria-label='next' ng-if="!isEnd"	ng-click="nextJSX();">
+  <md-icon>arrow_forward</md-icon>
+</md-button>

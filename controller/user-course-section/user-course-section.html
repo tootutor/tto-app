@@ -1,0 +1,22 @@
+<md-content layout layout-align="center center">
+    <div flex style="max-width: 500px;">
+        <md-content ng-repeat="courseSection in courseSectionList">
+        	<md-card>
+        		<md-toolbar>
+        			<div class="md-toolbar-tools">
+        				<h5>{{courseSection.name}}</h5>
+        				<span flex></span>
+						<md-button class="md-icon-button" ng-click="goRoute('user-section-item/'+courseSection.courseSectionId, 'keep');">
+        					<md-icon>play_arrow</md-icon>
+        				</md-button>
+        			</div>
+        		</md-toolbar>
+        		<md-card-content layout="column" layout-align="start start">
+        			<div layout="row" layout-align="start center">
+    					<md-ktx ng-model="courseSection.sectionName"></md-ktx>
+        			</div>
+        		</md-card-content>
+        	</md-card>
+        </md-content>
+    </div>
+</md-content>

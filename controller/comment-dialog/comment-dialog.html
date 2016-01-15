@@ -1,0 +1,41 @@
+<md-dialog ng-cloak class="chat" ng-controller="commentDialogCtrl" style="width:320px;">
+	<md-toolbar class="md-warn">
+		<div class="md-toolbar-tools">
+			<md-icon>comment</md-icon>
+			<span flex></span>
+			<md-button class="md-icon-button" ng-click="hideDialog();">
+				<md-icon>close</md-icon>
+			</md-button>
+		</div>
+	</md-toolbar>
+	<md-dialog-content scroll-glue>
+		<div ng-repeat="comment in allComment">
+			<div ng-if="comment.userId != $root.userId" layout="row" layout-align="start center" style="color: #E65100; fill: #E65100">
+				<div class="inset">
+					<user-avatar ng-model="comment.avatarId" size="24"></user-avatar>
+				</div>
+				<div class="inset">
+					<md-ktx ng-model="comment.message"></md-ktx>
+				</div>
+			</div>
+			<div ng-if="comment.userId == $root.userId" layout="row" layout-align="end center">
+				<div class="inset">
+					<md-ktx ng-model="comment.message"></md-ktx>
+				</div>
+				<div class="inset">
+					<user-avatar ng-model="comment.avatarId" size="24"></user-avatar>
+				</div>
+			</div>
+		</div>
+	</md-dialog-content>
+	<md-dialog-actions flex layout="row" layout-align="space-between stretch" layout-padding>
+		<form name="commentForm" flex layout="row" layout-align="space-between stretch" layout-fill>
+			<md-input-container flex>
+				<input ng-model="newMessage" placeholder="Comment" required>
+			</md-input-container>
+			<md-button class="md-fab md-mini md-warn" ng-if="commentForm.$valid" ng-click="addNewComment()" type="submit">
+				<md-icon>comment</md-icon>
+			</md-button>
+		</form>
+	</md-dialog-actions>
+</md-dialog>
