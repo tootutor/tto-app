@@ -17,6 +17,11 @@ function ($scope, Restangular, $rootScope, $mdDialog, $mdSidenav, Something) {
 		console.log("SAVE");
 	});
 	
+	data1.data = "UPDATE DATA";
+	data1.$update({id : 111}, function () {
+		console.log("UPDATE");
+	});
+	
 	function hereDoc(f) {
   return f.toString().
       replace(/^[^\/]+\/\*!?/, '').
