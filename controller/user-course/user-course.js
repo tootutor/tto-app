@@ -1,5 +1,5 @@
-ttoApp.controller('userCourseCtrl', ['$scope', 'Restangular', '$rootScope', '$mdDialog', '$mdSidenav',
-function ($scope, Restangular, $rootScope, $mdDialog, $mdSidenav) {
+ttoApp.controller('userCourseCtrl', ['$scope', 'Restangular', '$rootScope', '$mdDialog', '$mdSidenav', '$routeParams',
+function ($scope, Restangular, $rootScope, $mdDialog, $mdSidenav, $routeParams) {
 	$rootScope.icon = 'class';
 	$rootScope.title = 'Course';
 	$rootScope.showTab = 0;

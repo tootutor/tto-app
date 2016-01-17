@@ -38,7 +38,19 @@ ttoApp.config(function($mdThemingProvider, $routeProvider, RestangularProvider) 
       templateUrl: 'controller/coin/coin.html',
       controller: 'coinCtrl'
     })
-    .when('/user-course', {
+    .when('/category', {
+      templateUrl: 'controller/category/category.html',
+      controller: 'categoryCtrl'
+    })
+    .when('/user-category', {
+      templateUrl: 'controller/user-category/user-category.html',
+      controller: 'userCategoryCtrl'
+    })
+    .when('/user-category/user/:userId', {
+      templateUrl: 'controller/user-category/user-category.html',
+      controller: 'userCategoryCtrl'
+    })
+    .when('/user-category/:categoryId/course', {
       templateUrl: 'controller/user-course/user-course.html',
       controller: 'userCourseCtrl'
     })
@@ -65,14 +77,6 @@ ttoApp.config(function($mdThemingProvider, $routeProvider, RestangularProvider) 
     .when('/user-course-item-detail/:userCourseItemId', {
       templateUrl: 'controller/user-course-item-detail/user-course-item-detail.html',
       controller: 'userCourseItemDetailCtrl'
-    })
-    .when('/category', {
-      templateUrl: 'controller/category/category.html',
-      controller: 'categoryCtrl'
-    })
-    .when('/category/user/:userId', {
-      templateUrl: 'controller/category/category.html',
-      controller: 'categoryCtrl'
     })
     .when('/group', {
       templateUrl: 'controller/group/group.html',

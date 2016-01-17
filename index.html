@@ -78,7 +78,7 @@
 
 			<!-- FAB action -->
 			<md-button ng-if="$root.component.addCourse" class="md-fab md-fab-bottom-right" 
-				aria-label="Submit" ng-click="$root.goRoute('course', 'keep');"
+				aria-label="Submit" ng-click="$root.goRoute('category', 'keep');"
 			>
 				<md-icon>playlist_add</md-icon>
 			</md-button>
@@ -195,6 +195,7 @@
     <script src="controller/category/category.js"></script>
     <script src="controller/group/group.js"></script>
     <script src="controller/course/course.js"></script>
+    <script src="controller/user-category/user-category.js"></script>
     <script src="controller/user-course/user-course.js"></script>
     <script src="controller/user-course-section/user-course-section.js"></script>
     <script src="controller/add-user-course-item/add-user-course-item.js"></script>
@@ -223,6 +224,7 @@
     <script src="directive/user-item-detail/user-item-detail.js"></script>
 		<!-- Services -->
     <script src="service/something/something.js"></script>
+    <script src="service/category/category.js"></script>
 		
     <script src="config/config.js"></script>
     <script src="google.js"></script>

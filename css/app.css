@@ -282,3 +282,7 @@ md-dialog.chat {
 	right: 20px;
 	bottom: 20px;
 }
+
+.category {
+  background-color: #E0F2F1;
+}

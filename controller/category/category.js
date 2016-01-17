@@ -1,5 +1,5 @@
-ttoApp.controller('categoryCtrl', ['$scope', 'Restangular', '$rootScope', '$mdDialog', '$mdSidenav', '$routeParams', 
-	function ($scope, Restangular, $rootScope, $mdDialog, $mdSidenav, $routeParams) {
+ttoApp.controller('categoryCtrl', ['$scope', 'Restangular', '$rootScope', '$mdDialog', '$mdSidenav', '$routeParams', 'CategoryServ', 
+	function ($scope, Restangular, $rootScope, $mdDialog, $mdSidenav, $routeParams, CategoryServ) {
 		$rootScope.icon = 'class';
 		$rootScope.title = 'Category';
 		$rootScope.showTab = 0;
@@ -12,14 +12,10 @@ ttoApp.controller('categoryCtrl', ['$scope', 'Restangular', '$rootScope', '$mdDi
 		categoryCtrlInit();
 		
 		function categoryCtrlInit() {
-			var userId = $routeParams.userId ? $routeParams.userId : $rootScope.userId;
+			var userId = $rootScope.userId;
 			$rootScope.isLoading++;
-			Restangular.one('category/user',userId).get({}, $rootScope.headerObj)
-			.then(function (data) {
-				$scope.allCategory = data;
+			$scope.allCategory = CategoryServ.query(function () {
 				$rootScope.isLoading--;
-			}, function (response) {
-				$rootScope.errorDialog(response, 'Loading Error !!!');
 			});
 		}
 
