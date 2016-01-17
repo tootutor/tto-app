@@ -1,0 +1,21 @@
+<md-content layout layout-align="center center">
+  <div flex ng-if="isNoData" style="max-width: 500px;">
+		<md-card class="order">
+			<md-card-content layout="column" layout-align="center center">
+				<h3>No Course Available</h3>
+				Please add a new course.
+			</md-card-content>
+		</md-card>
+  </div>
+
+  <div flex ng-if="!isNoData" style="max-width: 500px;">
+		<md-content ng-repeat="category in allCategory">
+			<md-card class="category" ng-click="$root.goRoute('category/' + category.categoryId + '/course');">
+				<md-card-content layout="column" layout-align="center center">
+					<img ng-src="{{$root.ttoIcon('book');}}" style="width:50px;">
+					<h3>{{category.name}}</h3>
+				</md-card-content>
+			</md-card>
+		</md-content>
+  </div>
+</md-content>
