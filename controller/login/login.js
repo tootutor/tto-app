@@ -1,5 +1,5 @@
-ttoApp.controller('loginCtrl', ['$scope', 'Restangular', '$rootScope', '$mdDialog', '$mdSidenav',
-function ($scope, Restangular, $rootScope, $mdDialog, $mdSidenav) {
+ttoApp.controller('loginCtrl', ['$scope', 'Restangular', '$rootScope', '$mdDialog', '$mdSidenav', 'AuthServ', 
+function ($scope, Restangular, $rootScope, $mdDialog, $mdSidenav, AuthServ) {
 	$rootScope.icon = "lock";
 	$rootScope.title = "Login"; 
 	$rootScope.showTab = 0;
@@ -11,9 +11,10 @@ function ($scope, Restangular, $rootScope, $mdDialog, $mdSidenav) {
 	$scope.login = login;
 
 	function login() {
-  	var postObj = {'email' : $scope.email, 'password' : $scope.password};
-		Restangular.all('auth/login').post(postObj)
-		.then(function (data) {
+		var auth = new AuthServ();
+		auth.email = $scope.email;
+		auth.password = $scope.password;
+		auth.$save(function (data) {
 			localStorage.setItem('email', $scope.email);
 			localStorage.setItem('password', $scope.password);
 			localStorage.setItem('token', data.token);
