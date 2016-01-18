@@ -1,5 +1,5 @@
-ttoApp.controller('userCategoryCtrl', ['$scope', 'Restangular', '$rootScope', '$mdDialog', '$mdSidenav', '$routeParams',
-function ($scope, Restangular, $rootScope, $mdDialog, $mdSidenav, $routeParams) {
+ttoApp.controller('userCategoryCtrl', ['$scope', 'Restangular', '$rootScope', '$mdDialog', '$mdSidenav', '$routeParams', 'UserCategoryServ',
+function ($scope, Restangular, $rootScope, $mdDialog, $mdSidenav, $routeParams, UserCategoryServ) {
 	$rootScope.icon = 'class';
 	$rootScope.title = 'Course';
 	$rootScope.showTab = 0;
@@ -10,24 +10,18 @@ function ($scope, Restangular, $rootScope, $mdDialog, $mdSidenav, $routeParams) 
  	$rootScope.component.addCourse = true;
 
 	$rootScope.isLoading = 0;
-	$scope.isNoData = false;
+	$scope.allCategory = {};
 
  	userCategoryCtrlInit();
  	
  	function userCategoryCtrlInit() {
 		var userId = $routeParams.userId ? $routeParams.userId : $rootScope.userId;
 		$rootScope.isLoading++;
-		Restangular.one('category/user',userId).get({}, $rootScope.headerObj)
-		.then(function (data) {
-			if (data.length > 0) {
-				$scope.allCategory = data;
-			} else {
-				$scope.isNoData = true;
-			}
-			$rootScope.isLoading--;
-		}, function (response) {
+    $scope.allCategory = UserCategoryServ.query({userId : userId}, function() {
+      $rootScope.isLoading--;
+    }, function(response) {
 			$rootScope.errorDialog(response, 'Loading Error !!!');
-		});
- 	}
+    });
+  }
 
 }]);
