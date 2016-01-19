@@ -13,11 +13,15 @@ function ($scope, Restangular, $rootScope, $mdDialog, $mdSidenav, Something) {
 	
 	var data1 = new Something();
 	data1.data = "New DATA";
+	data1.data1 = "New DATA 1";
+	data1.data2 = "New DATA 2";
 	data1.$save(function () {
 		console.log("SAVE");
 	});
 	
 	data1.data = "UPDATE DATA";
+	data1.detail1 = "DETAIL 1";
+	data1.detail2 = "DETAIL 2";
 	data1.$update({id : 111}, function () {
 		console.log("UPDATE");
 	});

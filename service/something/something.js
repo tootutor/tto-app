@@ -1,5 +1,12 @@
 ttoApp.factory('Something', function($resource, $rootScope) {
   return $resource('../api/test/something/:id', {}, {
+		query: {
+					method: 'GET',
+					isArray:true,
+					headers: {
+						'token': $rootScope.token
+					}
+		},	
 		get: {
 					method: 'GET',
 					headers: {
