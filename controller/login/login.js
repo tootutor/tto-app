@@ -14,6 +14,7 @@ function ($scope, Restangular, $rootScope, $mdDialog, $mdSidenav, AuthServ) {
 		var auth = new AuthServ();
 		auth.email = $scope.email;
 		auth.password = $scope.password;
+		$rootScope.isLoading++;
 		auth.$save(function (data) {
 			localStorage.setItem('email', $scope.email);
 			localStorage.setItem('password', $scope.password);
@@ -33,7 +34,9 @@ function ($scope, Restangular, $rootScope, $mdDialog, $mdSidenav, AuthServ) {
 			$rootScope.isLoggedIn = true;
 			$rootScope.goRoute('profile', 'home');
 			$rootScope.checkVersion();
+			$rootScope.isLoading--;
 		}, function (response) {
+			$rootScope.isLoading = 0;
 			$rootScope.errorDialog(response, 'Login Error !!!');
 		});
 	}

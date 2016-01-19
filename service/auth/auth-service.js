@@ -1,5 +1,11 @@
 ttoApp.factory('AuthServ', function($resource, $rootScope) {
-  return $resource(appInfo.apiPath + '/auth', {}, {
+  return $resource(appInfo.apiPath + '/auth/:userId', {}, {
+		get: {
+					method: 'GET',
+					headers: {
+						'token': $rootScope.token
+					}
+		},
 		update: {
 					method: 'POST',
 					headers: {
