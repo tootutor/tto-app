@@ -1,0 +1,80 @@
+<div layout="row" layout-align="center center" ng-controller="profileCtrl">
+  <form>
+	  <md-content class="tto-background" flex style="max-width: 600px;">
+			<md-card flex>
+			  <md-card-content>
+					<div layout-padding layout="row" layout-xs="column">
+						<user-avatar ng-model="user.avatarId"></user-avatar>
+					  <md-select placeholder="Select avatar" ng-model="user.avatarId" ng-required="true">
+					    <md-option ng-repeat="avatar in allAvatar" value="{{avatar.avatarId}}">
+						    {{avatar.avatarId}}
+					    </md-option>
+					  </md-select>
+					  <span flex></span>
+		        <div layout="row" layout-align="center center">
+			        <div class="inset">
+			        	{{user.coin}}
+			        </div>
+			        <div class="inset">
+								<md-icon>stars</md-icon>
+			        </div>
+			        <div class="inset">
+			        	{{user.point}}
+			        </div>
+			        <div class="inset">
+								<md-icon>star</md-icon>
+			        </div>
+		        </div>
+					</div>
+					<div layout-padding>
+				    <div layout layout-xs="column">
+				      <md-input-container flex>
+				        <label>First name (ชื่อ)</label>
+				        <input ng-model="user.firstname" required>
+				      </md-input-container>
+				      <md-input-container flex>
+				        <label>Last Name (นามสกุล)</label>
+				        <input ng-model="user.lastname" required>
+				      </md-input-container>
+				    </div>
+				    <div layout layout-xs="column">
+				      <md-input-container flex>
+				        <label>Nick Name (ชื่อเล่น)</label>
+				        <input ng-model="user.nickname" required>
+				      </md-input-container>
+				      <md-input-container flex>
+				        <label>Phone Number (เบอร์โทรศัพท์)</label>
+				        <input ng-model="user.phone" type="tel" required>
+				      </md-input-container>
+				      <md-input-container flex>
+				        <label>Date of Birth (วันเกิด)</label>
+				        <input ng-model="user.birthdate" type="date" required>
+				      </md-input-container>
+				    </div>
+				    <div layout layout-xs="column">
+				      <md-input-container flex>
+				        <label>School Name (ชื่อโรงเรียน)</label>
+				        <input ng-model="user.school" required>
+				      </md-input-container>
+				      <md-input-container flex>
+				        <label>Level (ระดับชั้น)</label>
+				        <input ng-model="user.province" required>
+				      </md-input-container>
+				      <md-input-container flex>
+				        <label>Province (จังหวัด)</label>
+				        <input ng-model="user.level" required>
+				      </md-input-container>
+				    </div>
+				    <div layout layout-xs="column">
+				      <md-input-container flex>
+				        <label>Purpose (วัตถุประสงค์)</label>
+				        <textarea ng-model="user.purpose" row="3" required></textarea>
+				      </md-input-container>
+				    </div>
+					</div>
+			  </md-card-content>
+			</md-card>
+	  	
+	  </md-content>
+  </form>
+</div>

@@ -1,0 +1,32 @@
+<md-dialog ng-cloak ng-controller="logoutDialogCtrl" style="width:320px;">
+
+	<md-toolbar class="md-primary">
+		<div class="md-toolbar-tools">
+			<md-icon>lock_open</md-icon>
+			<span flex></span>
+			<md-button class="md-icon-button" ng-click="hideDialog();">
+				<md-icon>close</md-icon>
+			</md-button>
+		</div>
+	</md-toolbar>
+
+	<md-dialog-content>
+    <img ng-src="{{$root.ttoIcon('tto-logo');}}">
+	</md-dialog-content>
+
+	<md-dialog-actions flex layout="row" layout-align="space-between stretch" layout-padding>
+    <form name="loginForm" ng-submit="logout($event);">
+      <div class="dialog-content">
+        <h3>Logout</h3>
+        <md-input-container layout-fill>
+          <label>Email</label>
+          <input type="email" ng-model="email" disabled>
+        </md-input-container>
+      </div>
+      <md-button class="md-raised md-accent" aria-label="Submit" type="submit">
+        <md-icon>lock_open</md-icon>
+      </md-button>
+		</form>
+	</md-dialog-actions>
+
+</md-dialog>
