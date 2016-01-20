@@ -1,5 +1,5 @@
-ttoApp.controller('registerCtrl', ['$scope', 'Restangular', '$rootScope', '$mdDialog', '$mdSidenav',
-function ($scope, Restangular, $rootScope, $mdDialog, $mdSidenav) {
+ttoApp.controller('registerCtrl', ['$scope', '$rootScope', '$mdDialog', 'UserServ', 
+function ($scope, $rootScope, $mdDialog, UserServ) {
 	$rootScope.icon = "person_add";
 	$rootScope.title = "Register"; 
 	$rootScope.showTab = 0;
@@ -8,8 +8,6 @@ function ($scope, Restangular, $rootScope, $mdDialog, $mdSidenav) {
  	$rootScope.backUrl  = '/';
  	$rootScope.component = {};
  	$rootScope.component.register = true;
-
-	$scope.avatarId = 'avatar-01';
 
 	$scope.register = register;
 
@@ -21,32 +19,13 @@ function ($scope, Restangular, $rootScope, $mdDialog, $mdSidenav) {
 	registerInit();
 
 	function registerInit() {
-		Restangular.all('user/allAvatar').getList()
-		.then(function (data) {
-			$scope.allAvatar = data;
-		}, function (response) {
-			$rootScope.errorDialog(response, 'Loading Error !!!');
-		});
+    $scope.allAvatar = ttoAvatarList();
+    $scope.user = new UserServ();
+    $scope.user.avatarId = 'avatar-01';
 	}
 
 	function register() {
-		var alert;
-		var postObj = {
-		'email'     : $scope.email1, 
-		'password'  : $scope.password1,
-		'firstname' : $scope.firstname,
-		'lastname'  : $scope.lastname,
-		'nickname'  : $scope.nickname,
-		'phone'     : $scope.phone,
-		'birthdate' : $scope.birthdate,
-		'school'    : $scope.school,
-		'province'  : $scope.province,
-		'level'     : $scope.level,
-		'purpose'   : $scope.purpose,
-		'avatarId'  : $scope.avatarId
-		};
-		Restangular.all('user/register').post(postObj)
-		.then(function (data) {
+    $scope.user.$save(function (data) {
 			var alert = $mdDialog.alert({
 				  title: 'Register Completed',
 				  content: 'Please check your email for serial code - ตรวจสอบอีเมล์เพื่อรับรหัส',

@@ -1,5 +1,5 @@
-ttoApp.controller('logoutCtrl', ['$scope', 'Restangular', '$rootScope', '$mdDialog', '$mdSidenav', 'AuthServ',
-function ($scope, Restangular, $rootScope, $mdDialog, $mdSidenav, AuthServ) {
+ttoApp.controller('logoutCtrl', ['$scope', '$http', '$rootScope', '$mdDialog', 'AuthServ',
+function ($scope, $http, $rootScope, $mdDialog, AuthServ) {
 	$rootScope.icon = "lock_open";
 	$rootScope.title = "Logout"; 
 	$rootScope.showTab = 0;
@@ -25,6 +25,7 @@ function ($scope, Restangular, $rootScope, $mdDialog, $mdSidenav, AuthServ) {
 				$rootScope.password   = '';
 				$rootScope.userId     = '';
 				$rootScope.token      = '';
+        $http.defaults.headers.common['token'] = '';
 				$rootScope.role       = '';
 				$rootScope.notificationCount = '';
 				$rootScope.isLoggedIn = false;

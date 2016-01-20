@@ -1,0 +1,60 @@
+<md-toolbar class="md-tall md-hue-2">
+	<span flex></span>
+	<div layout="column" class="md-toolbar-tools-bottom inset" layout-align="center center">
+		<div layout="row">
+		  <user-avatar ng-model="$root.avatarId" size="96"></user-avatar>
+		  <user-avatar ng-if="$root.asUserMode" ng-model="$root.asAvatarId" size="96"></user-avatar>
+		</div>
+	  <span></span>
+		<div>
+			<small><small>version : {{ $root.version }}</small></small>
+		</div>
+	</div>
+</md-toolbar>
+
+<md-list>
+
+  <md-item ng-if="!$root.isLoggedIn" ng-repeat="initMenu in allInitMenu">
+  	<md-content class="side-nav-background" ng-click="$root.goRoute(initMenu.route, initMenu.mode)">
+	    <md-item-content md-ink-ripple layout="row" layout-align="start center">
+	      <div class="inset">
+	        <md-icon>{{initMenu.icon}}</md-icon>
+	      </div>
+	      <div class="inset">{{initMenu.title}}</div>
+	    </md-item-content>
+  	</md-content>
+  </md-item>
+
+  <md-item ng-if="$root.isLoggedIn" ng-repeat="menu in allMenu">
+  	<md-content class="side-nav-background" ng-click="$root.goRoute(menu.route, menu.mode)">
+	    <md-item-content md-ink-ripple layout="row" layout-align="start center">
+	      <div class="inset">
+	        <md-icon>{{menu.icon}}</md-icon>
+	      </div>
+	      <div class="inset">{{menu.title}}</div>
+	    </md-item-content>
+  	</md-content>
+  </md-item>
+
+	<div ng-if="$root.role == 'admin'">
+	  <md-divider></md-divider>
+
+	  <md-subheader ng-click="$root.adminShow=!$root.adminShow;">
+	  	Administrator <span ng-show="$root.adminShow">(-)</span><span ng-show="!$root.adminShow">(+)</span>
+	  </md-subheader>
+
+		<div ng-show="$root.adminShow">
+		  <md-item ng-repeat="adminMenu in allAdminMenu">
+		  	<md-content class="side-nav-background" ng-click="$root.goRoute(adminMenu.route, adminMenu.mode)">
+		      <md-item-content md-ink-ripple layout="row" layout-align="start center">
+		        <div class="inset">
+		          <md-icon>{{adminMenu.icon}}</md-icon>
+		        </div>
+		        <div class="inset">{{adminMenu.title}}</div>
+		      </md-item-content>
+		  	</md-content>
+		  </md-item>
+		</div>	
+	</div>
+
+</md-list>

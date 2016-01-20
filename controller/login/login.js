@@ -24,6 +24,7 @@ function ($scope, Restangular, $rootScope, $mdDialog, $mdSidenav, AuthServ) {
 			$rootScope.email    = $scope.email;
 			$rootScope.password = $scope.passwor;
 			$rootScope.token    = data.token;
+      $http.defaults.headers.common['token'] = data.token;
 			$rootScope.headerObj = {'token' : data.token};
 			$rootScope.userId   = data.userId;
 			$rootScope.role     = data.role;

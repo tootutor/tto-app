@@ -15,12 +15,9 @@ ttoApp.config(function($mdThemingProvider, $routeProvider, RestangularProvider) 
     .when('/', {
       templateUrl: 'controller/home/home.html',
       controller: 'homeCtrl'
-      //controllerAs: 'vm'
     })
     .when('/register', {
       templateUrl: 'controller/register/register.html',
-      controller: 'registerCtrl'
-      //controllerAs: 'vm'
     })
     .when('/login', {
       templateUrl: 'controller/login/login.html',
@@ -31,8 +28,7 @@ ttoApp.config(function($mdThemingProvider, $routeProvider, RestangularProvider) 
       controller: 'logoutCtrl'
     })
     .when('/profile', {
-      templateUrl: 'controller/profile/profile.html',
-      controller: 'profileCtrl'
+      templateUrl: 'page/profile/profile.html',
     })
     .when('/coin', {
       templateUrl: 'controller/coin/coin.html',

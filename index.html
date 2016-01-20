@@ -38,8 +38,9 @@
 
 		<!-- Left NAV -->
   	<md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
-	  	<ng-include src="'view/side-toolbar.html'"></ng-include>
-	  	<ng-include src="'view/side-nav-list.html'"></ng-include>
+      <side-menu></side-menu>
+	  	<!--<ng-include src="'view/side-toolbar.html'"></ng-include>-->
+	  	<!--<ng-include src="'view/side-nav-list.html'"></ng-include>-->
 		</md-sidenav>
 
 
@@ -185,11 +186,11 @@
     <!-- TTO App -->
 		<script src="app-info.js"></script>    
     <script src="app.js"></script>
+    <script src="app-run.js"></script>
 		<!-- Controller -->
     <script src="controller/register/register.js"></script>
     <script src="controller/login/login.js"></script>
     <script src="controller/logout/logout.js"></script>
-    <script src="controller/profile/profile.js"></script>
     <script src="controller/home/home.js"></script>
     <script src="controller/coin/coin.js"></script>
     <script src="controller/category/category.js"></script>
@@ -213,6 +214,12 @@
     <script src="controller/user-course-item-detail-admin/user-course-item-detail-admin.js"></script>
     <script src="controller/test-admin/test-admin.js"></script>
 		<script src="controller/comment-dialog/comment-dialog.js"></script>
+    <!-- Page -->
+    <script src="page/profile/profile.js"></script>
+    <!-- Dialog -->
+    <script src="dialog/login/login-dialog.js"></script>
+    <script src="dialog/logout/logout-dialog.js"></script>
+    
 		<!-- Directive -->
     <script src="directive/user-avatar/user-avatar.js"></script>
     <script src="directive/jsx-jc/jsx-jc.js"></script>
@@ -222,12 +229,14 @@
     <script src="directive/tto-marked/tto-marked.js"></script>
     <script src="directive/comment/comment.js"></script>
     <script src="directive/user-item-detail/user-item-detail.js"></script>
+    <script src="component/side-menu/side-menu.js"></script>
 		<!-- Services -->
     <script src="service/something/something.js"></script>
     <script src="service/auth/auth-service.js"></script>
+    <script src="service/user/user-service.js"></script>
     <script src="service/category/category-service.js"></script>
     <script src="service/user-category/user-category-service.js"></script>
-		
+   
     <script src="config/config.js"></script>
     <script src="google.js"></script>
     
