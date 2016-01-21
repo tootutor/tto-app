@@ -1,9 +1,9 @@
-ttoApp.factory('UserCategoryServ', function($resource, $rootScope) {
-  return $resource(appInfo.apiPath + '/category/user/:userId', {}, {
+ttoApp.factory('OrderServ', function($resource, $rootScope) {
+  return $resource(appInfo.apiPath + '/order/:orderId', {}, {
 		query: {
 					method: 'GET',
 					isArray:true,
-		},
+		},	
 		update: {
 					method: 'POST',
 					headers: {

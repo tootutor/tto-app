@@ -2,12 +2,17 @@ ttoApp.controller('loginDialogCtrl', ['$scope', '$rootScope', '$mdDialog', 'Auth
 function($scope, $rootScope, $mdDialog, AuthServ) {
 
 	$scope.goRegister = goRegister;
+	$scope.forgetPassword = forgetPassword;
 	$scope.login = login;
 
 	function goRegister() {
 		$mdDialog.hide();
     $rootScope.goRoute('register', 'clear');
 	}
+  
+  function forgetPassword() {
+		$mdDialog.hide();
+  }
 
 	function login() {
 		var auth = new AuthServ();

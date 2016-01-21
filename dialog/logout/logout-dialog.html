@@ -1,4 +1,4 @@
-<md-dialog ng-cloak ng-controller="logoutDialogCtrl" style="width:320px;">
+<md-dialog ng-cloak ng-controller="logoutDialogCtrl" style="width:320px;" layout="column">
 
 	<md-toolbar class="md-primary">
 		<div class="md-toolbar-tools">
@@ -10,12 +10,9 @@
 		</div>
 	</md-toolbar>
 
-	<md-dialog-content>
+  <md-dialog-content layout="column" layout-align="center center">
     <img ng-src="{{$root.ttoIcon('tto-logo');}}">
-	</md-dialog-content>
-
-	<md-dialog-actions flex layout="row" layout-align="space-between stretch" layout-padding>
-    <form name="loginForm" ng-submit="logout($event);">
+    <form name="loginForm" ng-submit="logout();">
       <div class="dialog-content">
         <h3>Logout</h3>
         <md-input-container layout-fill>
@@ -27,6 +24,6 @@
         <md-icon>lock_open</md-icon>
       </md-button>
 		</form>
-	</md-dialog-actions>
+	</md-dialog-content>
 
 </md-dialog>

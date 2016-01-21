@@ -1,35 +1,18 @@
 ttoApp.factory('CategoryServ', function($resource, $rootScope) {
-  return $resource(appInfo.apiPath + '/category', {}, {
+  return $resource(appInfo.apiPath + '/category/:categoryId', {}, {
 		query: {
 					method: 'GET',
 					isArray:true,
-					headers: {
-						'token': $rootScope.token
-					}
 		},	
-		get: {
-					method: 'GET',
-					headers: {
-						'token': $rootScope.token
-					}
-		},	
-		save: {
-					method: 'POST',
-					headers: {
-						'token': $rootScope.token
-					}
-		},
 		update: {
 					method: 'POST',
 					headers: {
-						'token': $rootScope.token,
 						'X-HTTP-Method-Override' : 'PUT'
 					}
 		},
-		update: {
+		remove: {
 					method: 'POST',
 					headers: {
-						'token': $rootScope.token,
 						'X-HTTP-Method-Override' : 'DELETE'
 					}
 		}	

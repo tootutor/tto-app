@@ -1,5 +1,5 @@
 ttoApp.controller('logoutDialogCtrl', ['$scope', '$rootScope', '$mdDialog', 'AuthServ',
-function($scope, Restangular, $rootScope, $mdDialog, AuthServ) {
+function($scope, $rootScope, $mdDialog, AuthServ) {
 
 	$scope.email    = $rootScope.email;
 	$scope.password = $rootScope.password;
