@@ -1,4 +1,4 @@
-ttoApp.factory('UserServ', function($resource, $rootScope) {
+ttoApp.factory('UserServ', function($resource) {
   return $resource(appInfo.apiPath + '/user/:userId' , {}, {
 		get: {
       method: 'GET',

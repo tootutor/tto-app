@@ -70,7 +70,16 @@ ttoApp.run(function ($rootScope, $location, $mdSidenav, Restangular, $mdDialog, 
 	$rootScope.ttoIcon = function(iconId) {
 		return ttoIcon(iconId);
 	}
-	  
+
+	$rootScope.loginDialog = function (ev) {
+		$mdDialog.show({
+			templateUrl: 'dialog/login/login-dialog.html',
+			parent: angular.element(document.body),
+			targetEvent: ev,
+			clickOutsideToClose: false
+		});
+	}
+	
  	$rootScope.goBack = function() {
 		var backUrl = $rootScope.urlStack.pop();
  		localStorage.setItem('urlStack', JSON.stringify($rootScope.urlStack));
@@ -99,7 +108,11 @@ ttoApp.run(function ($rootScope, $location, $mdSidenav, Restangular, $mdDialog, 
 		var error = '';
 		if (response) {
 			if (response.data.error) {
-				error = response.data.error.code + ' : ' + response.data.error.message;
+				if (response.data.error.message.search("Database error [23000]") >= 0) {
+					error = "Data already exists - มีข้อมูลในระบบแล้ว"
+				} else {
+					error = response.data.error.code + ' : ' + response.data.error.message;
+				}
 			} else {
 				error = response.status + ' : ' + response.statusText;
 			}
@@ -111,7 +124,6 @@ ttoApp.run(function ($rootScope, $location, $mdSidenav, Restangular, $mdDialog, 
 	$rootScope.checkVersion = function() {
 	  Restangular.one('app','appinfo').get({}, $rootScope.headerObj)
 	  .then(function (data) {
-	  	window.loading_screen.finish();
 	  	if (appInfo.version >= data.minVersion) {
 				$rootScope.loadDefinition();
 				$rootScope.initNotification();
@@ -174,14 +186,20 @@ ttoApp.run(function ($rootScope, $location, $mdSidenav, Restangular, $mdDialog, 
 	// Initial logic.	
 	if ($rootScope.token > '') {
     var user = UserServ.get({userId: $rootScope.userId}, function(data) {
-			$rootScope.isLoggedIn = true;
-			$rootScope.notificationCount = data.notificationCount;
-			$rootScope.role = data.role;
-			$rootScope.nickname = data.nickname;
-			$rootScope.avatarId = data.avatarId;
-			$rootScope.asUserId = data.asUserId;
-			$rootScope.version  = appInfo.version;
-			$rootScope.checkVersion();
+			if (data.status == 'active') {
+				$rootScope.isLoggedIn = true;
+				$rootScope.notificationCount = data.notificationCount;
+				$rootScope.role = data.role;
+				$rootScope.nickname = data.nickname;
+				$rootScope.avatarId = data.avatarId;
+				$rootScope.asUserId = data.asUserId;
+				$rootScope.version  = appInfo.version;
+				$rootScope.checkVersion();
+				window.loading_screen.finish();
+			} else {
+				window.loading_screen.finish();
+				$rootScope.loginDialog();
+			}
 	  }, function (response) {
   		localStorage.setItem('email', '');
   		localStorage.setItem('password', '');
@@ -194,25 +212,15 @@ ttoApp.run(function ($rootScope, $location, $mdSidenav, Restangular, $mdDialog, 
 		 	$rootScope.password  = '';
 			$rootScope.isLoggedIn = false;
 		 	$rootScope.urlStack = [];
-			//$rootScope.goRoute('login', 'clear');
-      $mdDialog.show({
-        templateUrl: 'dialog/login/login-dialog.html',
-        parent: angular.element(document.body),
-        //targetEvent: ev,
-        clickOutsideToClose: false
-      });
+			$rootScope.goRoute('/', 'clear');
+			$rootScope.loginDialog();
 	  	window.loading_screen.finish();
 	  });
 	} else {
 		$rootScope.isLoggedIn = false;
 	 	$rootScope.urlStack = [];
-		//$rootScope.goRoute('login', 'clear');
-    $mdDialog.show({
-      templateUrl: 'dialog/login/login-dialog.html',
-      parent: angular.element(document.body),
-      //targetEvent: ev,
-      clickOutsideToClose: false
-    });
+		$rootScope.goRoute('/', 'clear');
+		$rootScope.loginDialog();
   	window.loading_screen.finish();
 	}
 });

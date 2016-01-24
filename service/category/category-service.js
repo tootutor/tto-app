@@ -1,4 +1,4 @@
-ttoApp.factory('CategoryServ', function($resource, $rootScope) {
+ttoApp.factory('CategoryServ', function($resource) {
   return $resource(appInfo.apiPath + '/category/:categoryId', {}, {
 		query: {
 					method: 'GET',

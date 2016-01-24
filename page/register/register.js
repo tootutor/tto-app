@@ -12,9 +12,9 @@ function ($scope, $rootScope, $mdDialog, UserServ) {
 	$scope.register = register;
 
 	// Event from rootScope view
-	$scope.$on('register', function(event) {
-		$scope.register();
-	});
+	//$scope.$on('register', function(event) {
+	//	$scope.register();
+	//});
 
 	registerInit();
 
@@ -25,7 +25,9 @@ function ($scope, $rootScope, $mdDialog, UserServ) {
 	}
 
 	function register() {
+		$rootScope.isLoading++;
     $scope.user.$save(function (data) {
+			$rootScope.isLoading--;
 			var alert = $mdDialog.alert({
 				  title: 'Register Completed',
 				  content: 'Please check your email for serial code - ตรวจสอบอีเมล์เพื่อรับรหัส',
@@ -34,6 +36,7 @@ function ($scope, $rootScope, $mdDialog, UserServ) {
 			$mdDialog.show(alert).finally(function() {alert = undefined;});
 			$rootScope.goRoute('/', 'clear');
 		}, function (response) {
+			$rootScope.isLoading = 0;
 			$rootScope.errorDialog(response, 'Update Error !!!');
 		});
 	}

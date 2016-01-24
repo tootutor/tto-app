@@ -37,7 +37,10 @@
   	<div id="main-spin" ng-show="$root.isLoading > 0"></div>
 
 		<!-- Left NAV -->
-  	<md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
+  	<md-sidenav ng-if="$root.isLoggedIn"
+			layout="column" class="md-sidenav-left md-whiteframe-z2" 
+			md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')"
+		>
       <side-menu></side-menu>
 	  	<!--<ng-include src="'view/side-toolbar.html'"></ng-include>-->
 	  	<!--<ng-include src="'view/side-nav-list.html'"></ng-include>-->
@@ -53,7 +56,10 @@
 				  <h3> {{ $root.title }} </h3>
 				  <!--<md-icon>{{$root.icon}}</md-icon>-->
 				  <span flex></span>
-					<md-button class="md-icon-button" ng-if="$root.urlStack.length" aria-label="Back" ng-click="$root.goBack();">
+					<md-button class="md-icon-button" ng-if="!$root.isLoggedIn" ng-click="$root.loginDialog();">
+						<md-icon>lock</md-icon>
+					</md-button>
+					<md-button class="md-icon-button" ng-if="$root.urlStack.length" ng-click="$root.goBack();">
 						<md-icon>arrow_back</md-icon>
 					</md-button>
 				  <md-button class="md-icon-button" ng-if="$root.component.comment" ng-click="$root.showCommentDialog($event)">
@@ -101,12 +107,6 @@
 			>
 				<md-icon>done</md-icon>
 			</md-button>
-		  
-		  <md-button ng-if="$root.component.register" class="md-fab md-fab-bottom-right" 
-		  	aria-label="Submit" ng-click="$root.boardcast('register');"
-		  >
-				<md-icon>done</md-icon>
-			</md-button>
 
 		  <md-button ng-if="$root.component.addUserCourseItem" class="md-fab md-fab-bottom-right" 
 		  	aria-label="add" ng-click="$root.boardcast('addUserCourseItem');"
@@ -133,23 +133,6 @@
 			</md-button>
 
 		</div>
-
-		<!-- Right NAV -->
-<!--
-  	<md-sidenav ng-if="$root.component.comment" 
-  		layout="column" 
-  		class="md-sidenav-right md-whiteframe-z2" 
-  		md-component-id="right" 
-  		md-is-locked-open="$mdMedia('gt-md')"
-  	>
-			<comment 
-				user-id="$root.component.comment.userId" 
-				user-course-item-id="$root.component.comment.userCourseItemId"
-				content="$root.component.comment.content"
-			>
-			</comment>
-		</md-sidenav>
--->
 		
     <!-- Angular Material Dependencies -->
     <script src="libs/angular/angular.min.js"></script>
@@ -188,11 +171,9 @@
     <script src="app.js"></script>
     <script src="app-run.js"></script>
 		<!-- Controller -->
-    <script src="controller/register/register.js"></script>
     <script src="controller/login/login.js"></script>
     <script src="controller/logout/logout.js"></script>
     <script src="controller/home/home.js"></script>
-    <script src="controller/coin/coin.js"></script>
     <script src="controller/category/category.js"></script>
     <script src="controller/group/group.js"></script>
     <script src="controller/course/course.js"></script>
@@ -215,10 +196,13 @@
     <script src="controller/test-admin/test-admin.js"></script>
 		<script src="controller/comment-dialog/comment-dialog.js"></script>
     <!-- Page -->
+    <script src="page/register/register.js"></script>
     <script src="page/profile/profile.js"></script>
+    <script src="page/coin/coin.js"></script>
     <!-- Dialog -->
     <script src="dialog/login/login-dialog.js"></script>
     <script src="dialog/logout/logout-dialog.js"></script>
+    <script src="dialog/activate/activate-dialog.js"></script>
     
 		<!-- Directive -->
     <script src="directive/user-avatar/user-avatar.js"></script>
@@ -234,6 +218,11 @@
     <script src="service/something/something.js"></script>
     <script src="service/auth/auth-service.js"></script>
     <script src="service/user/user-service.js"></script>
+    <script src="service/coin/coin-service.js"></script>
+    <script src="service/bank/bank-service.js"></script>
+    <script src="service/order/order-service.js"></script>
+    <script src="service/user-order/user-order-service.js"></script>
+    <script src="service/user-coin/user-coin-service.js"></script>
     <script src="service/category/category-service.js"></script>
     <script src="service/user-category/user-category-service.js"></script>
    

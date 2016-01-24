@@ -1,0 +1,25 @@
+<md-dialog ng-cloak ng-controller="activateDialogCtrl" layout="column">
+
+  <md-toolbar class="md-primary" flex>
+    <div class="md-toolbar-tools">
+      <h3>  Activate  </h3>
+      <span flex></span>
+    </div>
+  </md-toolbar>
+
+  <md-dialog-content layout="column" layout-align="center center" style="width:320px; height:400px;" flex>
+    <img ng-src="{{$root.ttoIcon('tto-logo');}}" style="width: 200px">
+    <form layout="column" layout-align="center center" ng-submit="activate()">
+      <md-input-container layout-fill>
+        <label>Serial No.</label>
+        <input ng-model="auth.serial" required>
+      </md-input-container>
+			<div layout="row">
+				<md-button flex class="md-raised md-primary" type="submit">
+					<md-icon>lock</md-icon>
+				</md-button>
+			</div>
+    </form>	
+  </md-dialog-content>
+
+</md-dialog>

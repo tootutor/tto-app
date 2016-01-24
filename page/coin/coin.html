@@ -8,10 +8,10 @@
 							<span class="fa-stack fa-lg">
 								<i class="fa fa-star fa-stack-1x"></i>
 							</span>
-							My Coins : {{myCoin}}
+							My Coins : {{myCoin.coin}}
 						</h4>
 						<span flex></span>
-						<md-button ng-if="neworder.amount" class="md-icon-button" aria-label="Submit" type="submit">
+						<md-button ng-if="newOrder.amount" class="md-icon-button" aria-label="Submit" type="submit">
 							<md-icon>shopping_cart</md-icon>
 						</md-button>  
 					</div>
@@ -19,8 +19,8 @@
 				<md-card-content flex layout="column" layout-align="center center">
 					<md-input-container layout-fill>
 						<label>เลือก package เพื่อเติม &starf; แล้วกดปุ่มรถเข็น</label>
-						<md-select ng-model="neworder.amount" required>
-							<md-option ng-repeat="package in allPackage" value={{package.amount}}>
+						<md-select ng-model="selectedPackage" ng-change="coinSelect()" required>
+							<md-option ng-repeat="package in allPackage" value={{$index}}>
 								{{package.amount}} Baht : {{package.coin}} + {{package.bonus}} Coins
 							</md-option>
 						</md-select>

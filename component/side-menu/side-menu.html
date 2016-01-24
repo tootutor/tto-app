@@ -14,17 +14,6 @@
 
 <md-list>
 
-  <md-item ng-if="!$root.isLoggedIn" ng-repeat="initMenu in allInitMenu">
-  	<md-content class="side-nav-background" ng-click="$root.goRoute(initMenu.route, initMenu.mode)">
-	    <md-item-content md-ink-ripple layout="row" layout-align="start center">
-	      <div class="inset">
-	        <md-icon>{{initMenu.icon}}</md-icon>
-	      </div>
-	      <div class="inset">{{initMenu.title}}</div>
-	    </md-item-content>
-  	</md-content>
-  </md-item>
-
   <md-item ng-if="$root.isLoggedIn" ng-repeat="menu in allMenu">
   	<md-content class="side-nav-background" ng-click="$root.goRoute(menu.route, menu.mode)">
 	    <md-item-content md-ink-ripple layout="row" layout-align="start center">
@@ -57,4 +46,17 @@
 		</div>	
 	</div>
 
+	<md-divider></md-divider>
+
+  <md-item ng-if="$root.isLoggedIn">
+  	<md-content class="side-nav-background" ng-click="logoutDialog($event);">
+	    <md-item-content md-ink-ripple layout="row" layout-align="start center">
+	      <div class="inset">
+	        <md-icon>lock_open</md-icon>
+	      </div>
+	      <div class="inset">Logout</div>
+	    </md-item-content>
+  	</md-content>
+  </md-item>
+	
 </md-list>

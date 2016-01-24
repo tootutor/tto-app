@@ -1,5 +1,5 @@
-ttoApp.factory('OrderServ', function($resource) {
-  return $resource(appInfo.apiPath + '/order/:orderId', {orderId: '@orderId'}, {
+ttoApp.factory('UserOrderServ', function($resource) {
+  return $resource(appInfo.apiPath + '/order/:orderId/user/:userId', {orderId: '@orderId'}, {
 		query: {
 			method: 'GET',
 			isArray: true

@@ -3,14 +3,12 @@ function($scope, $rootScope, $mdDialog, AuthServ) {
 
 	$scope.email    = $rootScope.email;
 	$scope.password = $rootScope.password;
-	$scope.logout = logout;
-	$scope.hideDialog = hideDialog;
 
-	function hideDialog() {
+	$scope.hideDialog = function () {
 		$mdDialog.hide();
 	}
 
-	function logout() {
+	$scope.logout = function () {
 		$rootScope.isLoading++;
 		var auth = AuthServ.get({userId: $rootScope.userId}, function () {
 			auth.$remove({userId: $rootScope.userId}, function () {
@@ -27,7 +25,7 @@ function($scope, $rootScope, $mdDialog, AuthServ) {
 				$rootScope.notificationCount = '';
 				$rootScope.isLoggedIn = false;
 				$mdDialog.hide();
-				$rootScope.goRoute('login', 'clear');
+				$rootScope.goRoute('/', 'clear');
 				$rootScope.isLoading--;
 			}, function (response) {
 				localStorage.setItem('email', '');
@@ -35,7 +33,7 @@ function($scope, $rootScope, $mdDialog, AuthServ) {
 				localStorage.setItem('token', '');
 				localStorage.setItem('userId', '');
 				localStorage.setItem('role', '');
-				$rootScope.goRoute('login', 'clear');
+				$rootScope.goRoute('/', 'clear');
 				$rootScope.isLoading = 0;
 			});
 		});

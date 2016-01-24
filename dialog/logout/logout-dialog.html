@@ -1,28 +1,27 @@
-<md-dialog ng-cloak ng-controller="logoutDialogCtrl" style="width:320px;" layout="column">
+<md-dialog ng-cloak ng-controller="logoutDialogCtrl" layout="column">
 
-	<md-toolbar class="md-primary">
+	<md-toolbar class="md-primary" flex>
 		<div class="md-toolbar-tools">
-			<md-icon>lock_open</md-icon>
+      <h3>  Logout  </h3>
 			<span flex></span>
-			<md-button class="md-icon-button" ng-click="hideDialog();">
-				<md-icon>close</md-icon>
-			</md-button>
 		</div>
 	</md-toolbar>
 
-  <md-dialog-content layout="column" layout-align="center center">
-    <img ng-src="{{$root.ttoIcon('tto-logo');}}">
-    <form name="loginForm" ng-submit="logout();">
-      <div class="dialog-content">
-        <h3>Logout</h3>
-        <md-input-container layout-fill>
-          <label>Email</label>
-          <input type="email" ng-model="email" disabled>
-        </md-input-container>
-      </div>
-      <md-button class="md-raised md-accent" aria-label="Submit" type="submit">
-        <md-icon>lock_open</md-icon>
-      </md-button>
+  <md-dialog-content layout="column" layout-align="center center" style="width:320px; height:400px;" flex>
+    <img ng-src="{{$root.ttoIcon('tto-logo');}}" style="width: 200px">
+    <form name="loginForm" layout="column" layout-align="center center" ng-submit="logout();">
+			<md-input-container layout-fill>
+				<label>Email</label>
+				<input type="email" ng-model="email" disabled>
+			</md-input-container>
+			<div layout="row">
+				<md-button flex class="md-raised md-accent" aria-label="Submit" type="submit">
+					<md-icon>lock_open</md-icon>
+				</md-button>
+				<md-button flex class="md-raised md-primary" ng-click="hideDialog();">
+					<md-icon>close</md-icon>
+				</md-button>
+			</div>
 		</form>
 	</md-dialog-content>
 

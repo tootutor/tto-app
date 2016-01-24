@@ -1,30 +1,30 @@
 ttoApp.factory('Something', function($resource, $rootScope) {
   return $resource('../api/test/something/:id/aa/:id2', {id: '@id'}, {
 		query: {
-					method: 'GET',
-					isArray:true,
-					headers: {
-						'token': $rootScope.token
-					}
+			method: 'GET',
+			isArray:true,
+			headers: {
+				'token': $rootScope.token
+			}
 		},	
 		get: {
-					method: 'GET',
-					headers: {
-						'token': $rootScope.token
-					}
+			method: 'GET',
+			headers: {
+				'token': $rootScope.token
+			}
 		},	
 		save: {
-					method: 'POST',
-					headers: {
-						'token': $rootScope.token
-					}
+			method: 'POST',
+			headers: {
+				'token': $rootScope.token
+			}
 		},
 		update: {
-					method: 'POST',
-					headers: {
-						'token': $rootScope.token,
-						'X-HTTP-Method-Override' : 'PUT'
-					}
+			method: 'POST',
+			headers: {
+				'token': $rootScope.token,
+				'X-HTTP-Method-Override' : 'PUT'
+			}
 		}	
 	}); // Note the full endpoint address
 	

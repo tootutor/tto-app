@@ -17,21 +17,13 @@ ttoApp.config(function($mdThemingProvider, $routeProvider, RestangularProvider) 
       controller: 'homeCtrl'
     })
     .when('/register', {
-      templateUrl: 'controller/register/register.html',
-    })
-    .when('/login', {
-      templateUrl: 'controller/login/login.html',
-      controller: 'loginCtrl'
-    })
-    .when('/logout', {
-      templateUrl: 'controller/logout/logout.html',
-      controller: 'logoutCtrl'
+      templateUrl: 'page/register/register.html',
     })
     .when('/profile', {
       templateUrl: 'page/profile/profile.html',
     })
     .when('/coin', {
-      templateUrl: 'controller/coin/coin.html',
+      templateUrl: 'page/coin/coin.html',
       controller: 'coinCtrl'
     })
     .when('/category', {

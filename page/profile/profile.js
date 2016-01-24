@@ -9,7 +9,7 @@ function ($scope, $rootScope, $mdDialog, UserServ) {
  	$rootScope.component = {};
  	$rootScope.component.profileUpdate = true;
 
-	$rootScope.isLoading     = true;
+	$rootScope.isLoading = 0;
  	$scope.profileUpdate = profileUpdate;
 
 	// Event from rootScope view
@@ -21,12 +21,13 @@ function ($scope, $rootScope, $mdDialog, UserServ) {
  	
  	function profileCtrlInit() {
     $scope.allAvatar = ttoAvatarList();
+		$rootScope.isLoading++;
     $scope.user = UserServ.get({userId: $rootScope.userId}, function(data) {
 			$scope.user.birthdate = new Date(data.birthdate); //Set format for date field
 			$rootScope.firstname = data.firstname;
 			$rootScope.lastname  = data.lastname;
 			$rootScope.nickname  = data.nickname;
-			$rootScope.isLoading = false;
+			$rootScope.isLoading--;
 		}, function (response) {
 			$rootScope.errorDialog(response, 'Loading Error !!!');
 		});

@@ -1,20 +1,16 @@
-ttoApp.controller('loginDialogCtrl', ['$scope', '$rootScope', '$mdDialog', 'AuthServ',
-function($scope, $rootScope, $mdDialog, AuthServ) {
+ttoApp.controller('loginDialogCtrl', ['$scope', '$rootScope', '$mdDialog', 'AuthServ', '$http',
+function($scope, $rootScope, $mdDialog, AuthServ, $http) {
 
-	$scope.goRegister = goRegister;
-	$scope.forgetPassword = forgetPassword;
-	$scope.login = login;
-
-	function goRegister() {
+	$scope.goRegister = function () {
 		$mdDialog.hide();
     $rootScope.goRoute('register', 'clear');
 	}
   
-  function forgetPassword() {
+  $scope.forgetPassword = function () {
 		$mdDialog.hide();
   }
 
-	function login() {
+	$scope.login = function () {
 		var auth = new AuthServ();
 		auth.email = $scope.email;
 		auth.password = $scope.password;
@@ -28,17 +24,28 @@ function($scope, $rootScope, $mdDialog, AuthServ) {
 			$rootScope.email    = $scope.email;
 			$rootScope.password = $scope.passwor;
 			$rootScope.token    = data.token;
+			$http.defaults.headers.common['token'] = data.token;
 			$rootScope.headerObj = {'token' : data.token};
 			$rootScope.userId   = data.userId;
 			$rootScope.role     = data.role;
 			$rootScope.nickname = data.nickname;
 			$rootScope.avatarId = data.avatarId;
 			$rootScope.notificationCount = data.notificationCount;
-			$rootScope.isLoggedIn = true;
-      hideDialog();
-			$rootScope.goRoute('profile', 'home');
-			$rootScope.checkVersion();
-			$rootScope.isLoading--;
+			if (data.status == 'active') {
+				$rootScope.isLoggedIn = true;
+				$mdDialog.hide();
+				$rootScope.goRoute('profile', 'home');
+				$rootScope.checkVersion();				
+				$rootScope.isLoading--;
+			} else {
+				$mdDialog.hide();
+				$rootScope.isLoading--;
+				$mdDialog.show({
+					templateUrl: 'dialog/activate/activate-dialog.html',
+					parent: angular.element(document.body),
+					clickOutsideToClose: false
+				});
+			}
 		}, function (response) {
 			$rootScope.isLoading = 0;
       hideDialog();

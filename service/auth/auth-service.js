@@ -1,5 +1,5 @@
 ttoApp.factory('AuthServ', function($resource, $rootScope) {
-  return $resource(appInfo.apiPath + '/auth/:userId', {}, {
+  return $resource(appInfo.apiPath + '/auth/:userId', {userId: '@userId'}, {
 		get: {
       method: 'GET',
 		},
