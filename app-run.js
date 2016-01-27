@@ -1,4 +1,4 @@
-ttoApp.run(function ($rootScope, $location, $mdSidenav, Restangular, $mdDialog, $http, UserServ) {
+ttoApp.run(function ($rootScope, $location, $mdSidenav, Restangular, $mdDialog, $http, UserServ, AppServ) {
 	$rootScope.version   = appInfo.version;
 	$rootScope.apiPath   = appInfo.apiPath;
 	$rootScope.icon      = 'home';
@@ -21,10 +21,10 @@ ttoApp.run(function ($rootScope, $location, $mdSidenav, Restangular, $mdDialog, 
 
   var opts = {
     lines: 12             // The number of lines to draw
-  , length: 7             // The length of each line
+  , length: 5             // The length of each line
   , width: 5              // The line thickness
-  , radius: 10            // The radius of the inner circle
-  , scale: 5.0            // Scales overall size of the spinner
+  , radius: 20            // The radius of the inner circle
+  , scale: 1.0            // Scales overall size of the spinner
   , corners: 1            // Roundness (0..1)
   , color: '#000000'      // #rgb or #rrggbb
   , opacity: 1/4          // Opacity of the lines
@@ -117,13 +117,13 @@ ttoApp.run(function ($rootScope, $location, $mdSidenav, Restangular, $mdDialog, 
 				error = response.status + ' : ' + response.statusText;
 			}
 		}
+    $rootScope.isLoading = 0;
 		var alert = $mdDialog.alert({title: title, content: error, ok: 'Close'});
 		$mdDialog.show(alert).finally(function() {alert = undefined;});
 	};
 	
 	$rootScope.checkVersion = function() {
-	  Restangular.one('app','appinfo').get({}, $rootScope.headerObj)
-	  .then(function (data) {
+    AppServ.get(function(data) {
 	  	if (appInfo.version >= data.minVersion) {
 				$rootScope.loadDefinition();
 				$rootScope.initNotification();

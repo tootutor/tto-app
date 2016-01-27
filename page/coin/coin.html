@@ -1,7 +1,7 @@
-<md-content layout="column" layout-align="center center" ng-cloak>
-  <div flex style="max-width: 500px;" layout-padding>
+<div layout="column" layout-align="center start" style="max-width: 500px;">
+  <md-content flex layout-fill>
 		<form name="newCoinForm" ng-submit="coinNewOrder();">
-			<md-card>
+			<md-card flex>
 				<md-toolbar>
 					<div class="md-toolbar-tools">
 						<h4>
@@ -18,7 +18,7 @@
 				</md-toolbar>
 				<md-card-content flex layout="column" layout-align="center center">
 					<md-input-container layout-fill>
-						<label>เลือก package เพื่อเติม &starf; แล้วกดปุ่มรถเข็น</label>
+						<label>เลือก package &starf; แล้วกดปุ่มรถเข็น</label>
 						<md-select ng-model="selectedPackage" ng-change="coinSelect()" required>
 							<md-option ng-repeat="package in allPackage" value={{$index}}>
 								{{package.amount}} Baht : {{package.coin}} + {{package.bonus}} Coins
@@ -29,7 +29,7 @@
 			</md-card>
     </form>    	
 
-		<div ng-repeat="order in orderList | orderBy:'-status'">
+		<div ng-repeat="order in orderList | orderBy:['-status', '-timestamp']">
 			<div ng-if="order.status == 'order'">
 				<form name="coinForm" ng-submit="coinConfirmOrder(order)">
 					<md-card class="{{order.status}}">
@@ -58,11 +58,11 @@
 								<div layout="row" layout-xs="column">
 									<md-input-container layout-fill>
 										<label>Transfer Date</label>
-										<input type="date" ng-model="order.updatedTransferDate" ng-required="true">
+										<input type="date" ng-model="order.updateTransferDate" ng-required="true">
 									</md-input-container>
 									<md-input-container layout-fill>
 										<label>Transfer Amount (Baht)</label>
-										<input type="text" ng-model="order.updatedTransferAmount" ng-required="true">
+										<input type="text" ng-model="order.transferAmount" ng-required="true">
 									</md-input-container>
 								</div>
 							</div>
@@ -80,16 +80,17 @@
 								<span class="fa-stack fa-lg">
 									<i class="fa fa-clock-o fa-stack-1x"></i>
 								</span>
-								ได้รับการยืนยัน กำลังรอดำเนินการ
+								ยืนยันแล้ว กำลังรอดำเนินการ
 							</h4>
 							<span flex></span>
 						</div>
 					</md-toolbar>
 					<md-card-content layout="column" layout-align="start start">
-						<p>{{order.transferAmount}} Baht : {{order.coin}} + {{order.bonus}} coins; Transfer @ {{order.transferDate}}</p>
+						<p>{{order.transferAmount}} Baht : {{order.coin}} + {{order.bonus}} coins</p>
+						<small><small>Transfer @ {{order.transferDate}}</small></small>
 						<small><small>Order created @ {{ order.timestamp }}</small></small>
 					</md-card-content>
-				</md-card>>
+				</md-card>
 			</div>
 	
 			<div ng-if="order.status == 'approve'">
@@ -106,11 +107,13 @@
 						</div>
 					</md-toolbar>
 					<md-card-content layout="column" layout-align="start start">
-						<p>{{order.transferAmount}} Baht : {{order.coin}} + {{order.bonus}} coins; Transfer @ {{order.transferDate}}</p>
+						<p>{{order.transferAmount}} Baht : {{order.coin}} + {{order.bonus}} coins</p>
+						<small><small>Transfer @ {{order.transferDate}}</small></small>
 						<small><small>Order created @ {{ order.timestamp }}</small></small>
 					</md-card-content>
 				</md-card>
 			</div>
 		</div>
-	</div>
-</md-content>
+
+  </md-content>
+</div>

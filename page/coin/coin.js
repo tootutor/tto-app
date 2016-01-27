@@ -59,7 +59,7 @@ function ($scope, $rootScope, $mdDialog, $mdSidenav, CoinServ, OrderServ, UserOr
     $scope.newOrder.$save(function (data) {
       var alert = $mdDialog.alert({title: 'Update Completed !!!', content: '', ok: 'OK'});
       $mdDialog.show( alert ).finally(function() {alert = undefined;});
-      $scope.orderList.push(data[0]);
+      $scope.orderList.push($scope.newOrder);
       $rootScope.isLoading--;
     }, function (response) {
       $rootScope.errorDialog(response, 'Update Error !!!');
@@ -74,7 +74,8 @@ function ($scope, $rootScope, $mdDialog, $mdSidenav, CoinServ, OrderServ, UserOr
 
   function coinConfirmOrder(order) {
     $rootScope.isLoading++;
-    order.$update({orderId: order.orderId}, function(data) {
+    order.transferDate = order.updateTransferDate; // To solve date format error
+    order.$update({orderId: order.orderId, userId: $rootScope.userId}, function(data) {
       var alert = $mdDialog.alert({title: 'Update Completed !!!', content: '', ok: 'OK'});
       $mdDialog.show( alert ).finally(function() {alert = undefined;});
       order.status = 'confirm';
