@@ -75,6 +75,7 @@ function ($scope, $rootScope, $mdDialog, $mdSidenav, CoinServ, OrderServ, UserOr
   function coinConfirmOrder(order) {
     $rootScope.isLoading++;
     order.transferDate = order.updateTransferDate; // To solve date format error
+    order.transferAmount = order.updateTransferAmount; // To solve date format error
     order.$update({orderId: order.orderId, userId: $rootScope.userId}, function(data) {
       var alert = $mdDialog.alert({title: 'Update Completed !!!', content: '', ok: 'OK'});
       $mdDialog.show( alert ).finally(function() {alert = undefined;});

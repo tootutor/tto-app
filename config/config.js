@@ -27,19 +27,23 @@ ttoApp.config(function($mdThemingProvider, $routeProvider, RestangularProvider) 
       controller: 'coinCtrl'
     })
     .when('/category', {
-      templateUrl: 'controller/category/category.html',
+      templateUrl: 'page/category/category.html',
       controller: 'categoryCtrl'
     })
     .when('/user-category', {
-      templateUrl: 'controller/user-category/user-category.html',
+      templateUrl: 'page/user-category/user-category.html',
       controller: 'userCategoryCtrl'
     })
     .when('/user-category/user/:userId', {
-      templateUrl: 'controller/user-category/user-category.html',
+      templateUrl: 'page/user-category/user-category.html',
       controller: 'userCategoryCtrl'
     })
     .when('/user-category/:categoryId/course', {
-      templateUrl: 'controller/user-course/user-course.html',
+      templateUrl: 'page/user-course/user-course.html',
+      controller: 'userCourseCtrl'
+    })
+    .when('/user-category/:categoryId/course/user/:userId', {
+      templateUrl: 'page/user-course/user-course.html',
       controller: 'userCourseCtrl'
     })
     .when('/add-user-course-item/:userCourseId', {

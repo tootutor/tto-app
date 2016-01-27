@@ -19,6 +19,7 @@ ttoApp.run(function ($rootScope, $location, $mdSidenav, Restangular, $mdDialog, 
 	$rootScope.component = {};
 	$rootScope.isLoading = 0;
 
+  /*
   var opts = {
     lines: 12             // The number of lines to draw
   , length: 5             // The length of each line
@@ -43,7 +44,8 @@ ttoApp.run(function ($rootScope, $location, $mdSidenav, Restangular, $mdDialog, 
   }
 	var target = document.getElementById('main-spin');
 	$rootScope.spinner = new Spinner(opts).spin(target);
-
+  */
+  
  	$rootScope.goRoute = function(path, mode) {
  		switch (mode) {
  			case 'home':

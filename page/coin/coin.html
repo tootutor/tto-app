@@ -1,5 +1,5 @@
-<div layout="column" layout-align="center start" style="max-width: 500px;">
-  <md-content flex layout-fill>
+<md-content layout="column" layout-align="center center">
+  <div flex style="max-width: 500px;">
 		<form name="newCoinForm" ng-submit="coinNewOrder();">
 			<md-card flex>
 				<md-toolbar>
@@ -62,7 +62,7 @@
 									</md-input-container>
 									<md-input-container layout-fill>
 										<label>Transfer Amount (Baht)</label>
-										<input type="text" ng-model="order.transferAmount" ng-required="true">
+										<input type="text" ng-model="order.updateTransferAmount" ng-required="true">
 									</md-input-container>
 								</div>
 							</div>
@@ -115,5 +115,5 @@
 			</div>
 		</div>
 
-  </md-content>
-</div>
+  </div>
+</md-content>

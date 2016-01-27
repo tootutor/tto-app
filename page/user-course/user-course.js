@@ -1,5 +1,5 @@
-ttoApp.controller('userCourseCtrl', ['$scope', 'Restangular', '$rootScope', '$mdDialog', '$mdSidenav', '$routeParams',
-function ($scope, Restangular, $rootScope, $mdDialog, $mdSidenav, $routeParams) {
+ttoApp.controller('userCourseCtrl', ['$scope', '$rootScope', '$routeParams', 'UserCourseServ',
+function ($scope, $rootScope, $routeParams, UserCourseServ) {
 	$rootScope.icon = 'class';
 	$rootScope.title = 'Course';
 	$rootScope.showTab = 0;
@@ -15,15 +15,9 @@ function ($scope, Restangular, $rootScope, $mdDialog, $mdSidenav, $routeParams) 
  	userCourseCtrlInit();
  	
  	function userCourseCtrlInit() {
-		var userId = $rootScope.userId;
+    var userId = $routeParams.userId ? $routeParams.userId : $rootScope.userId;
 		$rootScope.isLoading++;
-		Restangular.one('usercourse/usercourselist',userId).get({}, $rootScope.headerObj)
-		.then(function (data) {
-			if (data.length > 0) {
-				$scope.userCourseList = data;
-			} else {
-				$scope.isNoData = true;
-			}
+    $scope.userCourseList = UserCourseServ.query({userId: userId, categoryId: $routeParams.categoryId}, function (data) {
 			$rootScope.isLoading--;
 		}, function (response) {
 			$rootScope.errorDialog(response, 'Loading Error !!!');
