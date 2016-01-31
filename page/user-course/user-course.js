@@ -3,7 +3,7 @@ function ($scope, $rootScope, $routeParams, UserCourseServ) {
 	$rootScope.icon = 'class';
 	$rootScope.title = 'Course';
 	$rootScope.showTab = 0;
- 	$rootScope.url = 'user-course';
+ 	$rootScope.url = 'user-category/'+$routeParams.categoryId+'/course';
  	$rootScope.showBack = true;
  	$rootScope.backUrl  = '/';
  	$rootScope.component = {};

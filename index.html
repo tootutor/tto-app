@@ -6,24 +6,33 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
       
-		<link rel="stylesheet" href="libs/please-wait/build/please-wait.css">
+    <link rel="stylesheet" href="libs/please-wait/build/please-wait.css">
     <link rel="stylesheet" href="libs/angular-material/angular-material.min.css">
     <link rel="stylesheet" href="libs/jsxgraph/jsxgraph.css">
     <link rel="stylesheet" href="libs/katex/katex.min.css">
     <link rel="stylesheet" href="libs/animate/animate.min.css">
     <link rel="stylesheet" href="libs/angular-hero/angular-hero.css">
-		<link rel="stylesheet" href="libs/spinkit/css/spinkit.css">
+    <link rel="stylesheet" href="libs/spinkit/css/spinkit.css">
     <link rel="stylesheet" href="libs/google-fonts/roboto.css">
     <link rel="stylesheet" href="libs/material-icons/material-icons.css">
     <link rel="stylesheet" href="libs/sweetalert/dist/sweetalert.css">
-		<link rel="stylesheet" href="libs/fontawesome/css/font-awesome.min.css">
-		<link rel="stylesheet" href="libs/angular-timeline/dist/angular-timeline.css">
-		<link rel="stylesheet" href="libs/angular-timeline/dist/angular-timeline-animations.css">
-		<link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="libs/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="libs/angular-timeline/dist/angular-timeline.css">
+    <link rel="stylesheet" href="libs/angular-timeline/dist/angular-timeline-animations.css">
+    <link rel="stylesheet" href="app.css">
 
-	</head>
+  </head>
   <body ng-app="app" layout="row">
-  	<!-- Run please-wait to show splash screen -->
+    <script src="app-info.js"></script>    
+    <script src="libs/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript">
+      if (appInfo.isWeb && !appInfo.isChrome) {
+        swal('Please use Chrome !!!');
+        window.stop();
+      }
+    </script>
+    
+    <!-- Run please-wait to show splash screen -->
     <script src="libs/please-wait/build/please-wait.min.js"></script>
     <script src="libs/tto/tto-icon-set.js"></script>
     <script type="text/javascript">
@@ -34,7 +43,8 @@
       });
     </script>
 
-  	<!--<div id="main-spin" ng-show="$root.isLoading > 0"></div>-->
+    <!--<div id="main-spin" ng-show="$root.isLoading > 0"></div>-->
+    <!--
     <div class="sk-fading-circle tto-center" ng-show="$root.isLoading > 0">
       <div class="sk-circle1 sk-circle"></div>
       <div class="sk-circle2 sk-circle"></div>
@@ -49,111 +59,111 @@
       <div class="sk-circle11 sk-circle"></div>
       <div class="sk-circle12 sk-circle"></div>
     </div>
+    -->
+    
+    <div class="tto-center" ng-show="$root.isLoading > 0">
+      <md-progress-circular class="md-warn" md-mode="indeterminate" md-diameter="120px"></md-progress-circular>
+    </div>
 
-		<!-- Left NAV -->
-  	<md-sidenav ng-if="$root.isLoggedIn"
-			layout="column" class="md-sidenav-left md-whiteframe-z2" 
-			md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')"
-		>
+    <!-- Left NAV -->
+    <md-sidenav ng-if="$root.isLoggedIn"
+      layout="column" class="md-sidenav-left md-whiteframe-z2" 
+      md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')"
+    >
       <side-menu></side-menu>
-	  	<!--<ng-include src="'view/side-toolbar.html'"></ng-include>-->
-	  	<!--<ng-include src="'view/side-nav-list.html'"></ng-include>-->
-		</md-sidenav>
+      <!--<ng-include src="'view/side-toolbar.html'"></ng-include>-->
+      <!--<ng-include src="'view/side-nav-list.html'"></ng-include>-->
+    </md-sidenav>
 
 
-		<div flex layout="column" class="relative" layout-fill role="main">
-			<md-toolbar>
-				<div class="md-toolbar-tools">
-				  <md-button class="md-icon-button" ng-click="$root.toggleSidenav('left')" hide-gt-md aria-label="Menu">
-				    <md-icon>menu</md-icon>
-				  </md-button>
-				  <h3> {{ $root.title }} </h3>
-				  <!--<md-icon>{{$root.icon}}</md-icon>-->
-				  <span flex></span>
-					<md-button class="md-icon-button" ng-if="!$root.isLoggedIn" ng-click="$root.loginDialog();">
-						<md-icon>lock</md-icon>
-					</md-button>
-					<md-button class="md-icon-button" ng-if="$root.urlStack.length" ng-click="$root.goBack();">
-						<md-icon>arrow_back</md-icon>
-					</md-button>
-				  <md-button class="md-icon-button" ng-if="$root.component.comment" ng-click="$root.showCommentDialog($event)">
-				    <md-icon>comment</md-icon>
-				  </md-button>
-				</div>
-			</md-toolbar>
+    <div flex layout="column" class="relative" layout-fill role="main">
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <md-button class="md-icon-button" ng-click="$root.toggleSidenav('left')" hide-gt-md aria-label="Menu">
+            <md-icon>menu</md-icon>
+          </md-button>
+          <h3> {{ $root.title }} </h3>
+          <!--<md-icon>{{$root.icon}}</md-icon>-->
+          <span flex></span>
+          <md-button class="md-icon-button" ng-if="!$root.isLoggedIn" ng-click="$root.loginDialog();">
+            <md-icon>lock</md-icon>
+          </md-button>
+          <md-button class="md-icon-button" ng-if="$root.urlStack.length" ng-click="$root.goBack();">
+            <md-icon>arrow_back</md-icon>
+          </md-button>
+          <md-button class="md-icon-button" ng-if="$root.component.comment" ng-click="$root.showCommentDialog($event)">
+            <md-icon>comment</md-icon>
+          </md-button>
+        </div>
+      </md-toolbar>
 
-			<md-toolbar ng-if="$root.showTab">
-				<md-tabs md-stretch-tabs="always" md-selected="$root.selectedTab">
-			    <md-tab label="LEARN ({{$root.countLearn}})"></md-tab>
-			    <md-tab label="START ({{$root.countStart}})"></md-tab>
-			    <md-tab label="DONE ({{$root.countDone}})"></md-tab>
-				</md-tabs>
-			</md-toolbar>
+      <md-toolbar ng-if="$root.showTab">
+        <md-tabs md-stretch-tabs="always" md-selected="$root.selectedTab">
+          <md-tab label="LEARN ({{$root.countLearn}})"></md-tab>
+          <md-tab label="START ({{$root.countStart}})"></md-tab>
+          <md-tab label="DONE ({{$root.countDone}})"></md-tab>
+        </md-tabs>
+      </md-toolbar>
 
-			<md-content>
-				<ui-view>
-<!--					<ng-view class="page-transition hero-transition"></ng-view>-->
-					<ng-view></ng-view>
-				</ui-view>
-			</md-content>
+      <md-content>
+        <ui-view>
+<!--          <ng-view class="page-transition hero-transition"></ng-view>-->
+          <ng-view></ng-view>
+        </ui-view>
+      </md-content>
 
-			<!-- FAB action -->
-			<md-button ng-if="$root.component.addCourse" class="md-fab md-fab-bottom-right" 
-				aria-label="Submit" ng-click="$root.goRoute('category', 'keep');"
-			>
-				<md-icon>playlist_add</md-icon>
-			</md-button>
-	
-		  <md-button ng-if="$root.component.addNewItem" class="md-fab md-fab-bottom-right" 
-		  	aria-label="Add" ng-click="$root.boardcast('addNewItem');"
-		  >
-				<md-icon>done_all</md-icon>
-			</md-button>
-	
-			<md-button ng-if="$root.component.addCourseItem" class="md-fab md-fab-bottom-right" 
-				aria-label="Submit" ng-click="$root.boardcast('addCourseItem');"
-			>
-				<md-icon>my_library_add</md-icon>
-			</md-button>
-			
-			<md-button ng-if="$root.component.profileUpdate" class="md-fab md-fab-bottom-right" 
-				aria-label="Submit" ng-click="$root.boardcast('profileUpdate');"
-			>
-				<md-icon>done</md-icon>
-			</md-button>
+      <!-- FAB action -->
+      <md-button ng-if="$root.component.addCourse" class="md-fab md-fab-bottom-right" 
+        aria-label="Submit" ng-click="$root.goRoute('category', 'keep');"
+      >
+        <md-icon>playlist_add</md-icon>
+      </md-button>
+  
+      <md-button ng-if="$root.component.addNewItem" class="md-fab md-fab-bottom-right" 
+        aria-label="Add" ng-click="$root.boardcast('addNewItem');"
+      >
+        <md-icon>done_all</md-icon>
+      </md-button>
+  
+      <md-button ng-if="$root.component.addCourseItem" class="md-fab md-fab-bottom-right" 
+        aria-label="Submit" ng-click="$root.boardcast('addCourseItem');"
+      >
+        <md-icon>my_library_add</md-icon>
+      </md-button>
+      
+      <md-button ng-if="$root.component.addUserCourseItem" class="md-fab md-fab-bottom-right" 
+        aria-label="add" ng-click="$root.boardcast('addUserCourseItem');"
+      >
+        <md-icon>add</md-icon>
+      </md-button>
 
-		  <md-button ng-if="$root.component.addUserCourseItem" class="md-fab md-fab-bottom-right" 
-		  	aria-label="add" ng-click="$root.boardcast('addUserCourseItem');"
-		  >
-				<md-icon>add</md-icon>
-			</md-button>
+      <md-button ng-if="$root.component.addUserCourseItemAdmin" class="md-fab md-fab-bottom-right" 
+        aria-label="add" ng-click="$root.boardcast('addUserCourseItemAdmin');"
+      >
+        <md-icon>add</md-icon>
+      </md-button>
 
-		  <md-button ng-if="$root.component.addUserCourseItemAdmin" class="md-fab md-fab-bottom-right" 
-		  	aria-label="add" ng-click="$root.boardcast('addUserCourseItemAdmin');"
-		  >
-				<md-icon>add</md-icon>
-			</md-button>
+      <md-button ng-if="$root.component.addItemDetail" class="md-fab md-fab-bottom-right" 
+        aria-label="Add" ng-click="$root.boardcast('addItemDetail');"
+      >
+        <md-icon>add</md-icon>
+      </md-button>
 
-			<md-button ng-if="$root.component.addItemDetail" class="md-fab md-fab-bottom-right" 
-				aria-label="Add" ng-click="$root.boardcast('addItemDetail');"
-			>
-				<md-icon>add</md-icon>
-			</md-button>
+      <md-button ng-if="$root.component.userCourseItemDone" class="md-fab md-fab-bottom-right" 
+        aria-label="Add" ng-click="$root.boardcast('userCourseItemDone');"
+      >
+        <md-icon>check</md-icon>
+      </md-button>
 
-			<md-button ng-if="$root.component.userCourseItemDone" class="md-fab md-fab-bottom-right" 
-				aria-label="Add" ng-click="$root.boardcast('userCourseItemDone');"
-			>
-				<md-icon>check</md-icon>
-			</md-button>
-
-		</div>
-		
+    </div>
+    
     <!-- Angular Material Dependencies -->
     <script src="libs/angular/angular.min.js"></script>
     <script src="libs/angular-resource/angular-resource.min.js"></script>
     <script src="libs/angular-route/angular-route.min.js"></script>
     <script src="libs/angular-animate/angular-animate.min.js"></script>
     <script src="libs/angular-aria/angular-aria.min.js"></script>
+    <script src="libs/angular-messages/angular-messages.min.js"></script>
     <script src="libs/angular-material/angular-material.min.js"></script>
     <script src="libs/lodash/lodash.min.js"></script>
     <script src="libs/restangular/dist/restangular.min.js"></script>
@@ -167,24 +177,22 @@
     <script src="libs/spin-js/spin.min.js"></script>
     <script src="libs/fabric/dist/fabric.min.js"></script>
     <script src="libs/angular-morph/dist/angular-morph.min.js"></script>
-    <script src="libs/sweetalert/dist/sweetalert.min.js"></script>
-		<script src="libs/angular-scroll-animate/dist/angular-scroll-animate.js"></script>
-		<script src="libs/angular-timeline/dist/angular-timeline.js"></script>
-		<script src="libs/angular-scroll-glue/src/scrollglue.js"></script>
+    <script src="libs/angular-scroll-animate/dist/angular-scroll-animate.js"></script>
+    <script src="libs/angular-timeline/dist/angular-timeline.js"></script>
+    <script src="libs/angular-scroll-glue/src/scrollglue.js"></script>
 
     <script src="libs/tto/ASCIIMathKaTeXHTML.js"></script>
     <script src="libs/tto/tto-regexp.js"></script>
     <script src="libs/tto/JSXCreate.js"></script>
     <script src="libs/tto/JXGDump.js"></script>
     <script src="libs/tto/tto-image.js"></script>
-		<script src="https://www.youtube.com/iframe_api"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script src="libs/angular-youtube-mb/dist/angular-youtube-embed.min.js"></script>
 
     <!-- TTO App -->
-		<script src="app-info.js"></script>    
     <script src="app.js"></script>
     <script src="app-run.js"></script>
-		<!-- Controller -->
+    <!-- Controller -->
     <script src="controller/login/login.js"></script>
     <script src="controller/logout/logout.js"></script>
     <script src="controller/home/home.js"></script>
@@ -205,7 +213,7 @@
     <script src="controller/user-course-item-admin/user-course-item-admin.js"></script>
     <script src="controller/user-course-item-detail-admin/user-course-item-detail-admin.js"></script>
     <script src="controller/test-admin/test-admin.js"></script>
-		<script src="controller/comment-dialog/comment-dialog.js"></script>
+    <script src="controller/comment-dialog/comment-dialog.js"></script>
     <!-- Page -->
     <script src="page/register/register.js"></script>
     <script src="page/profile/profile.js"></script>
@@ -219,7 +227,7 @@
     <script src="dialog/logout/logout-dialog.js"></script>
     <script src="dialog/activate/activate-dialog.js"></script>
     
-		<!-- Directive -->
+    <!-- Directive -->
     <script src="directive/user-avatar/user-avatar.js"></script>
     <script src="directive/jsx-jc/jsx-jc.js"></script>
     <script src="directive/slide/slide.js"></script>
@@ -229,7 +237,7 @@
     <script src="directive/comment/comment.js"></script>
     <script src="directive/user-item-detail/user-item-detail.js"></script>
     <script src="component/side-menu/side-menu.js"></script>
-		<!-- Services -->
+    <!-- Services -->
     <script src="service/something/something.js"></script>
     <script src="service/app/app-service.js"></script>
     <script src="service/auth/auth-service.js"></script>
@@ -237,8 +245,9 @@
     <script src="service/coin/coin-service.js"></script>
     <script src="service/bank/bank-service.js"></script>
     <script src="service/order/order-service.js"></script>
-    <script src="service/user-order/user-order-service.js"></script>
     <script src="service/category/category-service.js"></script>
+    <script src="service/user-coin/user-coin-service.js"></script>
+    <script src="service/user-order/user-order-service.js"></script>
     <script src="service/user-category/user-category-service.js"></script>
     <script src="service/user-course/user-course-service.js"></script>
     <script src="service/user-section/user-section-service.js"></script>

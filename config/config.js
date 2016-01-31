@@ -46,6 +46,14 @@ ttoApp.config(function($mdThemingProvider, $routeProvider, RestangularProvider) 
       templateUrl: 'page/user-course/user-course.html',
       controller: 'userCourseCtrl'
     })
+    .when('/user-course/:courseId/section', {
+      templateUrl: 'page/user-section/user-section.html',
+      controller: 'userSectionCtrl'
+    })
+    .when('/user-course/:courseId/section/user/:userId', {
+      templateUrl: 'page/user-section/user-section.html',
+      controller: 'userSectionCtrl'
+    })
     .when('/add-user-course-item/:userCourseId', {
       templateUrl: 'controller/add-user-course-item/add-user-course-item.html',
       controller: 'addUserCourseItemCtrl'

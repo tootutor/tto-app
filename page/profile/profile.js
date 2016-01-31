@@ -12,11 +12,6 @@ function ($scope, $rootScope, $mdDialog, UserServ) {
 	$rootScope.isLoading = 0;
  	$scope.profileUpdate = profileUpdate;
 
-	// Event from rootScope view
-	$scope.$on('profileUpdate', function(event) {
-		$scope.profileUpdate();
-	});
- 	
  	profileCtrlInit();
  	
  	function profileCtrlInit() {
@@ -34,7 +29,9 @@ function ($scope, $rootScope, $mdDialog, UserServ) {
  	}
 
 	function profileUpdate() {
+    $rootScope.isLoading++;
     $scope.user.$update({userId: $rootScope.userId}, function(data) {
+      $rootScope.isLoading--;
 		  var alert = $mdDialog.alert({title: 'Update Completed', content: 'Updated your profile successfully.', ok: 'OK'});
 			$mdDialog.show(alert).finally(function() {alert = undefined;});
 			$rootScope.goRoute('/', 'clear');

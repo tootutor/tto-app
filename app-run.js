@@ -65,6 +65,7 @@ ttoApp.run(function ($rootScope, $location, $mdSidenav, Restangular, $mdDialog, 
  				break;
  		}
  		localStorage.setItem('urlStack', JSON.stringify($rootScope.urlStack));
+    $rootScope.url = path;
 		$location.url(path);
 		$mdSidenav('left').close();
 	};
@@ -104,14 +105,14 @@ ttoApp.run(function ($rootScope, $location, $mdSidenav, Restangular, $mdDialog, 
 		  targetEvent: ev,
 		  clickOutsideToClose: false
 		});
-	}
+	};
 
 	$rootScope.errorDialog = function(response, title) {
 		var error = '';
 		if (response) {
 			if (response.data.error) {
 				if (response.data.error.message.search("Database error [23000]") >= 0) {
-					error = "Data already exists - มีข้อมูลในระบบแล้ว"
+					error = "Data already exists - มีข้อมูลในระบบแล้ว";
 				} else {
 					error = response.data.error.code + ' : ' + response.data.error.message;
 				}
@@ -130,7 +131,7 @@ ttoApp.run(function ($rootScope, $location, $mdSidenav, Restangular, $mdDialog, 
 				$rootScope.loadDefinition();
 				$rootScope.initNotification();
 	  	} else {
-		  	if (appInfo.type == "web") {
+		  	if (appInfo.isWeb) {
 					location.reload(true);
 		  	} else {
 		  		$rootScope.errorDialog(null, 'Please download new version !!!');
@@ -163,7 +164,7 @@ ttoApp.run(function ($rootScope, $location, $mdSidenav, Restangular, $mdDialog, 
 		}, function (response) {
 			$rootScope.errorDialog(response, 'Loading Error !!!');
 		});
-	}
+	};
 	
 	$rootScope.initNotification = function() {
 		if ($rootScope.notificationCount > 0) {
@@ -186,43 +187,44 @@ ttoApp.run(function ($rootScope, $location, $mdSidenav, Restangular, $mdDialog, 
 	};
 
 	// Initial logic.	
-	if ($rootScope.token > '') {
+  $rootScope.isChrome = /chrome/.test(navigator.userAgent.toLowerCase());
+  if ($rootScope.token > '') {
     var user = UserServ.get({userId: $rootScope.userId}, function(data) {
-			if (data.status == 'active') {
-				$rootScope.isLoggedIn = true;
-				$rootScope.notificationCount = data.notificationCount;
-				$rootScope.role = data.role;
-				$rootScope.nickname = data.nickname;
-				$rootScope.avatarId = data.avatarId;
-				$rootScope.asUserId = data.asUserId;
-				$rootScope.version  = appInfo.version;
-				$rootScope.checkVersion();
-				window.loading_screen.finish();
-			} else {
-				window.loading_screen.finish();
-				$rootScope.loginDialog();
-			}
-	  }, function (response) {
-  		localStorage.setItem('email', '');
-  		localStorage.setItem('password', '');
-  		localStorage.setItem('token', '');
-  		localStorage.setItem('userId', '');
-		 	$rootScope.token     = '';
-		 	$rootScope.headerObj = {};
-		 	$rootScope.userId    = '';
-		 	$rootScope.email     = '';
-		 	$rootScope.password  = '';
-			$rootScope.isLoggedIn = false;
-		 	$rootScope.urlStack = [];
-			$rootScope.goRoute('/', 'clear');
-			$rootScope.loginDialog();
-	  	window.loading_screen.finish();
-	  });
-	} else {
-		$rootScope.isLoggedIn = false;
-	 	$rootScope.urlStack = [];
-		$rootScope.goRoute('/', 'clear');
-		$rootScope.loginDialog();
-  	window.loading_screen.finish();
-	}
+      if (data.status == 'active') {
+        $rootScope.isLoggedIn = true;
+        $rootScope.notificationCount = data.notificationCount;
+        $rootScope.role = data.role;
+        $rootScope.nickname = data.nickname;
+        $rootScope.avatarId = data.avatarId;
+        $rootScope.asUserId = data.asUserId;
+        $rootScope.version  = appInfo.version;
+        $rootScope.checkVersion();
+        window.loading_screen.finish();
+      } else {
+        window.loading_screen.finish();
+        $rootScope.loginDialog();
+      }
+    }, function (response) {
+      localStorage.setItem('email', '');
+      localStorage.setItem('password', '');
+      localStorage.setItem('token', '');
+      localStorage.setItem('userId', '');
+      $rootScope.token     = '';
+      $rootScope.headerObj = {};
+      $rootScope.userId    = '';
+      $rootScope.email     = '';
+      $rootScope.password  = '';
+      $rootScope.isLoggedIn = false;
+      $rootScope.urlStack = [];
+      $rootScope.goRoute('/', 'clear');
+      $rootScope.loginDialog();
+      window.loading_screen.finish();
+    });
+  } else {
+    $rootScope.isLoggedIn = false;
+    $rootScope.urlStack = [];
+    $rootScope.goRoute('/', 'clear');
+    $rootScope.loginDialog();
+    window.loading_screen.finish();
+  }
 });

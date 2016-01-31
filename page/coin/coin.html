@@ -18,7 +18,7 @@
 				</md-toolbar>
 				<md-card-content flex layout="column" layout-align="center center">
 					<md-input-container layout-fill>
-						<label>เลือก package &starf; แล้วกดปุ่มรถเข็น</label>
+						<label>เลือก package เพื่อเติม &starf; แล้วกดปุ่มรถเข็น</label>
 						<md-select ng-model="selectedPackage" ng-change="coinSelect()" required>
 							<md-option ng-repeat="package in allPackage" value={{$index}}>
 								{{package.amount}} Baht : {{package.coin}} + {{package.bonus}} Coins

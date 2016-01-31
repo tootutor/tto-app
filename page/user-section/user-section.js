@@ -16,7 +16,7 @@ function ($scope, $rootScope, $routeParams, UserSectionServ) {
  	function userCourseCtrlInit() {
     var userId = $routeParams.userId ? $routeParams.userId : $rootScope.userId;
 		$rootScope.isLoading++;
-    $scope.userCourseList = UserSectionServ.query({userId: userId, categoryId: $routeParams.categoryId}, function (data) {
+    $scope.userSectionList = UserSectionServ.query({userId: userId, courseId: $routeParams.courseId}, function (data) {
 			$rootScope.isLoading--;
 		}, function (response) {
 			$rootScope.errorDialog(response, 'Loading Error !!!');

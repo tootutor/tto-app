@@ -1,5 +1,5 @@
 <div layout="row" layout-align="center center" ng-controller="profileCtrl">
-  <form>
+  <form ng-submit="profileUpdate();">
 	  <md-content class="tto-background" flex style="max-width: 600px;">
 			<md-card flex>
 			  <md-card-content>
@@ -73,6 +73,10 @@
 				    </div>
 					</div>
 			  </md-card-content>
+          <md-button flex class="md-raised md-accent" type="submit">
+          <md-icon>done_all</md-icon> Update
+				</md-button>
+
 			</md-card>
 	  	
 	  </md-content>
