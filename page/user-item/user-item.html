@@ -1,14 +1,14 @@
 <md-content layout layout-align="center center">
   <div flex style="max-width: 500px;">
 		<md-content ng-repeat="userItem in userItemList">
-			<md-card>
-				<md-toolbar>
+			<md-card md-theme="{{userItem.theme}}">
+				<md-toolbar class="md-primary">
 					<div class="md-toolbar-tools">
 						<h5>
 							<span class="fa-stack fa-lg">
 								<i class="fa fa-book fa-stack-1x"></i>
 							</span>
-							{{userItem.code}}
+							{{userItem.itemGroup}}
 						</h5>
 						<span flex></span>
 						<md-button class="md-icon-button" aria-label="Play" 

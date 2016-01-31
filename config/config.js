@@ -8,6 +8,21 @@ ttoApp.config(function($mdThemingProvider, $routeProvider, RestangularProvider) 
 		.warnPalette('deep-orange') ;
 //		.backgroundPalette('grey');
 
+  $mdThemingProvider.theme('ttoIndigo')
+    .primaryPalette('indigo')
+    .accentPalette('red')
+		.warnPalette('deep-orange') ;
+
+  $mdThemingProvider.theme('ttoDeepOrange')
+    .primaryPalette('deep-orange')
+    .accentPalette('green')
+		.warnPalette('yellow') ;
+
+  $mdThemingProvider.theme('ttoBlue')
+    .primaryPalette('blue')
+    .accentPalette('red')
+		.warnPalette('yellow') ;
+    
   $mdThemingProvider.theme('input', 'default')
         .primaryPalette('grey');
         
