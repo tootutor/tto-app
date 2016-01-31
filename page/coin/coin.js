@@ -3,13 +3,9 @@ function ($scope, $rootScope, $mdDialog, $mdSidenav, CoinServ, OrderServ, UserOr
   $rootScope.icon = "stars";
   $rootScope.title = "Coins"; 
   $rootScope.showTab = 0;
-   $rootScope.url = 'coin';
-   $rootScope.showBack = true;
-   $rootScope.backUrl  = '/';
-   $rootScope.component = {};
+  $rootScope.showBack = true;
+  $rootScope.component = {};
   
-  $rootScope.isLoading = 0;
-
   $scope.myCoin = 0;
   $scope.newOrder = new OrderServ();
   $scope.newOrder.userId = $rootScope.userId;
