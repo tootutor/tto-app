@@ -5,77 +5,48 @@ ttoApp.config(function($mdThemingProvider, $routeProvider, RestangularProvider) 
 //    .primaryPalette('blue')
 //    .primaryPalette('blue-grey')
     .accentPalette('red')
-		.warnPalette('deep-orange') ;
-//		.backgroundPalette('grey');
+    .warnPalette('deep-orange') ;
+//    .backgroundPalette('grey');
 
   $mdThemingProvider.theme('ttoIndigo')
     .primaryPalette('indigo')
     .accentPalette('red')
-		.warnPalette('deep-orange') ;
+    .warnPalette('deep-orange') ;
 
   $mdThemingProvider.theme('ttoDeepOrange')
     .primaryPalette('deep-orange')
     .accentPalette('green')
-		.warnPalette('yellow') ;
+    .warnPalette('yellow') ;
 
   $mdThemingProvider.theme('ttoBlue')
     .primaryPalette('blue')
     .accentPalette('red')
-		.warnPalette('yellow') ;
+    .warnPalette('yellow') ;
     
   $mdThemingProvider.theme('input', 'default')
-        .primaryPalette('grey');
+    .primaryPalette('grey');
         
- 	$routeProvider
+  $routeProvider
+    .when('/register', {templateUrl: 'page/register/register.html'})
+    .when('/profile', {templateUrl: 'page/profile/profile.html'})
+    .when('/coin', {templateUrl: 'page/coin/coin.html'})
+    // Category
+    .when('/category', {templateUrl: 'page/category/category.html'})
+    .when('/category/:action', {templateUrl: 'page/category/category.html'})
+    .when('/category/user/:userId', {templateUrl: 'page/category/category.html'})
+    // Course
+    .when('/category/:categoryId/course', {templateUrl: 'page/course/course.html'})
+    .when('/category/:categoryId/course/:action', {templateUrl: 'page/course/course.html'})
+    .when('/category/:categoryId/course/user/:userId', {templateUrl: 'page/course/course.html'})
+    // Section
+    .when('/course/:courseId/section', {templateUrl: 'page/section/section.html'})
+    .when('/course/:courseId/section/user/:userId', {templateUrl: 'page/section/section.html'})
+    // Item
+    .when('/section/:sectionId/item', {templateUrl: 'page/item/item.html'})
+    .when('/section/:sectionId/item/user/:userId', {templateUrl: 'page/item/item.html'})
     .when('/', {
       templateUrl: 'controller/home/home.html',
       controller: 'homeCtrl'
-    })
-    .when('/register', {
-      templateUrl: 'page/register/register.html',
-    })
-    .when('/profile', {
-      templateUrl: 'page/profile/profile.html',
-    })
-    .when('/coin', {
-      templateUrl: 'page/coin/coin.html',
-      controller: 'coinCtrl'
-    })
-    .when('/category', {
-      templateUrl: 'page/category/category.html',
-      controller: 'categoryCtrl'
-    })
-    .when('/user-category', {
-      templateUrl: 'page/user-category/user-category.html',
-      controller: 'userCategoryCtrl'
-    })
-    .when('/user-category/user/:userId', {
-      templateUrl: 'page/user-category/user-category.html',
-      controller: 'userCategoryCtrl'
-    })
-    .when('/user-category/:categoryId/course', {
-      templateUrl: 'page/user-course/user-course.html',
-      controller: 'userCourseCtrl'
-    })
-    .when('/user-category/:categoryId/course/user/:userId', {
-      templateUrl: 'page/user-course/user-course.html',
-      controller: 'userCourseCtrl'
-    })
-    .when('/user-course/:courseId/section', {
-      templateUrl: 'page/user-section/user-section.html',
-      controller: 'userSectionCtrl'
-    })
-    .when('/user-course/:courseId/section/user/:userId', {
-      templateUrl: 'page/user-section/user-section.html',
-      controller: 'userSectionCtrl'
-    })
-    .when('/user-section/:sectionId/item', {
-      templateUrl: 'page/user-item/user-item.html',
-      controller: 'userItemCtrl'
-    })
-    .when('/user-section/:sectionId/item/user/:userId', {
-      templateUrl: 'page/user-item/user-item.html',
-      controller: 'userItemCtrl'
     })
     .when('/add-user-course-item/:userCourseId', {
       templateUrl: 'controller/add-user-course-item/add-user-course-item.html',
@@ -147,10 +118,12 @@ ttoApp.config(function($mdThemingProvider, $routeProvider, RestangularProvider) 
       templateUrl: 'controller/test-admin/test-admin.html',
       controller: 'testAdminCtrl'
     })
-    //Default page
-    .otherwise({
-      redirectTo: '/'      
+    .when('/test-admin/:action', {
+      templateUrl: 'controller/test-admin/test-admin.html',
+      controller: 'testAdminCtrl'
     })
+    //Default page
+    .otherwise({redirectTo: '/'})
   ;
   
   RestangularProvider.setBaseUrl(appInfo.apiPath);

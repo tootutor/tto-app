@@ -1,8 +1,8 @@
-ttoApp.factory('UserItemServ', function($resource, $rootScope) {
-  return $resource(appInfo.apiPath + '/item/:itemId/user/:userId', {itemId: '@itemId', userId: '@userId'}, {
+ttoApp.factory('ItemServ', function($resource, $rootScope) {
+  return $resource(appInfo.apiPath + '/item/:itemId', {itemId: '@itemId'}, {
     query: {
       method: 'GET',
-      isArray:true,
+      isArray: true,
     },
     update: {
       method: 'POST',

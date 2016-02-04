@@ -7,25 +7,19 @@ function ($scope, $rootScope, $mdDialog, UserServ) {
   $rootScope.component = {};
   $rootScope.component.profileUpdate = true;
 
-  $scope.profileUpdate = profileUpdate;
+  $scope.allAvatar = ttoAvatarList();
+  $rootScope.isLoading++;
+  $scope.user = UserServ.get({userId: $rootScope.userId}, function(data) {
+    $scope.user.birthdate = new Date(data.birthdate); //Set format for date field
+    $rootScope.firstname = data.firstname;
+    $rootScope.lastname  = data.lastname;
+    $rootScope.nickname  = data.nickname;
+    $rootScope.isLoading--;
+  }, function (response) {
+    $rootScope.errorDialog(response, 'Loading Error !!!');
+  });
 
-  profileCtrlInit();
-  
-  function profileCtrlInit() {
-    $scope.allAvatar = ttoAvatarList();
-    $rootScope.isLoading++;
-    $scope.user = UserServ.get({userId: $rootScope.userId}, function(data) {
-      $scope.user.birthdate = new Date(data.birthdate); //Set format for date field
-      $rootScope.firstname = data.firstname;
-      $rootScope.lastname  = data.lastname;
-      $rootScope.nickname  = data.nickname;
-      $rootScope.isLoading--;
-    }, function (response) {
-      $rootScope.errorDialog(response, 'Loading Error !!!');
-    });
-  }
-
-  function profileUpdate() {
+  $scope.profileUpdate = function () {
     $rootScope.isLoading++;
     $scope.user.$update({userId: $rootScope.userId}, function(data) {
       $rootScope.isLoading--;

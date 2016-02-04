@@ -1,6 +1,6 @@
-<md-content layout layout-align="center center">
+<md-content layout layout-align="center center" ng-controller="sectionCtrl">
   <div flex style="max-width: 500px;">
-		<md-content ng-repeat="userSection in userSectionList">
+		<md-content ng-repeat="section in sectionList">
 			<md-card>
 				<md-toolbar>
 					<div class="md-toolbar-tools">
@@ -8,19 +8,17 @@
 							<span class="fa-stack fa-lg">
 								<i class="fa fa-book fa-stack-1x"></i>
 							</span>
-							{{userSection.name}}
+							{{section.name}}
 						</h5>
 						<span flex></span>
-						<md-button class="md-icon-button" aria-label="Play" 
-							ng-click="$root.goRoute('user-section/'+userSection.sectionId+'/item', 'keep');"
-						>
+						<md-button class="md-icon-button" ng-click="nextNavigate(section);">
 							<md-icon>play_arrow</md-icon>
 						</md-button>
 					</div>
 				</md-toolbar>
 				<md-card-content layout="column" layout-align="start start">
 					<div layout="row" layout-align="start center">
-						<md-ktx ng-model="userSection.description"></md-ktx>
+						<md-ktx ng-model="section.description"></md-ktx>
 					</div>
 				</md-card-content>
 			</md-card>

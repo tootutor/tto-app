@@ -48,8 +48,9 @@ function($scope, $rootScope, $mdDialog, AuthServ, $http) {
 			}
 		}, function (response) {
 			$rootScope.isLoading = 0;
-      hideDialog();
-			$rootScope.errorDialog(response, 'Login Error !!!');
+      //hideDialog();
+			//$rootScope.errorDialog(response, 'Login Error !!!');
+      $rootScope.showToast('Login Error !!!!');
 		});
 	}
 	

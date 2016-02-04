@@ -89,6 +89,7 @@
             <md-icon>lock</md-icon>
           </md-button>
           <md-button class="md-icon-button" ng-if="$root.urlStack.length" ng-click="$root.goBack();">
+            <md-tooltip>Go back previous page</md-tooltip>
             <md-icon>arrow_back</md-icon>
           </md-button>
           <md-button class="md-icon-button" ng-if="$root.component.comment" ng-click="$root.showCommentDialog($event)">
@@ -107,14 +108,13 @@
 
       <md-content>
         <ui-view>
-<!--          <ng-view class="page-transition hero-transition"></ng-view>-->
           <ng-view></ng-view>
         </ui-view>
       </md-content>
 
       <!-- FAB action -->
       <md-button ng-if="$root.component.addCourse" class="md-fab md-fab-bottom-right" 
-        aria-label="Submit" ng-click="$root.goRoute('category', 'keep');"
+        aria-label="Submit" ng-click="$root.goRoute('category/add', 'keep');"
       >
         <md-icon>playlist_add</md-icon>
       </md-button>
@@ -219,10 +219,9 @@
     <script src="page/profile/profile.js"></script>
     <script src="page/coin/coin.js"></script>
     <script src="page/category/category.js"></script>
-    <script src="page/user-category/user-category.js"></script>
-    <script src="page/user-course/user-course.js"></script>
-    <script src="page/user-section/user-section.js"></script>
-    <script src="page/user-item/user-item.js"></script>
+    <script src="page/course/course.js"></script>
+    <script src="page/section/section.js"></script>
+    <script src="page/item/item.js"></script>
     <!-- Dialog -->
     <script src="dialog/login/login-dialog.js"></script>
     <script src="dialog/logout/logout-dialog.js"></script>
@@ -247,6 +246,8 @@
     <script src="service/bank/bank-service.js"></script>
     <script src="service/order/order-service.js"></script>
     <script src="service/category/category-service.js"></script>
+    <script src="service/course/course-service.js"></script>
+    <script src="service/section/section-service.js"></script>
     <script src="service/user-coin/user-coin-service.js"></script>
     <script src="service/user-order/user-order-service.js"></script>
     <script src="service/user-category/user-category-service.js"></script>

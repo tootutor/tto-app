@@ -7,22 +7,11 @@ function ($scope, $rootScope, $mdDialog, UserServ) {
   $rootScope.component = {};
   $rootScope.component.register = true;
 
-  $scope.register = register;
+  $scope.allAvatar = ttoAvatarList();
+  $scope.user = new UserServ();
+  $scope.user.avatarId = 'avatar-01';
 
-  // Event from rootScope view
-  //$scope.$on('register', function(event) {
-  //  $scope.register();
-  //});
-
-  registerInit();
-
-  function registerInit() {
-    $scope.allAvatar = ttoAvatarList();
-    $scope.user = new UserServ();
-    $scope.user.avatarId = 'avatar-01';
-  }
-
-  function register() {
+  $scope.register = function () {
     $rootScope.isLoading++;
     $scope.user.$save(function (data) {
       $rootScope.isLoading--;
