@@ -1,9 +1,12 @@
-<md-content layout layout-align="center center" ng-controller="courseCtrl">
+<md-content layout="column" layout-align="center center" ng-controller="courseCtrl">
   <div flex style="max-width: 500px;">
 		<md-content ng-repeat="course in courseList">
-			<md-card>
+			<md-card ng-if="!course.editMode">
 				<md-toolbar>
 					<div class="md-toolbar-tools">
+						<md-button class="md-icon-button" ng-if="$root.role == 'admin'" ng-click="course.editMode=true;">
+							<md-icon>create</md-icon>
+						</md-button>
 						<h5>
 							<span class="fa-stack fa-lg">
 								<i class="fa fa-book fa-stack-1x"></i>
@@ -20,6 +23,41 @@
 					<div layout="row" layout-align="start center">
 						<md-ktx ng-model="course.description"></md-ktx>
 					</div>
+				</md-card-content>
+			</md-card>
+      
+			<md-card ng-if="course.editMode" md-theme="ttoDeepOrange">
+				<md-toolbar>
+					<div class="md-toolbar-tools">
+						<md-button class="md-icon-button" ng-click="course.editMode=false;">
+							<md-icon>visibility</md-icon>
+						</md-button>
+            courseId - {{course.courseId}}
+						<span flex></span>
+						<md-button class="md-icon-button" ng-click="updateChange(course);">
+							<md-icon>save</md-icon>
+						</md-button>
+					</div>
+				</md-toolbar>
+				<md-card-content>
+          <div layout="row">
+            <md-input-container class="md-block" flex>
+              <label>Coin</label>
+              <input ng-model="course.coin">
+            </md-input-container>
+            <md-input-container class="md-block">
+              <label>Code</label>
+              <input ng-model="course.code">
+            </md-input-container>
+          </div>
+          <md-input-container class="md-block">
+            <label>Name</label>
+            <textarea ng-model="course.name"></textarea>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Description</label>
+            <textarea ng-model="course.description"></textarea>
+          </md-input-container>
 				</md-card-content>
 			</md-card>
 		</md-content>

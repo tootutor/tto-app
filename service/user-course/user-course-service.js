@@ -1,5 +1,5 @@
 ttoApp.factory('UserCourseServ', function($resource, $rootScope) {
-  return $resource(appInfo.apiPath + '/course/user/:userId', {userId: '@userId'}, {
+  return $resource(appInfo.apiPath + '/course/:courseId/user/:userId', {userId: '@userId', courseId: '@courseId'}, {
 		query: {
 					method: 'GET',
 					isArray:true,

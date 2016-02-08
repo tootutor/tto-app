@@ -1,5 +1,5 @@
 ttoApp.factory('UserSectionServ', function($resource, $rootScope) {
-  return $resource(appInfo.apiPath + '/section/user/:userId', {userId: '@userId'}, {
+  return $resource(appInfo.apiPath + '/section/:sectionId/user/:userId', {userId: '@userId', sectionId: '@sectionId'}, {
 		query: {
 					method: 'GET',
 					isArray:true,

@@ -1,0 +1,27 @@
+<md-content layout layout-align="center center" ng-controller="taskCtrl">
+  <div flex style="max-width: 500px;">
+		<div ng-repeat="task in taskList">
+			<md-card>
+				<md-toolbar class="md-primary">
+					<div class="md-toolbar-tools">
+						<h5>
+							<span class="fa-stack fa-lg">
+								<i class="fa fa-book fa-stack-1x"></i>
+							</span>
+							{{task.taskTypeName}}
+						</h5>
+						<span flex></span>
+						<md-button class="md-icon-button" ng-click="nextNavigate(task);">
+							<md-icon>play_arrow</md-icon>
+						</md-button>
+					</div>
+				</md-toolbar>
+				<md-card-content layout="column" layout-align="start start">
+					<div layout="row" layout-align="start center">
+						<md-ktx ng-model="task.content"></md-ktx>
+					</div>
+				</md-card-content>
+			</md-card>
+		</div>
+  </div>
+</md-content>

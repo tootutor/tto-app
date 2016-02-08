@@ -1,0 +1,27 @@
+<md-content layout layout-align="center center" ng-controller="userCtrl">
+  <div flex style="max-width: 500px;" md-theme="ttoDeepOrange">
+		<md-content ng-repeat="user in userList">
+			<md-card>
+				<md-toolbar>
+					<div class="md-toolbar-tools">
+						<h5>
+							<span class="fa-stack fa-lg">
+								<i class="fa fa-user fa-stack-1x"></i>
+							</span>
+							{{user.nickname}}
+						</h5>
+						<span flex></span>
+						<md-button class="md-icon-button" ng-click="nextNavigate(user);">
+							<md-icon>play_arrow</md-icon>
+						</md-button>
+					</div>
+				</md-toolbar>
+				<md-card-content layout="column" layout-align="start start">
+          {{user.firstname}} - {{user.lastname}}
+          <br>
+          {{user.email}}
+				</md-card-content>
+			</md-card>
+		</md-content>
+  </div>
+</md-content>

@@ -32,18 +32,22 @@ ttoApp.config(function($mdThemingProvider, $routeProvider, RestangularProvider) 
     .when('/coin', {templateUrl: 'page/coin/coin.html'})
     // Category
     .when('/category', {templateUrl: 'page/category/category.html'})
-    .when('/category/:action', {templateUrl: 'page/category/category.html'})
-    .when('/category/user/:userId', {templateUrl: 'page/category/category.html'})
+    .when('/:action/category', {templateUrl: 'page/category/category.html'})
+    .when('/user/:userId/category', {templateUrl: 'page/category/category.html'})
     // Course
     .when('/category/:categoryId/course', {templateUrl: 'page/course/course.html'})
-    .when('/category/:categoryId/course/:action', {templateUrl: 'page/course/course.html'})
-    .when('/category/:categoryId/course/user/:userId', {templateUrl: 'page/course/course.html'})
+    .when('/:action/category/:categoryId/course', {templateUrl: 'page/course/course.html'})
+    .when('/user/:userId/category/:categoryId/course', {templateUrl: 'page/course/course.html'})
     // Section
     .when('/course/:courseId/section', {templateUrl: 'page/section/section.html'})
-    .when('/course/:courseId/section/user/:userId', {templateUrl: 'page/section/section.html'})
-    // Item
-    .when('/section/:sectionId/item', {templateUrl: 'page/item/item.html'})
-    .when('/section/:sectionId/item/user/:userId', {templateUrl: 'page/item/item.html'})
+    .when('/user/:userId/course/:courseId/section', {templateUrl: 'page/section/section.html'})
+    .when('/:action/course/:courseId/section', {templateUrl: 'page/section/section.html'})
+    // Task
+    .when('/section/:sectionId/task', {templateUrl: 'page/task/task.html'})
+    .when('/user/:userId/section/:sectionId/task', {templateUrl: 'page/task/task.html'})
+    .when('/:action/section/:sectionId/task', {templateUrl: 'page/task/task.html'})
+    // Course Tutor
+    .when('/user', {templateUrl: 'page/user/user.html'})
     .when('/', {
       templateUrl: 'controller/home/home.html',
       controller: 'homeCtrl'

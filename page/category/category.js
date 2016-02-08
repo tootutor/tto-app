@@ -28,16 +28,16 @@ function ($scope, $rootScope, $mdDialog, $routeParams, CategoryServ, UserCategor
   $scope.nextNavigate = function (category) {
     switch ($scope.processMode) {
       case 'setup' :
-        $rootScope.goRoute('category/' + category.categoryId + '/course/setup');
+        $rootScope.goRoute('/setup/category/' + category.categoryId + '/course');
         break;
       case 'add' :
-        $rootScope.goRoute('category/' + category.categoryId + '/course/add');
+        $rootScope.goRoute('/add/category/' + category.categoryId + '/course');
         break;
       case 'user' :
-        $rootScope.goRoute('category/' + category.categoryId + '/course');
+        $rootScope.goRoute('/category/' + category.categoryId + '/course');
         break;
       case 'tutor' :
-        $rootScope.goRoute('category/' + category.categoryId + '/course/user/' + $scope.userId);
+        $rootScope.goRoute('/user/' + $scope.userId + '/category/' + category.categoryId + '/course');
         break;
     }
   }

@@ -1,9 +1,12 @@
-<md-content layout layout-align="center center" ng-controller="sectionCtrl">
+<md-content layout="column" layout-align="center center" ng-controller="sectionCtrl">
   <div flex style="max-width: 500px;">
-		<md-content ng-repeat="section in sectionList">
-			<md-card>
+		<div ng-repeat="section in sectionList" layout-fill>
+			<md-card ng-if="!section.editMode">
 				<md-toolbar>
 					<div class="md-toolbar-tools">
+						<md-button class="md-icon-button" ng-if="$root.role == 'admin'" ng-click="section.editMode=true;">
+							<md-icon>create</md-icon>
+						</md-button>
 						<h5>
 							<span class="fa-stack fa-lg">
 								<i class="fa fa-book fa-stack-1x"></i>
@@ -22,6 +25,35 @@
 					</div>
 				</md-card-content>
 			</md-card>
-		</md-content>
+
+			<md-card ng-if="section.editMode" md-theme="ttoDeepOrange">
+				<md-toolbar>
+					<div class="md-toolbar-tools">
+						<md-button class="md-icon-button" ng-click="section.editMode=false;">
+							<md-icon>visibility</md-icon>
+						</md-button>
+            sectionId - {{section.sectionId}}
+						<span flex></span>
+						<md-button class="md-icon-button" ng-click="updateChange(section);">
+							<md-icon>save</md-icon>
+						</md-button>
+					</div>
+				</md-toolbar>
+				<md-card-content>
+          <md-input-container class="md-block">
+            <label>Seq</label>
+            <input ng-model="section.seq">
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Name</label>
+            <textarea ng-model="section.name"></textarea>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Description</label>
+            <textarea ng-model="section.description"></textarea>
+          </md-input-container>
+				</md-card-content>
+			</md-card>
+		</div>
   </div>
 </md-content>

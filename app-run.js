@@ -9,6 +9,7 @@ ttoApp.run(function ($rootScope, $location, $routeParams, $mdSidenav, Restangula
   $rootScope.userId    = localStorage.getItem('userId');
   $rootScope.email     = localStorage.getItem('email');
   $rootScope.password  = localStorage.getItem('password');
+  $rootScope.role      = localStorage.getItem('role');
   $rootScope.urlStack  = JSON.parse(localStorage.getItem('urlStack'));
   //$rootScope.url       = '/';
   $rootScope.showBack  = false;
@@ -19,6 +20,9 @@ ttoApp.run(function ($rootScope, $location, $routeParams, $mdSidenav, Restangula
   $rootScope.component = {};
   $rootScope.isLoading = 0;
 
+  // Initial logic. 
+  $rootScope.isChrome = /chrome/.test(navigator.userAgent.toLowerCase());
+  
   /*
   var opts = {
     lines: 12             // The number of lines to draw
@@ -132,7 +136,7 @@ ttoApp.run(function ($rootScope, $location, $routeParams, $mdSidenav, Restangula
     $mdToast.show(
       $mdToast.simple()
         .textContent(message)
-        .position($scope.getToastPosition())
+        //.position($scope.getToastPosition())
         .hideDelay(3000)
     );
   };
@@ -155,8 +159,8 @@ ttoApp.run(function ($rootScope, $location, $routeParams, $mdSidenav, Restangula
   };
 
   $rootScope.loadDefinition = function () {
-    $rootScope.isLoading++;
     /*
+    $rootScope.isLoading++;
     Restangular.all('item/allitemtype').getList({}, $rootScope.headerObj)
     .then(function (data) {
       if (data.length > 0) {
@@ -201,7 +205,7 @@ ttoApp.run(function ($rootScope, $location, $routeParams, $mdSidenav, Restangula
       if ($routeParams.userId) {
         return 'tutor';
       }
-      if ($routeParams.action == 'setup')
+      if ($routeParams.action == 'setup') {
         return 'setup'
       }
     } else {
@@ -216,9 +220,7 @@ ttoApp.run(function ($rootScope, $location, $routeParams, $mdSidenav, Restangula
   $rootScope.boardcast = function(eventName) {
     $rootScope.$broadcast(eventName);
   };
-
-  // Initial logic. 
-  $rootScope.isChrome = /chrome/.test(navigator.userAgent.toLowerCase());
+  
   if ($rootScope.token > '') {
     UserServ.get({userId: $rootScope.userId}, function(data) {
       if (data.status == 'active') {
@@ -259,4 +261,6 @@ ttoApp.run(function ($rootScope, $location, $routeParams, $mdSidenav, Restangula
     $rootScope.loginDialog();
     window.loading_screen.finish();
   }
+  
+
 });

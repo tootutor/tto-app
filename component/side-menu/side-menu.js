@@ -17,10 +17,10 @@ ttoApp.directive('sideMenu', function () {
     ];
 
     $scope.allAdminMenu = [
-      {title: 'Course Setup'     , icon: 'create' , route: '/course/setup'     , mode: 'home'},
-//      {title: 'Add Course Item'  , icon: 'link'   , route: '/add-course-item'  , mode: 'home'},
       {title: 'Coin Admin'       , icon: 'stars'  , route: '/coin-admin'       , mode: 'home'},
-      {title: 'Course Tutor'     , icon: 'school' , route: '/course-tutor'     , mode: 'home'},
+      {title: 'Course Setup'     , icon: 'create' , route: '/setup/category'   , mode: 'home'},
+//      {title: 'Add Course Item'  , icon: 'link'   , route: '/add-course-item'  , mode: 'home'},
+      {title: 'Course Tutor'     , icon: 'school' , route: '/user'             , mode: 'home'},
       {title: 'Test Admin'       , icon: 'warning', route: '/test-admin'       , mode: 'home'}
     ];
 		

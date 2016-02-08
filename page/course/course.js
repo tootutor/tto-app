@@ -7,8 +7,8 @@ function ($scope, $rootScope, $routeParams, CourseServ, UserCourseServ) {
   $rootScope.component = {};
   $rootScope.component.addCourse = true;
 
+  //$scope.allCategory = CategoryServ.query();
   $scope.userId = $routeParams.userId ? $routeParams.userId : $rootScope.userId;
-  
   $scope.processMode = $rootScope.processMode();
   
   if ($scope.processMode == 'user' || $scope.processMode == 'tutor') {
@@ -23,9 +23,12 @@ function ($scope, $rootScope, $routeParams, CourseServ, UserCourseServ) {
     );
   } else {
     $rootScope.isLoading++;
-    $scope.courseList = CourseServ.query(function () {
-      $rootScope.isLoading--;
-    });
+    $scope.courseList = CourseServ.query(
+      {categoryId: $routeParams.categoryId},
+      function () {
+        $rootScope.isLoading--;
+      }
+    );
   }
 
   $scope.nextNavigate = function (course) {
@@ -33,15 +36,28 @@ function ($scope, $rootScope, $routeParams, CourseServ, UserCourseServ) {
       case 'add' :
         break;
       case 'setup' :
-        $rootScope.goRoute('course/' + course.courseId + '/section/setup');
+        $rootScope.goRoute('/setup/course/' + course.courseId + '/section');
         break;
       case 'user' :
-        $rootScope.goRoute('course/' + course.courseId + '/section');
+        $rootScope.goRoute('/course/' + course.courseId + '/section');
         break;
       case 'tutor' :
-        $rootScope.goRoute('course/' + course.courseId + '/section/user/' + $scope.userId);
+        $rootScope.goRoute('/user/' + $scope.userId + '/course/' + course.courseId + '/section');
         break;
     }
+  }
+  
+  $scope.updateChange = function (course) {
+    $rootScope.isLoading++;
+    course.$update(
+      function(data) {
+        $rootScope.isLoading--;
+        $rootScope.showToast('Updated successfully !!!');
+        course.editMode = false;
+      }, function (response) {
+        $rootScope.errorDialog(response, 'Loading Error !!!');
+      }
+    );
   }
   
 }]);
