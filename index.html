@@ -119,6 +119,12 @@
         <md-icon>add</md-icon>
       </md-button>
       
+      <md-button ng-if="$root.component.addNewTask" class="md-fab md-primary md-fab-bottom-right" 
+        ng-click="$root.boardcast('addNewTask');"
+      >
+        <md-icon>add</md-icon>
+      </md-button>
+
       <md-button ng-if="$root.component.addCourse" class="md-fab md-fab-bottom-right" 
         aria-label="Submit" ng-click="$root.goRoute('category/add', 'keep');"
       >

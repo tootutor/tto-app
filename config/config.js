@@ -46,6 +46,10 @@ ttoApp.config(function($mdThemingProvider, $routeProvider, RestangularProvider) 
     .when('/section/:sectionId/task', {templateUrl: 'page/task/task.html'})
     .when('/user/:userId/section/:sectionId/task', {templateUrl: 'page/task/task.html'})
     .when('/:action/section/:sectionId/task', {templateUrl: 'page/task/task.html'})
+    // Item
+    .when('/task/:taskId/item', {templateUrl: 'page/item/item.html'})
+    .when('/user/:userId/task/:taskId/item', {templateUrl: 'page/item/item.html'})
+    .when('/:action/task/:taskId/item', {templateUrl: 'page/item/item.html'})
     // Course Tutor
     .when('/user', {templateUrl: 'page/user/user.html'})
     .when('/', {

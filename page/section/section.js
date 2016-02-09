@@ -84,4 +84,5 @@ function ($scope, $rootScope, $routeParams, SectionServ, UserSectionServ, Course
     newSection.description = '';
     $scope.sectionList.push(newSection);
   }
+  
 }]);
