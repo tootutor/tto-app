@@ -1,0 +1,88 @@
+<md-content layout layout-align="center center" ng-controller="itemCtrl">
+  <div flex style="max-width: 500px;">
+		<div ng-repeat="item in itemList | orderBy:['seq', 'itemId']">
+			<md-card ng-if="!item.editMode">
+				<md-toolbar class="md-primary">
+					<div class="md-toolbar-tools">
+						<md-button class="md-icon-button" ng-if="$root.role == 'admin'" ng-click="item.editMode=true;">
+							<md-icon>create</md-icon>
+						</md-button>
+						<h5>
+							<span class="fa-stack fa-lg">
+								<i class="fa fa-book fa-stack-1x"></i>
+							</span>
+						</h5>
+						<span flex></span>
+					</div>
+				</md-toolbar>
+				<md-card-content layout="column" layout-align="start start">
+					<div layout="row" layout-align="start center">
+            <h2 class="md-title" ng-if="item.showOption == '1'">Explanation</h2>
+            <!-- Use markdown katex for all type except type 6 and 7 (JSXGraph, Yoututbe) -->
+            <div ng-if="item.itemTypeId < 5" layout="column" layout-align="start start">
+              <tto-mark ng-model="item.content" process="['ams']"></tto-mark>
+            </div>
+            <!-- Use SVG for type 5 -->
+            <div ng-if="item.itemTypeId == 5" layout="column" layout-align="center center">
+              <ktx ng-model="item.content"></ktx>
+            </div>
+            <!-- Use JSXGraph logic for type 6 -->
+            <div ng-if="item.itemTypeId == 6" layout="column" layout-align="center center">
+              <jsx-jc dump="true" ng-model="item.content"></jsx-jc>
+            </div>
+            <!-- Use Youtube for type 7 -->
+            <div ng-if="item.itemTypeId == 7">
+              <youtube-video video-id="item.content" player-width="'100%'"></youtube-video>	
+            </div>
+            <!-- Use Slide for type 8 -->
+            <div ng-if="item.itemTypeId == 8">
+              <slide ng-model="item.content"></slide>	
+            </div>
+            <!-- Use Image with DataURI for type 9 -->
+            <div ng-if="item.itemTypeId == 9" layout="column" layout-align="center center">
+              <img ng-src="{{item.content}}" style="max-width:100%; max-height:100%;">
+            </div>
+					</div>
+          <div ng-if="$root.role == 'admin'">
+            <small><small>{{item.seq}} - {{item.code}} - {{item.itemId}}</small></small>
+          </div>
+				</md-card-content>
+			</md-card>
+
+			<md-card ng-if="item.editMode" md-theme="ttoDeepOrange">
+				<md-toolbar>
+					<div class="md-toolbar-tools">
+						<md-button class="md-icon-button" ng-click="item.editMode=false;">
+							<md-icon>visibility</md-icon>
+						</md-button>
+            itemId - {{item.itemId}}
+						<span flex></span>
+						<md-button class="md-icon-button" ng-click="updateChange(item);">
+							<md-icon>save</md-icon>
+						</md-button>
+					</div>
+				</md-toolbar>
+				<md-card-content>
+          <div layout="row">
+            <md-input-container class="md-block" flex>
+              <label>Seq</label>
+              <input ng-model="item.seq">
+            </md-input-container>
+            <md-input-container class="md-block" flex>
+              <label>Item Type</label>
+              <input ng-model="item.itemTypeId">
+            </md-input-container>
+          </div>
+          <md-input-container class="md-block">
+            <label>Code</label>
+            <textarea ng-model="item.code"></textarea>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Content</label>
+            <textarea ng-model="item.content"></textarea>
+          </md-input-container>
+				</md-card-content>
+			</md-card>
+    </div>
+  </div>
+</md-content>

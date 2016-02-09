@@ -125,6 +125,12 @@
         <md-icon>add</md-icon>
       </md-button>
 
+      <md-button ng-if="$root.component.addNewItem" class="md-fab md-primary md-fab-bottom-right" 
+        ng-click="$root.boardcast('addNewItem');"
+      >
+        <md-icon>add</md-icon>
+      </md-button>
+
       <md-button ng-if="$root.component.addCourse" class="md-fab md-fab-bottom-right" 
         aria-label="Submit" ng-click="$root.goRoute('category/add', 'keep');"
       >
@@ -234,6 +240,7 @@
     <script src="page/course/course.js"></script>
     <script src="page/section/section.js"></script>
     <script src="page/task/task.js"></script>
+    <script src="page/item/item.js"></script>
     <script src="page/user/user.js"></script>
     <!-- Dialog -->
     <script src="dialog/login/login-dialog.js"></script>
@@ -262,12 +269,14 @@
     <script src="service/course/course-service.js"></script>
     <script src="service/section/section-service.js"></script>
     <script src="service/task/task-service.js"></script>
+    <script src="service/item/item-service.js"></script>
     <script src="service/user-coin/user-coin-service.js"></script>
     <script src="service/user-order/user-order-service.js"></script>
     <script src="service/user-category/user-category-service.js"></script>
     <script src="service/user-course/user-course-service.js"></script>
     <script src="service/user-section/user-section-service.js"></script>
     <script src="service/user-task/user-task-service.js"></script>
+    <script src="service/user-item/user-item-service.js"></script>
    
     <script src="config/config.js"></script>
     <script src="google.js"></script>
