@@ -20,7 +20,7 @@
             <h2 class="md-title" ng-if="item.showOption == '1'">Explanation</h2>
             <!-- Use markdown katex for all type except type 6 and 7 (JSXGraph, Yoututbe) -->
             <div ng-if="item.itemTypeId < 5" layout="column" layout-align="start start">
-              <tto-mark ng-model="item.content" process="['ams']"></tto-mark>
+              <md-ktx ng-model="item.content"></md-ktx>
             </div>
             <!-- Use SVG for type 5 -->
             <div ng-if="item.itemTypeId == 5" layout="column" layout-align="center center">
@@ -31,8 +31,8 @@
               <jsx-jc dump="true" ng-model="item.content"></jsx-jc>
             </div>
             <!-- Use Youtube for type 7 -->
-            <div ng-if="item.itemTypeId == 7">
-              <youtube-video video-id="item.content" player-width="'100%'"></youtube-video>	
+            <div ng-if="item.itemTypeId == 7" class="embed-responsive embed-responsive-16by9">
+              <youtube-video video-id="item.content"></youtube-video>	
             </div>
             <!-- Use Slide for type 8 -->
             <div ng-if="item.itemTypeId == 8">
