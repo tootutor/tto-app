@@ -7,11 +7,6 @@
 						<md-button class="md-icon-button" ng-if="$root.role == 'admin'" ng-click="item.editMode=true;">
 							<md-icon>create</md-icon>
 						</md-button>
-						<h5>
-							<span class="fa-stack fa-lg">
-								<i class="fa fa-book fa-stack-1x"></i>
-							</span>
-						</h5>
 						<span flex></span>
 					</div>
 				</md-toolbar>
@@ -19,8 +14,17 @@
 					<div layout="row" layout-align="start center">
             <h2 class="md-title" ng-if="item.showOption == '1'">Explanation</h2>
             <!-- Use markdown katex for all type except type 6 and 7 (JSXGraph, Yoututbe) -->
-            <div ng-if="item.itemTypeId < 5" layout="column" layout-align="start start">
-              <md-ktx ng-model="item.content"></md-ktx>
+            <div ng-if="item.itemTypeId == 1" layout="column" layout-align="start start">
+              <item-content content="item.content"></item-content>
+            </div>
+            <div ng-if="item.itemTypeId == 2" layout="column" layout-align="start start">
+              <item-content content="item.content"></item-content>
+            </div>
+            <div ng-if="item.itemTypeId == 3" layout="column" layout-align="start start">
+              <item-content content="item.content"></item-content>
+            </div>
+            <div ng-if="item.itemTypeId == 4" layout="column" layout-align="start start">
+              <item-content content="item.content"></item-content>
             </div>
             <!-- Use SVG for type 5 -->
             <div ng-if="item.itemTypeId == 5" layout="column" layout-align="center center">
