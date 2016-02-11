@@ -2,7 +2,7 @@ var ttoApp = angular.module('app', [
 	'ngMaterial', 
 	'ngRoute', 
 	'restangular', 
-	'youtube-embed', 
+	//'youtube-embed', 
 	'ngMorph', 
 	'alAngularHero', 
 	'luegg.directives',

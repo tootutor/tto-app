@@ -11,18 +11,18 @@ function ($scope, $rootScope, $routeParams, CourseServ, UserCourseServ) {
   $scope.userId = $routeParams.userId ? $routeParams.userId : $rootScope.userId;
   $scope.processMode = $rootScope.processMode();
   
+  $rootScope.isLoading++;
   if ($scope.processMode == 'user' || $scope.processMode == 'tutor') {
-    $rootScope.isLoading++;
     $scope.courseList = UserCourseServ.query(
       {userId: $scope.userId, categoryId: $routeParams.categoryId}, 
       function (data) {
         $rootScope.isLoading--;
       }, function (response) {
+        $rootScope.isLoading = 0;
         $rootScope.errorDialog(response, 'Loading Error !!!');
       }
     );
   } else {
-    $rootScope.isLoading++;
     $scope.courseList = CourseServ.query(
       {categoryId: $routeParams.categoryId},
       function () {
@@ -55,6 +55,7 @@ function ($scope, $rootScope, $routeParams, CourseServ, UserCourseServ) {
         $rootScope.showToast('Updated successfully !!!');
         course.editMode = false;
       }, function (response) {
+        $rootScope.isLoading = 0;
         $rootScope.errorDialog(response, 'Loading Error !!!');
       }
     );

@@ -10,18 +10,18 @@ function ($scope, $rootScope, $routeParams, SectionServ, UserSectionServ, Course
   $scope.userId = $routeParams.userId ? $routeParams.userId : $rootScope.userId;
   $scope.processMode = $rootScope.processMode();
   
+  $rootScope.isLoading++;
   if ($scope.processMode == 'user' || $scope.processMode == 'tutor') {
-    $rootScope.isLoading++;
     $scope.sectionList = UserSectionServ.query(
       {userId: $scope.userId, courseId: $routeParams.courseId}, 
       function (data) {
         $rootScope.isLoading--;
       }, function (response) {
+        $rootScope.isLoading = 0;
         $rootScope.errorDialog(response, 'Loading Error !!!');
       }
     );
   } else {
-    $rootScope.isLoading++;
     $scope.sectionList = SectionServ.query(
       {courseId: $routeParams.courseId},
       function () {
@@ -53,6 +53,7 @@ function ($scope, $rootScope, $routeParams, SectionServ, UserSectionServ, Course
           $rootScope.showToast('Updated successfully !!!');
           section.editMode = false;
         }, function (response) {
+          $rootScope.isLoading = 0;
           $rootScope.errorDialog(response, 'Updating Error !!!');
         }
       );
@@ -63,6 +64,7 @@ function ($scope, $rootScope, $routeParams, SectionServ, UserSectionServ, Course
           $rootScope.showToast('Added successfully !!!');
           section.editMode = false;
         }, function (response) {
+          $rootScope.isLoading = 0;
           $rootScope.errorDialog(response, 'Adding Error !!!');
         }
       );

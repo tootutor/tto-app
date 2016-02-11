@@ -1,4 +1,4 @@
-ttoApp.config(function($mdThemingProvider, $routeProvider, RestangularProvider) {
+ttoApp.config(function($mdThemingProvider, $routeProvider, RestangularProvider, $sceDelegateProvider) {
   $mdThemingProvider.theme('default')
     .primaryPalette('teal')
 //    .primaryPalette('indigo')
@@ -135,4 +135,10 @@ ttoApp.config(function($mdThemingProvider, $routeProvider, RestangularProvider) 
   ;
   
   RestangularProvider.setBaseUrl(appInfo.apiPath);
+  
+  $sceDelegateProvider.resourceUrlWhitelist([
+    'self',
+    'http://www.youtube.com/**'
+  ]);
+  
 });

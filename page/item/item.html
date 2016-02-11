@@ -31,8 +31,8 @@
               <jsx-jc dump="true" ng-model="item.content"></jsx-jc>
             </div>
             <!-- Use Youtube for type 7 -->
-            <div ng-if="item.itemTypeId == 7" class="embed-responsive embed-responsive-16by9">
-              <youtube-video video-id="item.content"></youtube-video>	
+            <div ng-if="item.itemTypeId == 7">
+              <iframe ng-src="{{youtubeSrc(item.content);}}" frameborder='0' allowfullscreen></iframe>
             </div>
             <!-- Use Slide for type 8 -->
             <div ng-if="item.itemTypeId == 8">

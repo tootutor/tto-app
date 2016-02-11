@@ -10,13 +10,14 @@ function ($scope, $rootScope, $routeParams, ItemServ, UserItemServ) {
   $scope.userId = $routeParams.userId ? $routeParams.userId : $rootScope.userId;
   $scope.processMode = $rootScope.processMode();
 
+  $rootScope.isLoading++;
   if ($scope.processMode == 'user' || $scope.processMode == 'tutor') {
-    $rootScope.isLoading++;
     $scope.itemList = UserItemServ.query(
       {userId: $scope.userId, taskId: $routeParams.taskId}, 
       function (data) {
         $rootScope.isLoading--;
       }, function (response) {
+        $rootScope.isLoading = 0;
         $rootScope.errorDialog(response, 'Loading Error !!!');
       }
     );
@@ -38,6 +39,7 @@ function ($scope, $rootScope, $routeParams, ItemServ, UserItemServ) {
           $rootScope.showToast('Updated successfully !!!');
           item.editMode = false;
         }, function (response) {
+          $rootScope.isLoading = 0;
           $rootScope.errorDialog(response, 'Updating Error !!!');
         }
       );
@@ -48,6 +50,7 @@ function ($scope, $rootScope, $routeParams, ItemServ, UserItemServ) {
           $rootScope.showToast('Added successfully !!!');
           item.editMode = false;
         }, function (response) {
+          $rootScope.isLoading = 0;
           $rootScope.errorDialog(response, 'Adding Error !!!');
         }
       );
@@ -68,6 +71,10 @@ function ($scope, $rootScope, $routeParams, ItemServ, UserItemServ) {
     newTask.code = '';
     newTask.content = '';
     $scope.taskList.push(newTask);
+  }
+  
+  $scope.youtubeSrc = function (src) {
+    return 'http://www.youtube.com/embed/' + src;
   }
 
 }]);

@@ -10,13 +10,14 @@ function ($scope, $rootScope, $routeParams, TaskServ, UserTaskServ) {
   $scope.userId = $routeParams.userId ? $routeParams.userId : $rootScope.userId;
   $scope.processMode = $rootScope.processMode();
 
+  $rootScope.isLoading++;
   if ($scope.processMode == 'user' || $scope.processMode == 'tutor') {
-    $rootScope.isLoading++;
     $scope.taskList = UserTaskServ.query(
       {userId: $scope.userId, sectionId: $routeParams.sectionId}, 
       function (data) {
         $rootScope.isLoading--;
       }, function (response) {
+        $rootScope.isLoading = 0;
         $rootScope.errorDialog(response, 'Loading Error !!!');
       }
     );
@@ -52,6 +53,7 @@ function ($scope, $rootScope, $routeParams, TaskServ, UserTaskServ) {
           $rootScope.showToast('Updated successfully !!!');
           task.editMode = false;
         }, function (response) {
+          $rootScope.isLoading = 0;
           $rootScope.errorDialog(response, 'Updating Error !!!');
         }
       );
@@ -62,6 +64,7 @@ function ($scope, $rootScope, $routeParams, TaskServ, UserTaskServ) {
           $rootScope.showToast('Added successfully !!!');
           task.editMode = false;
         }, function (response) {
+          $rootScope.isLoading = 0;
           $rootScope.errorDialog(response, 'Adding Error !!!');
         }
       );
