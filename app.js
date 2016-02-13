@@ -4,7 +4,7 @@ var ttoApp = angular.module('app', [
 	'restangular', 
 	//'youtube-embed', 
 	'ngMorph', 
-	'alAngularHero', 
+	//'alAngularHero', 
 	'luegg.directives',
 	'ngResource'
 ]);

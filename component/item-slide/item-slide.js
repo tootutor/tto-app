@@ -1,5 +1,5 @@
-ttoApp.component('itemContent', {
-  templateUrl: 'component/item-content/item-content.html',
+ttoApp.component('itemSlide', {
+  templateUrl: 'component/item-slide/item-slide.html',
   bindings: {item: '='},
   controller: function ($rootScope) {
     vm = this;

@@ -1,5 +1,5 @@
-ttoApp.component('itemContent', {
-  templateUrl: 'component/item-content/item-content.html',
+ttoApp.component('itemDatauri', {
+  templateUrl: 'component/item-datauri/item-datauri.html',
   bindings: {item: '='},
   controller: function ($rootScope) {
     vm = this;

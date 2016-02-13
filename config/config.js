@@ -138,7 +138,8 @@ ttoApp.config(function($mdThemingProvider, $routeProvider, RestangularProvider, 
   
   $sceDelegateProvider.resourceUrlWhitelist([
     'self',
-    'http://www.youtube.com/**'
+    'http://www.youtube.com/**',
+    'https://www.youtube.com/**',
   ]);
   
 });

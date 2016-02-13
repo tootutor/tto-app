@@ -3,7 +3,7 @@ ttoApp.directive('jsxJc', ['$mdDialog', function ($mdDialog) {
     restrict: 'E',
     scope: {dump: '='},
     require: 'ngModel',
-    templateUrl: 'view/jsxgraph.html',
+    templateUrl: 'directive/jsx-jc/jsxgraph.html',
     controller: jsxCtrl,
     link: jsxLink
   };

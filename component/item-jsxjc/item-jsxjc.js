@@ -1,5 +1,5 @@
-ttoApp.component('itemContent', {
-  templateUrl: 'component/item-content/item-content.html',
+ttoApp.component('itemJsxjc', {
+  templateUrl: 'component/item-jsxjc/item-jsxjc.html',
   bindings: {item: '='},
   controller: function ($rootScope) {
     vm = this;

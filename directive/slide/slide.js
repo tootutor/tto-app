@@ -2,7 +2,7 @@ ttoApp.directive('slide', function () {
   return {
     restrict: 'E',
     require: 'ngModel',
-    templateUrl: 'view/slide.html',
+    templateUrl: 'directive/slide/slide.html',
     controller: slideCtrl,
     link: slideLink
   };

@@ -7,13 +7,11 @@
       <span flex></span>
     </div>
   </md-toolbar>
-  <md-card-content layout="column" layout-align="start start">
+  <md-card-content>
     <div layout="row" layout-align="start center">
       <h2 class="md-title" ng-if="$ctrl.item.showOption == '1'">Explanation</h2>
     </div>
-    <div>
-      <md-ktx ng-model="$ctrl.item.content"></md-ktx>
-    </div>
+    <jsx-jc dump="true" ng-model="$ctrl.item.content"></jsx-jc>
     <div ng-if="$root.role == 'admin'">
       <small><small>{{$ctrl.item.seq}} - {{$ctrl.item.code}} - {{$ctrl.item.itemId}}</small></small>
     </div>
@@ -49,7 +47,7 @@
       <textarea ng-model="$ctrl.item.code"></textarea>
     </md-input-container>
     <md-input-container class="md-block">
-      <label>MD KTX Content</label>
+      <label>JSX JC Code</label>
       <textarea ng-model="$ctrl.item.content"></textarea>
     </md-input-container>
   </md-card-content>

@@ -8,15 +8,15 @@
 <br>
 <br>
 
-<div class="md-actions" layout="row" layout-align="center center">
+<div class="md-actions" layout="row" layout-align="space-between center">
+  <md-button class="md-raised md-primary" aria-label='refresh' ng-click="refreshJSX();">
+    <md-icon>refresh</md-icon>
+  </md-button>
 	<md-button class="md-icon-botton" ng-show="dump" aria-label='dump' ng-click="dumpJSX();">
 	  <md-icon>save</md-icon>
 	</md-button>
+  <md-button class="md-raised md-primary" aria-label='next' ng-disabled="isEnd"	ng-click="nextJSX();">
+    <md-icon>arrow_forward</md-icon>
+  </md-button>
 </div>
 
-<md-button class="md-fab md-mini md-fab-bottom-left md-primary" aria-label='refresh' ng-click="refreshJSX();">
-  <md-icon>refresh</md-icon>
-</md-button>
-<md-button class="md-fab md-mini md-fab-bottom-right md-primary" aria-label='next' ng-if="!isEnd"	ng-click="nextJSX();">
-  <md-icon>arrow_forward</md-icon>
-</md-button>

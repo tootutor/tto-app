@@ -1,16 +1,19 @@
 ttoApp.directive('ttoMark', function () {
   return {
     restrict: 'E',
-    scope: {process: '='},
+    //scope: {process: '='},
     require: 'ngModel',
     link: ttoMarkLink
     };
   
   function ttoMarkLink($scope, $elem, $attrs, ngModel) {
     ngModel.$render = function () {
-			if (!$scope.process) {
-				$scope.process = ["tto","ams","md"];
+      /*
+      if (!$scope.process) {
+			//	$scope.process = ["tto","ams","md"];
 			}
+      */
+      $scope.process = ["tto","ams","md"];
 			
 			//var process = JSON.parse($scope.process);
 			var process = $scope.process;
