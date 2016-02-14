@@ -79,7 +79,7 @@ function ($scope, $rootScope, $routeParams, TaskServ, UserTaskServ) {
   $scope.addNewTask = function () {
     newTask = new TaskServ();
     newTask.editMode = true;
-    newTask.sectionId = null;
+    newTask.taskId = null;
     newTask.sectionId = $routeParams.sectionId;
     newTask.seq = 0;
     newTask.code = '';

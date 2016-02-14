@@ -62,19 +62,16 @@ function ($scope, $rootScope, $routeParams, ItemServ, UserItemServ) {
     $scope.addNewItem();
   });
 
-  $scope.addNewTask = function () {
-    newTask = new TaskServ();
-    newTask.editMode = true;
-    newTask.sectionId = null;
-    newTask.sectionId = $routeParams.sectionId;
-    newTask.seq = 0;
-    newTask.code = '';
-    newTask.content = '';
-    $scope.taskList.push(newTask);
+  $scope.addNewItem = function () {
+    newItem = new ItemServ();
+    newItem.editMode = true;
+    newItem.itemId = null;
+    newItem.itemTypeId = 2;
+    newItem.taskId = $routeParams.taskId;
+    newItem.seq = 0;
+    newItem.code = '';
+    newItem.content = '';
+    $scope.itemList.push(newItem);
   }
   
-  $scope.youtubeSrc = function (src) {
-    return 'http://www.youtube.com/embed/' + src;
-  }
-
 }]);

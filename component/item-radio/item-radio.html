@@ -1,0 +1,77 @@
+<md-card ng-if="!$ctrl.item.editMode">
+  <md-toolbar class="md-primary">
+    <div class="md-toolbar-tools">
+      <md-button class="md-icon-button" ng-if="$root.role == 'admin'" ng-click="$ctrl.item.editMode=true;">
+        <md-icon>create</md-icon>
+      </md-button>
+      <span flex></span>
+    </div>
+  </md-toolbar>
+  <md-card-content>
+    <div layout="row" layout-align="start center">
+      <h2 class="md-title" ng-if="$ctrl.item.showOption == '1'">Explanation</h2>
+    </div>
+    <div flex>
+      <slide ng-model="$ctrl.item.content" flex></slide>	
+    </div>
+    <div ng-if="$root.role == 'admin'">
+      <small><small>{{$ctrl.item.seq}} - {{$ctrl.item.code}} - {{$ctrl.item.itemId}}</small></small>
+    </div>
+  </md-card-content>
+</md-card>
+
+<md-card ng-if="$ctrl.item.editMode" md-theme="ttoDeepOrange">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <md-button class="md-icon-button" ng-click="$ctrl.item.editMode=false;">
+        <md-icon>visibility</md-icon>
+      </md-button>
+      itemId - {{$ctrl.item.itemId}}
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="$ctrl.updateChange($ctrl.item);">
+        <md-icon>save</md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-card-content>
+    <div layout="row">
+      <md-input-container class="md-block" flex>
+        <label>Seq</label>
+        <input ng-model="$ctrl.item.seq">
+      </md-input-container>
+      <md-input-container class="md-block" flex>
+        <label>Item Type</label>
+        <input ng-model="$ctrl.item.itemTypeId">
+      </md-input-container>
+    </div>
+    <md-input-container class="md-block">
+      <label>Code</label>
+      <textarea ng-model="$ctrl.item.code"></textarea>
+    </md-input-container>
+    <md-input-container class="md-block">
+      <label>Question</label>
+      <textarea ng-model="$ctrl.detail.question"></textarea>
+    </md-input-container>
+    <div layout="row" layout-xs="column" ng-repeat="radio in $ctrl.detail.allRadio" layout-align="start center">
+      <md-input-container class="md-block" flex>
+        <label><md-ktx ng-model="itemRadio.content"></md-ktx></label>
+        <textarea placeholder="Radio content" ng-model="radio.content"></textarea>
+      </md-input-container>
+      <md-checkbox aria-label="check box" ng-model="radio.isAnswer" ng-change="updatePoint(radio)">
+      </md-checkbox>
+      <md-input-container class="md-block" flex="10">
+        <label>Point</label>
+        <input ng-model="radio.point" type="number">
+      </md-input-container>
+      <md-button class="md-icon-button md-mini" ng-click="removeRadio($ctrl.detail, radio);">
+        <md-icon>highlight_remove</md-icon>
+      </md-button>
+    </div>
+    <div layout layout-sm="column">
+      <md-button class="md-fab md-primary md-mini" aria-label="Add" ng-click="$ctrl.addRadio($ctrl.detail);">
+        <md-icon>add</md-icon>
+      </md-button>
+    </div>
+
+  </md-card-content>
+</md-card>
