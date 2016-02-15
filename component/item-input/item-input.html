@@ -69,7 +69,7 @@
       <label>Question</label>
       <textarea ng-model="$ctrl.detail.question"></textarea>
     </md-input-container>
-    <div layout="row" layout-xs="column" ng-repeat="input in $ctrl.detail.allInput">
+    <div layout="row" ng-repeat="input in $ctrl.detail.allInput">
       <md-input-container flex="35">
         <label><md-ktx ng-model="input.question"></md-ktx></label>
         <textarea placeholder="Question" ng-model="input.question"></textarea>

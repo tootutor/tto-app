@@ -61,7 +61,7 @@
       <label>Question</label>
       <textarea ng-model="$ctrl.detail.question"></textarea>
     </md-input-container>
-    <div layout="row" layout-xs="column" ng-repeat="radio in $ctrl.detail.allRadio" layout-align="start center">
+    <div layout="row" ng-repeat="radio in $ctrl.detail.allRadio" layout-align="start center">
       <md-input-container class="md-block" flex>
         <label><md-ktx ng-model="radio.content"></md-ktx></label>
         <textarea placeholder="Radio content" ng-model="radio.content"></textarea>
