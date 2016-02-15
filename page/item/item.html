@@ -3,8 +3,8 @@
 		<div ng-repeat="item in itemList | orderBy:['seq', 'itemId']">
       <item-radio ng-if="item.itemTypeId == 1" item="item"></item-radio>
       <item-content ng-if="item.itemTypeId == 2" item="item"></item-content>
-      <item-content ng-if="item.itemTypeId == 3" item="item"></item-content>
-      <item-content ng-if="item.itemTypeId == 4" item="item"></item-content>
+      <item-select ng-if="item.itemTypeId == 3" item="item"></item-select>
+      <item-input ng-if="item.itemTypeId == 4" item="item"></item-input>
       <item-svg ng-if="item.itemTypeId == 5" item="item"></item-svg>
       <item-jsxjc ng-if="item.itemTypeId == 6" item="item"></item-jsxjc>
       <item-youtube ng-if="item.itemTypeId == 7" item="item"></item-youtube>

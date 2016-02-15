@@ -13,15 +13,23 @@
     </div>
     <div flex>
       <md-ktx ng-model="$ctrl.detail.question"></md-ktx>
-      <md-radio-group ng-model="$ctrl.user.index">
-        <md-radio-button ng-repeat="radio in $ctrl.detail.allRadio" layout-lign="start center"
-          value="{{$index}}""
-        >
-          <i class="fa fa-times-circle" style="color:red" ng-if="radio.isAnswer==0"></i>
-          <i class="fa fa-check-circle" style="color:green" ng-if="radio.isAnswer==1"></i>
-          <ktx ng-model="radio.content"></ktx>
-        </md-radio-button>
-      </md-radio-group>
+      <div ng-repeat="input in $ctrl.detail.allInput">
+        <md-ktx ng-model="input.question"></md-ktx>
+        <div layout="row">
+          <md-input-container flex>
+            <label>Your answer</label>
+            <input ng-model="input.userAnswer" disabled="disabled">
+          </md-input-container>
+          <md-input-container flex>
+            <label>Correct answer</label>
+            <input ng-model="input.answer" disabled="disabled">
+          </md-input-container>
+          <i class="fa fa-times-circle" style="color:red" ng-if="input.status=='done' && input.answer!=input.userAnswer"></i>
+          <i class="fa fa-check-circle" style="color:green" ng-if="input.status=='done' && input.answer==input.userAnswer"></i>
+        </div>
+      </div>
+      
+      
     </div>
     <div ng-if="$root.role == 'admin'">
       <small><small>{{$ctrl.item.seq}} - {{$ctrl.item.code}} - {{$ctrl.item.itemId}}</small></small>
@@ -61,23 +69,30 @@
       <label>Question</label>
       <textarea ng-model="$ctrl.detail.question"></textarea>
     </md-input-container>
-    <div layout="row" layout-xs="column" ng-repeat="radio in $ctrl.detail.allRadio" layout-align="start center">
-      <md-input-container class="md-block" flex>
-        <label><md-ktx ng-model="radio.content"></md-ktx></label>
-        <textarea placeholder="Radio content" ng-model="radio.content"></textarea>
+    <div layout="row" layout-xs="column" ng-repeat="input in $ctrl.detail.allInput">
+      <md-input-container flex="35">
+        <label><md-ktx ng-model="input.question"></md-ktx></label>
+        <textarea placeholder="Question" ng-model="input.question"></textarea>
       </md-input-container>
-      <md-checkbox aria-label="check box" ng-model="radio.isAnswer" ng-change="updatePoint(radio)">
-      </md-checkbox>
-      <md-input-container class="md-block" flex="10">
+      <md-select placeholder="Type" ng-model="input.answerType" flex="10">
+        <md-option value="text">text</md-option>
+        <md-option value="number">number</md-option>
+      </md-select>
+      <md-input-container flex="25">
+        <label><md-ktx ng-model="input.answer"></md-ktx></label>
+        <textarea placeholder="Answer" ng-model="input.answer"></textarea>
+      </md-input-container>
+      <md-input-container flex="5">
         <label>Point</label>
-        <input ng-model="radio.point" type="number">
+        <input ng-model="input.point" type="number">
       </md-input-container>
-      <md-button class="md-icon-button md-mini" ng-click="$ctrl.removeRadio($ctrl.detail.allRadio, $index);">
+      <md-button class="md-icon-button md-mini" ng-click="$ctrl.removeInput($ctrl.detail.addInput, $index);">
         <md-icon>highlight_remove</md-icon>
       </md-button>
     </div>
+          
     <div layout layout-sm="column">
-      <md-button class="md-fab md-primary md-mini" aria-label="Add" ng-click="$ctrl.addRadio($ctrl.detail);">
+      <md-button class="md-fab md-primary md-mini" aria-label="Add" ng-click="$ctrl.addInput($ctrl.detail);">
         <md-icon>add</md-icon>
       </md-button>
     </div>

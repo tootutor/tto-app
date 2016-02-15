@@ -1,5 +1,5 @@
-ttoApp.component('itemRadio', {
-  templateUrl: 'component/item-radio/item-radio.html',
+ttoApp.component('itemSelect', {
+  templateUrl: 'component/item-select/item-select.html',
   bindings: {item: '='},
   controller: function ($rootScope) {
     vm = this;
@@ -8,11 +8,10 @@ ttoApp.component('itemRadio', {
     } else {
       vm.detail = {};
       vm.detail.question = '';
-      vm.detail.allRadio = [];
+      vm.detail.allSelect = [];
     }
     
     vm.updateChange = function (item) {
-      console.log(vm.user.index);
       item.content = angular.toJson(vm.detail);
       $rootScope.isLoading++;
       if (item.itemId) {
@@ -40,16 +39,16 @@ ttoApp.component('itemRadio', {
       }
     }
     
-    vm.addRadio = function(detail) {
-      detail.allRadio.push({
+    vm.addSelect = function(detail) {
+      detail.allSelect.push({
          content : '', 
          isAnswer : false,
          point : -1
       });
     }
     
-    vm.removeRadio = function(allRadio, index) {
-      allRadio.splice(index, 1);
+    vm.removeSelect = function(allSelect, index) {
+      allSelect.splice(index, 1);
     }
 
   }

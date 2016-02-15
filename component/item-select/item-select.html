@@ -13,15 +13,13 @@
     </div>
     <div flex>
       <md-ktx ng-model="$ctrl.detail.question"></md-ktx>
-      <md-radio-group ng-model="$ctrl.user.index">
-        <md-radio-button ng-repeat="radio in $ctrl.detail.allRadio" layout-lign="start center"
-          value="{{$index}}""
-        >
-          <i class="fa fa-times-circle" style="color:red" ng-if="radio.isAnswer==0"></i>
-          <i class="fa fa-check-circle" style="color:green" ng-if="radio.isAnswer==1"></i>
-          <ktx ng-model="radio.content"></ktx>
-        </md-radio-button>
-      </md-radio-group>
+      <div ng-repeat="select in $ctrl.detail.allSelect" layout="row" layout-align="start center">
+        <md-checkbox ng-model="select.userIsAnswer" disabled="disabled"	aria-label="checkbox">
+        </md-checkbox>
+        <i class="fa fa-times-circle" style="color:red" ng-if="select.isAnswer==0"></i>
+        <i class="fa fa-check-circle" style="color:green" ng-if="select.isAnswer==1"></i>
+        <ktx ng-model="select.content"></ktx>
+      </div>
     </div>
     <div ng-if="$root.role == 'admin'">
       <small><small>{{$ctrl.item.seq}} - {{$ctrl.item.code}} - {{$ctrl.item.itemId}}</small></small>
@@ -61,23 +59,23 @@
       <label>Question</label>
       <textarea ng-model="$ctrl.detail.question"></textarea>
     </md-input-container>
-    <div layout="row" layout-xs="column" ng-repeat="radio in $ctrl.detail.allRadio" layout-align="start center">
+    <div layout="row" layout-xs="column" ng-repeat="select in $ctrl.detail.allSelect" layout-align="start center">
       <md-input-container class="md-block" flex>
-        <label><md-ktx ng-model="radio.content"></md-ktx></label>
-        <textarea placeholder="Radio content" ng-model="radio.content"></textarea>
+        <label><md-ktx ng-model="select.content"></md-ktx></label>
+        <textarea placeholder="Select content" ng-model="select.content"></textarea>
       </md-input-container>
-      <md-checkbox aria-label="check box" ng-model="radio.isAnswer" ng-change="updatePoint(radio)">
+      <md-checkbox aria-label="check box" ng-model="select.isAnswer" ng-change="updatePoint(select)">
       </md-checkbox>
       <md-input-container class="md-block" flex="10">
         <label>Point</label>
-        <input ng-model="radio.point" type="number">
+        <input ng-model="select.point" type="number">
       </md-input-container>
-      <md-button class="md-icon-button md-mini" ng-click="$ctrl.removeRadio($ctrl.detail.allRadio, $index);">
+      <md-button class="md-icon-button md-mini" ng-click="$ctrl.removeSelect($ctrl.detail.allSelect, $index);">
         <md-icon>highlight_remove</md-icon>
       </md-button>
     </div>
     <div layout layout-sm="column">
-      <md-button class="md-fab md-primary md-mini" aria-label="Add" ng-click="$ctrl.addRadio($ctrl.detail);">
+      <md-button class="md-fab md-primary md-mini" aria-label="Add" ng-click="$ctrl.addSelect($ctrl.detail);">
         <md-icon>add</md-icon>
       </md-button>
     </div>
