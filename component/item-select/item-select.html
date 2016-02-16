@@ -11,16 +11,19 @@
     <div layout="row" layout-align="start center">
       <h2 class="md-title" ng-if="$ctrl.item.showOption == '1'">Explanation</h2>
     </div>
-    <div flex>
+    <form name="formSelect" flex>
       <md-ktx ng-model="$ctrl.detail.question"></md-ktx>
       <div ng-repeat="select in $ctrl.detail.allSelect" layout="row" layout-align="start center">
-        <md-checkbox ng-model="select.userIsAnswer" disabled="disabled"	aria-label="checkbox">
+        <md-checkbox ng-model="$ctrl.userDetail.allUserSelect[$index]" layout-align="start center">
+          <i class="fa fa-times-circle" style="color:red" ng-if="select.isAnswer==0"></i>
+          <i class="fa fa-check-circle" style="color:green" ng-if="select.isAnswer==1"></i>
+          <ktx ng-model="select.content"></ktx>
         </md-checkbox>
-        <i class="fa fa-times-circle" style="color:red" ng-if="select.isAnswer==0"></i>
-        <i class="fa fa-check-circle" style="color:green" ng-if="select.isAnswer==1"></i>
-        <ktx ng-model="select.content"></ktx>
       </div>
-    </div>
+      <md-button class="md-raised md-accent" type="submit" ng-show="formSelect.$valid" ng-click="$ctrl.processSelect();">
+        <md-icon>check</md-icon>
+      </md-button>
+    </form>
     <div ng-if="$root.role == 'admin'">
       <small><small>{{$ctrl.item.seq}} - {{$ctrl.item.code}} - {{$ctrl.item.itemId}}</small></small>
     </div>

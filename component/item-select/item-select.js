@@ -10,6 +10,16 @@ ttoApp.component('itemSelect', {
       vm.detail.question = '';
       vm.detail.allSelect = [];
     }
+    if (vm.item.userContent > '') {
+      vm.userDetail = angular.fromJson(vm.item.userContent);
+    } else {
+      vm.userDetail = {};
+      vm.userDetail.allUserSelect = [];
+      // initial user value for all select items
+      for (i=0; i<vm.detail.allSelect.length; i++) {
+        vm.userDetail.allUserSelect[i] = false;
+      }
+    }
     
     vm.updateChange = function (item) {
       item.content = angular.toJson(vm.detail);
@@ -49,6 +59,10 @@ ttoApp.component('itemSelect', {
     
     vm.removeSelect = function(allSelect, index) {
       allSelect.splice(index, 1);
+    }
+
+    vm.processSelect = function () {
+      console.log(vm.userDetail);
     }
 
   }

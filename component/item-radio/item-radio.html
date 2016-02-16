@@ -11,9 +11,9 @@
     <div layout="row" layout-align="start center">
       <h2 class="md-title" ng-if="$ctrl.item.showOption == '1'">Explanation</h2>
     </div>
-    <div flex>
+    <form name="formRadio" flex>
       <md-ktx ng-model="$ctrl.detail.question"></md-ktx>
-      <md-radio-group ng-model="$ctrl.user.index">
+      <md-radio-group ng-model="$ctrl.userDetail.radioIndex" required>
         <md-radio-button ng-repeat="radio in $ctrl.detail.allRadio" layout-lign="start center"
           value="{{$index}}""
         >
@@ -22,7 +22,10 @@
           <ktx ng-model="radio.content"></ktx>
         </md-radio-button>
       </md-radio-group>
-    </div>
+      <md-button class="md-raised md-accent" type="submit" ng-show="formRadio.$valid" ng-click="$ctrl.processRadio();">
+        <md-icon>check</md-icon>
+      </md-button>
+    </form>
     <div ng-if="$root.role == 'admin'">
       <small><small>{{$ctrl.item.seq}} - {{$ctrl.item.code}} - {{$ctrl.item.itemId}}</small></small>
     </div>

@@ -10,6 +10,12 @@ ttoApp.component('itemRadio', {
       vm.detail.question = '';
       vm.detail.allRadio = [];
     }
+    if (vm.item.userContent > '') {
+      vm.userDetail = angular.fromJson(vm.item.userContent);
+    } else {
+      vm.userDetail = {};
+      vm.userDetail.radioIndex = null;
+    }
     
     vm.updateChange = function (item) {
       item.content = angular.toJson(vm.detail);
@@ -51,5 +57,8 @@ ttoApp.component('itemRadio', {
       allRadio.splice(index, 1);
     }
 
+    vm.processRadio = function () {
+      console.log(vm.userDetail);
+    }
   }
 });

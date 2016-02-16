@@ -18,11 +18,11 @@
         <div layout="row">
           <md-input-container flex>
             <label>Your answer</label>
-            <input ng-model="input.userAnswer" disabled="disabled">
+            <input ng-model="input.userAnswer">
           </md-input-container>
           <md-input-container flex>
             <label>Correct answer</label>
-            <input ng-model="input.answer" disabled="disabled">
+            <input ng-model="input.answer">
           </md-input-container>
           <i class="fa fa-times-circle" style="color:red" ng-if="input.status=='done' && input.answer!=input.userAnswer"></i>
           <i class="fa fa-check-circle" style="color:green" ng-if="input.status=='done' && input.answer==input.userAnswer"></i>
@@ -69,20 +69,20 @@
       <label>Question</label>
       <textarea ng-model="$ctrl.detail.question"></textarea>
     </md-input-container>
-    <div layout="row" ng-repeat="input in $ctrl.detail.allInput">
-      <md-input-container flex="35">
+    <div layout="row" ng-repeat="input in $ctrl.detail.allInput" layout-align="start center">
+      <md-input-container class="md-block" flex>
         <label><md-ktx ng-model="input.question"></md-ktx></label>
         <textarea placeholder="Question" ng-model="input.question"></textarea>
       </md-input-container>
-      <md-select placeholder="Type" ng-model="input.answerType" flex="10">
+      <md-select placeholder="Type" ng-model="input.answerType" class="md-block" flex="20">
         <md-option value="text">text</md-option>
         <md-option value="number">number</md-option>
       </md-select>
-      <md-input-container flex="25">
+      <md-input-container class="md-block" flex>
         <label><md-ktx ng-model="input.answer"></md-ktx></label>
         <textarea placeholder="Answer" ng-model="input.answer"></textarea>
       </md-input-container>
-      <md-input-container flex="5">
+      <md-input-container class="md-block" flex="10">
         <label>Point</label>
         <input ng-model="input.point" type="number">
       </md-input-container>
