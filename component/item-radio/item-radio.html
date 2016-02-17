@@ -13,16 +13,20 @@
     </div>
     <form name="formRadio" flex>
       <md-ktx ng-model="$ctrl.detail.question"></md-ktx>
-      <md-radio-group ng-model="$ctrl.userDetail.radioIndex" required>
+      <md-radio-group ng-model="$ctrl.userDetail.radioIndex" required ng-disabled="status == 'done'">
         <md-radio-button ng-repeat="radio in $ctrl.detail.allRadio" layout-lign="start center"
           value="{{$index}}""
         >
-          <i class="fa fa-times-circle" style="color:red" ng-if="radio.isAnswer==0"></i>
-          <i class="fa fa-check-circle" style="color:green" ng-if="radio.isAnswer==1"></i>
+          <div ng-if="$root.role == 'admin' || status='done'">
+            <i class="fa fa-times-circle" style="color:red" ng-if="radio.isAnswer==0"></i>
+            <i class="fa fa-check-circle" style="color:green" ng-if="radio.isAnswer==1"></i>
+          </div>
           <ktx ng-model="radio.content"></ktx>
         </md-radio-button>
       </md-radio-group>
-      <md-button class="md-raised md-accent" type="submit" ng-show="formRadio.$valid" ng-click="$ctrl.processRadio();">
+      <md-button class="md-raised md-accent" type="submit" ng-show="formRadio.$valid" 
+        ng-click="$ctrl.processRadio($ctrl.item, $ctrl.userDetail);"
+      >
         <md-icon>check</md-icon>
       </md-button>
     </form>

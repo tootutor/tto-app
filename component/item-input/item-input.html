@@ -11,16 +11,16 @@
     <div layout="row" layout-align="start center">
       <h2 class="md-title" ng-if="$ctrl.item.showOption == '1'">Explanation</h2>
     </div>
-    <div flex>
+    <form name="formInput" flex>
       <md-ktx ng-model="$ctrl.detail.question"></md-ktx>
       <div ng-repeat="input in $ctrl.detail.allInput">
         <md-ktx ng-model="input.question"></md-ktx>
         <div layout="row">
           <md-input-container flex>
             <label>Your answer</label>
-            <input ng-model="input.userAnswer">
+            <input ng-model="$ctrl.userDetail.allInput[$index]" required ng-disabled="status == 'done'">
           </md-input-container>
-          <md-input-container flex>
+          <md-input-container flex ng-if="$root.role == 'admin' || status='done'">
             <label>Correct answer</label>
             <input ng-model="input.answer">
           </md-input-container>
@@ -28,9 +28,12 @@
           <i class="fa fa-check-circle" style="color:green" ng-if="input.status=='done' && input.answer==input.userAnswer"></i>
         </div>
       </div>
-      
-      
-    </div>
+      <md-button class="md-raised md-accent" type="submit" ng-show="formInput.$valid" 
+        ng-click="$ctrl.processInput($ctrl.item, $ctrl.userDetail);"
+      >
+        <md-icon>check</md-icon>
+      </md-button>
+    </form>
     <div ng-if="$root.role == 'admin'">
       <small><small>{{$ctrl.item.seq}} - {{$ctrl.item.code}} - {{$ctrl.item.itemId}}</small></small>
     </div>

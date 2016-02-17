@@ -1,8 +1,9 @@
 ttoApp.component('itemSelect', {
   templateUrl: 'component/item-select/item-select.html',
   bindings: {item: '='},
-  controller: function ($rootScope) {
+  controller: function ($rootScope, UserItemServ) {
     vm = this;
+    console.log(vm.item);
     if (vm.item.content > '') {
       vm.detail = angular.fromJson(vm.item.content);
     } else {
@@ -14,10 +15,10 @@ ttoApp.component('itemSelect', {
       vm.userDetail = angular.fromJson(vm.item.userContent);
     } else {
       vm.userDetail = {};
-      vm.userDetail.allUserSelect = [];
+      vm.userDetail.allSelect = [];
       // initial user value for all select items
       for (i=0; i<vm.detail.allSelect.length; i++) {
-        vm.userDetail.allUserSelect[i] = false;
+        vm.userDetail.allSelect[i] = false;
       }
     }
     
@@ -61,8 +62,14 @@ ttoApp.component('itemSelect', {
       allSelect.splice(index, 1);
     }
 
-    vm.processSelect = function () {
-      console.log(vm.userDetail);
+    vm.processSelect = function (item, userDetail) {
+      var userItem = new UserItemServ();
+      userItem.userId = $rootScope.userId;
+      userItem.itemId = item.itemId;
+      userItem.point = 0;
+      userItem.userContent = angular.toJson(userDetail);
+      console.log(userItem);
+      userItem.$save();
     }
 
   }
