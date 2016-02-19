@@ -20,7 +20,7 @@
             <label>Your answer</label>
             <input ng-model="$ctrl.userDetail.allInput[$index]" required ng-disabled="status == 'done'">
           </md-input-container>
-          <md-input-container flex ng-if="$root.role == 'admin' || status='done'">
+          <md-input-container flex ng-if="$root.role == 'admin' || status ==' done'">
             <label>Correct answer</label>
             <input ng-model="input.answer">
           </md-input-container>
@@ -48,7 +48,7 @@
       </md-button>
       itemId - {{$ctrl.item.itemId}}
       <span flex></span>
-      <md-button class="md-icon-button" ng-click="$ctrl.updateChange($ctrl.item);">
+      <md-button class="md-icon-button" ng-click="$ctrl.updateChange($ctrl.item, $ctrl.detail);">
         <md-icon>save</md-icon>
       </md-button>
     </div>

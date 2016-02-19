@@ -1,15 +1,35 @@
 <md-content layout layout-align="center center" ng-controller="itemCtrl">
   <div flex style="max-width: 500px;">
 		<div ng-repeat="item in itemList | orderBy:['seq', 'itemId']">
-      <item-radio ng-if="item.itemTypeId == 1" item="item"></item-radio>
-      <item-content ng-if="item.itemTypeId == 2" item="item"></item-content>
-      <item-select ng-if="item.itemTypeId == 3" item="item"></item-select>
-      <item-input ng-if="item.itemTypeId == 4" item="item"></item-input>
-      <item-svg ng-if="item.itemTypeId == 5" item="item"></item-svg>
-      <item-jsxjc ng-if="item.itemTypeId == 6" item="item"></item-jsxjc>
-      <item-youtube ng-if="item.itemTypeId == 7" item="item"></item-youtube>
-      <item-slide ng-if="item.itemTypeId == 8" item="item"></item-slide>
-      <item-datauri ng-if="item.itemTypeId == 9" item="item"></item-datauri>
+      <div ng-switch="item.itemTypeId">
+        <div ng-switch-when="1">
+          <item-radio item="item"></item-radio>
+        </div>
+        <div ng-switch-when="2">
+          <item-content item="item"></item-content>
+        </div>
+        <div ng-switch-when="3">
+          <item-select item="item"></item-select>
+        </div>
+        <div ng-switch-when="4">
+          <item-input item="item"></item-input>
+        </div>
+        <div ng-switch-when="5">
+          <item-svg item="item"></item-svg>
+        </div>
+        <div ng-switch-when="6">
+          <item-jsxjc item="item"></item-jsxjc>
+        </div>
+        <div ng-switch-when="7">
+          <item-youtube item="item"></item-youtube>
+        </div>
+        <div ng-switch-when="8">
+          <item-slide item="item"></item-slide>
+        </div>
+        <div ng-switch-when="9">
+          <item-datauri item="item"></item-datauri>
+        </div>
+      </div>
     </div>
   </div>
 </md-content>

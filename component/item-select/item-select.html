@@ -15,10 +15,8 @@
       <md-ktx ng-model="$ctrl.detail.question"></md-ktx>
       <div ng-repeat="select in $ctrl.detail.allSelect" layout="row" layout-align="start center">
         <md-checkbox ng-model="$ctrl.userDetail.allSelect[$index]" layout-align="start center" ng-disabled="status == 'done'">
-          <div ng-if="$root.role == 'admin' || status='done'">
-            <i class="fa fa-times-circle" style="color:red" ng-if="select.isAnswer==0"></i>
-            <i class="fa fa-check-circle" style="color:green" ng-if="select.isAnswer==1"></i>
-          </div>
+          <i class="fa fa-times-circle" style="color:red" ng-if="select.isAnswer==0"></i>
+          <i class="fa fa-check-circle" style="color:green" ng-if="select.isAnswer==1"></i>
           <ktx ng-model="select.content"></ktx>
         </md-checkbox>
       </div>
@@ -42,7 +40,7 @@
       </md-button>
       itemId - {{$ctrl.item.itemId}}
       <span flex></span>
-      <md-button class="md-icon-button" ng-click="$ctrl.updateChange($ctrl.item);">
+      <md-button class="md-icon-button" ng-click="$ctrl.updateChange($ctrl.item, $ctrl.detail);">
         <md-icon>save</md-icon>
       </md-button>
     </div>

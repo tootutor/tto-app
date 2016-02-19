@@ -17,10 +17,8 @@
         <md-radio-button ng-repeat="radio in $ctrl.detail.allRadio" layout-lign="start center"
           value="{{$index}}""
         >
-          <div ng-if="$root.role == 'admin' || status='done'">
-            <i class="fa fa-times-circle" style="color:red" ng-if="radio.isAnswer==0"></i>
-            <i class="fa fa-check-circle" style="color:green" ng-if="radio.isAnswer==1"></i>
-          </div>
+          <i class="fa fa-times-circle" style="color:red" ng-if="radio.isAnswer==0"></i>
+          <i class="fa fa-check-circle" style="color:green" ng-if="radio.isAnswer==1"></i>
           <ktx ng-model="radio.content"></ktx>
         </md-radio-button>
       </md-radio-group>
@@ -44,7 +42,7 @@
       </md-button>
       itemId - {{$ctrl.item.itemId}}
       <span flex></span>
-      <md-button class="md-icon-button" ng-click="$ctrl.updateChange($ctrl.item);">
+      <md-button class="md-icon-button" ng-click="$ctrl.updateChange($ctrl.item, $ctrl.detail);">
         <md-icon>save</md-icon>
       </md-button>
     </div>

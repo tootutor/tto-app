@@ -18,8 +18,9 @@ ttoApp.component('itemRadio', {
       vm.userDetail.radioIndex = null;
     }
     
-    vm.updateChange = function (item) {
-      item.content = angular.toJson(vm.detail);
+    vm.updateChange = function (item, detail) {
+      item.content = angular.toJson(detail);
+      console.log(item);
       $rootScope.isLoading++;
       if (item.itemId) {
         item.$update(
