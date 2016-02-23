@@ -1,0 +1,59 @@
+<md-card ng-if="!$ctrl.task.editMode">
+  <md-toolbar class="md-primary">
+    <div class="md-toolbar-tools">
+      <md-button class="md-icon-button" ng-if="$root.role == 'admin'" ng-click="$ctrl.task.editMode=true;">
+        <md-icon>create</md-icon>
+      </md-button>
+      <h5>
+        <span class="fa-stack fa-lg">
+          <i class="fa fa-book fa-stack-1x"></i>
+        </span>
+        {{$ctrl.task.taskTypeName}}
+      </h5>
+      <span flex></span>
+    </div>
+  </md-toolbar>
+  <md-card-content layout="column" layout-align="start start">
+    <div layout="row" layout-align="start center">
+      <md-ktx ng-model="$ctrl.task.content"></md-ktx>
+    </div>
+    <div ng-if="$root.role == 'admin'">
+      <small><small>{{$ctrl.task.seq}} - {{$ctrl.task.code}} - {{$ctrl.task.taskId}}</small></small>
+    </div>
+  </md-card-content>
+</md-card>
+
+<md-card ng-if="$ctrl.task.editMode" md-theme="ttoDeepOrange">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <md-button class="md-icon-button" ng-click="$ctrl.task.editMode=false;">
+        <md-icon>visibility</md-icon>
+      </md-button>
+      taskId - {{$ctrl.task.taskId}}
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="$ctrl.updateChange($ctrl.task);">
+        <md-icon>save</md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-card-content>
+    <div layout="row">
+      <md-input-container class="md-block" flex>
+        <label>Seq</label>
+        <input ng-model="$ctrl.task.seq">
+      </md-input-container>
+      <md-input-container class="md-block" flex>
+        <label>Task Type</label>
+        <input ng-model="$ctrl.task.taskTypeId">
+      </md-input-container>
+    </div>
+    <md-input-container class="md-block">
+      <label>Code</label>
+      <textarea ng-model="$ctrl.task.code"></textarea>
+    </md-input-container>
+    <md-input-container class="md-block">
+      <label>Content</label>
+      <textarea ng-model="$ctrl.task.content"></textarea>
+    </md-input-container>
+  </md-card-content>
+</md-card>

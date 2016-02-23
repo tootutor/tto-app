@@ -1,5 +1,5 @@
-ttoApp.controller('itemCtrl', ['$scope', '$rootScope', '$routeParams', 'ItemServ', 'UserItemServ',
-function ($scope, $rootScope, $routeParams, ItemServ, UserItemServ) {
+ttoApp.controller('itemCtrl', ['$scope', '$rootScope', '$routeParams', 'ItemServ', 'UserItemServ', 'TaskServ', 'UserTaskServ',
+function ($scope, $rootScope, $routeParams, ItemServ, UserItemServ, TaskServ, UserTaskServ) {
   $rootScope.icon = 'class';
   $rootScope.title = 'Course';
   $rootScope.showTab = 0;
@@ -12,6 +12,15 @@ function ($scope, $rootScope, $routeParams, ItemServ, UserItemServ) {
 
   $rootScope.isLoading++;
   if ($scope.processMode == 'user' || $scope.processMode == 'tutor') {
+    $scope.task = UserTaskServ.get(
+      {userId: $scope.userId, taskId: $routeParams.taskId}, 
+      function (data) {
+        $rootScope.isLoading--;
+      }, function (response) {
+        $rootScope.isLoading = 0;
+        $rootScope.errorDialog(response, 'Loading Error !!!');
+      }
+    );
     $scope.itemList = UserItemServ.query(
       {userId: $scope.userId, taskId: $routeParams.taskId}, 
       function (data) {
@@ -22,6 +31,12 @@ function ($scope, $rootScope, $routeParams, ItemServ, UserItemServ) {
       }
     );
   } else {
+    $scope.task = TaskServ.get(
+      {taskId: $routeParams.taskId},
+      function (data) {
+        $rootScope.isLoading--;
+      }
+    );
     $scope.itemList = ItemServ.query(
       {taskId: $routeParams.taskId},
       function (data) {

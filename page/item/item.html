@@ -1,5 +1,6 @@
 <md-content layout layout-align="center center" ng-controller="itemCtrl">
   <div flex style="max-width: 500px;">
+    <task task="task"></task>
 		<div ng-repeat="item in itemList | orderBy:['seq', 'itemId']">
       <div ng-switch="item.itemTypeId">
         <div ng-switch-when="1">
