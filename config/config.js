@@ -52,6 +52,8 @@ ttoApp.config(function($mdThemingProvider, $routeProvider, RestangularProvider, 
     .when('/:action/task/:taskId/item', {templateUrl: 'page/item/item.html'})
     // Course Tutor
     .when('/user', {templateUrl: 'page/user/user.html'})
+    // Admin Browse
+    .when('/review', {templateUrl: 'page/review/review.html'})
     .when('/', {
       templateUrl: 'controller/home/home.html',
       controller: 'homeCtrl'

@@ -142,6 +142,7 @@ var noMathRender = false;
 	{input:"cong",   tag:"mo", output:"~=", tex:null, ttype:DEFINITION},
 	{input:"~~",  tag:"mo", output:"\u2248", tex:"approx", ttype:CONST},
 	{input:"prop", tag:"mo", output:"\u221D", tex:"propto", ttype:CONST},
+	{input:"~",  tag:"mo", output:"~", tex:"\sim", ttype:CONST}, //not simbol for logic (TTO))
 	// MUZ
 	//{input:"&minus;", tag:"mo", output:"-", tex:"null", ttype:CONST},
 
