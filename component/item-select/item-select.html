@@ -66,7 +66,7 @@
     </md-input-container>
     <div layout="row" ng-repeat="select in $ctrl.detail.allSelect" layout-align="start center">
       <md-input-container class="md-block" flex>
-        <label><md-ktx ng-model="select.content"></md-ktx></label>
+        <label>Select Content</label>
         <textarea placeholder="Select content" ng-model="select.content"></textarea>
       </md-input-container>
       <md-checkbox aria-label="check box" ng-model="select.isAnswer" ng-change="updatePoint(select)">

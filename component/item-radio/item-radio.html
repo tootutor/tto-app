@@ -68,7 +68,7 @@
     </md-input-container>
     <div layout="row" ng-repeat="radio in $ctrl.detail.allRadio" layout-align="start center">
       <md-input-container class="md-block" flex>
-        <label><md-ktx ng-model="radio.content"></md-ktx></label>
+        <label>Radio Content</md-ktx></label>
         <textarea placeholder="Radio content" ng-model="radio.content"></textarea>
       </md-input-container>
       <md-checkbox aria-label="check box" ng-model="radio.isAnswer" ng-change="updatePoint(radio)">

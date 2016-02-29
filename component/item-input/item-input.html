@@ -74,7 +74,7 @@
     </md-input-container>
     <div layout="row" ng-repeat="input in $ctrl.detail.allInput" layout-align="start center">
       <md-input-container class="md-block" flex>
-        <label><md-ktx ng-model="input.question"></md-ktx></label>
+        <label>Input Question</label>
         <textarea placeholder="Question" ng-model="input.question"></textarea>
       </md-input-container>
       <md-select placeholder="Type" ng-model="input.answerType" class="md-block" flex="20">
@@ -82,7 +82,7 @@
         <md-option value="number">number</md-option>
       </md-select>
       <md-input-container class="md-block" flex>
-        <label><md-ktx ng-model="input.answer"></md-ktx></label>
+        <label>Input Answer</label>
         <textarea placeholder="Answer" ng-model="input.answer"></textarea>
       </md-input-container>
       <md-input-container class="md-block" flex="10">
