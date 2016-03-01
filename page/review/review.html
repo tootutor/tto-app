@@ -2,40 +2,6 @@
   <div flex style="max-width: 500px;">
 		<div ng-repeat="task in taskList">
       <task task="task" ng-click="nextNavigate(task);"></task>
-      <md-card ng-if="task.editMode" md-theme="ttoDeepOrange">
-        <md-toolbar>
-          <div class="md-toolbar-tools">
-            <md-button class="md-icon-button" ng-click="task.editMode=false;">
-              <md-icon>visibility</md-icon>
-            </md-button>
-            taskId - {{task.taskId}}
-            <span flex></span>
-            <md-button class="md-icon-button" ng-click="updateChange(task);">
-              <md-icon>save</md-icon>
-            </md-button>
-          </div>
-        </md-toolbar>
-        <md-card-content>
-          <div layout="row">
-            <md-input-container class="md-block" flex>
-              <label>Seq</label>
-              <input ng-model="task.seq">
-            </md-input-container>
-            <md-input-container class="md-block" flex>
-              <label>Task Type</label>
-              <input ng-model="task.taskTypeId">
-            </md-input-container>
-          </div>
-          <md-input-container class="md-block">
-            <label>Code</label>
-            <textarea ng-model="task.code"></textarea>
-          </md-input-container>
-          <md-input-container class="md-block">
-            <label>Content</label>
-            <textarea ng-model="task.content"></textarea>
-          </md-input-container>
-        </md-card-content>
-      </md-card>    
     </div>
     
 		<div ng-repeat="item in itemList">
