@@ -1,9 +1,10 @@
 <md-content layout layout-align="center center" ng-controller="reviewCtrl">
   <div flex style="max-width: 500px;">
+    <!--
 		<div ng-repeat="task in taskList">
       <task task="task" ng-click="nextNavigate(task);"></task>
     </div>
-    
+    -->
 		<div ng-repeat="item in itemList">
       <div ng-switch="item.itemTypeId">
         <div ng-switch-when="1">

@@ -6,6 +6,7 @@ function ($scope, $rootScope, TaskServ, ItemServ) {
   $rootScope.showBack = true;
   $rootScope.component = {};
 
+  /*
   $rootScope.isLoading++;
   $scope.taskList = TaskServ.query(
     {sectionId: 0},
@@ -13,6 +14,7 @@ function ($scope, $rootScope, TaskServ, ItemServ) {
       $rootScope.isLoading--;
     }
   );
+  */
   $rootScope.isLoading++;
   $scope.itemList = ItemServ.query(
     {taskId: 0},
