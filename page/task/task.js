@@ -5,14 +5,17 @@ function ($scope, $rootScope, $routeParams, TaskServ, UserTaskServ) {
   $rootScope.showTab = 0;
   $rootScope.showBack = true;
   $rootScope.component = {};
-  $rootScope.component.addNewTask = true;
   $rootScope.isLoading = 0;
 
+  if ($rootScope.role == 'admin') {
+    $rootScope.component.addNewTask = true;
+  }
+  
   $scope.userId = $routeParams.userId ? $routeParams.userId : $rootScope.userId;
   $scope.processMode = $rootScope.processMode();
 
-  $rootScope.isLoading++;
   if ($scope.processMode == 'user' || $scope.processMode == 'tutor') {
+    $rootScope.isLoading++;
     $scope.taskList = UserTaskServ.query(
       {userId: $scope.userId, sectionId: $routeParams.sectionId}, 
       function (data) {
@@ -23,6 +26,7 @@ function ($scope, $rootScope, $routeParams, TaskServ, UserTaskServ) {
       }
     );
   } else {
+    $rootScope.isLoading++;
     $scope.taskList = TaskServ.query(
       {sectionId: $routeParams.sectionId},
       function (data) {

@@ -5,15 +5,18 @@ function ($scope, $rootScope, $routeParams, CourseServ, UserCourseServ) {
   $rootScope.showTab = 0;
   $rootScope.showBack = true;
   $rootScope.component = {};
-  $rootScope.component.addCourse = true;
   $rootScope.isLoading = 0;
+
+  if ($rootScope.role == 'admin') {
+    $rootScope.component.addCourse = true;
+  }
 
   //$scope.allCategory = CategoryServ.query();
   $scope.userId = $routeParams.userId ? $routeParams.userId : $rootScope.userId;
   $scope.processMode = $rootScope.processMode();
   
-  $rootScope.isLoading++;
   if ($scope.processMode == 'user' || $scope.processMode == 'tutor') {
+    $rootScope.isLoading++;
     $scope.courseList = UserCourseServ.query(
       {userId: $scope.userId, categoryId: $routeParams.categoryId}, 
       function (data) {
@@ -24,6 +27,7 @@ function ($scope, $rootScope, $routeParams, CourseServ, UserCourseServ) {
       }
     );
   } else {
+    $rootScope.isLoading++;
     $scope.courseList = CourseServ.query(
       {categoryId: $routeParams.categoryId},
       function () {

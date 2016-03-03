@@ -5,14 +5,17 @@ function ($scope, $rootScope, $routeParams, ItemServ, UserItemServ, TaskServ, Us
   $rootScope.showTab = 0;
   $rootScope.showBack = true;
   $rootScope.component = {};
-  $rootScope.component.addNewItem = true;
   $rootScope.isLoading = 0;
 
+  if ($rootScope.role == 'admin') {
+    $rootScope.component.addNewItem = true;
+  }
+  
   $scope.userId = $routeParams.userId ? $routeParams.userId : $rootScope.userId;
   $scope.processMode = $rootScope.processMode();
 
-  $rootScope.isLoading++;
   if ($scope.processMode == 'user' || $scope.processMode == 'tutor') {
+    $rootScope.isLoading++;
     $scope.task = UserTaskServ.get(
       {userId: $scope.userId, taskId: $routeParams.taskId}, 
       function (data) {
@@ -22,6 +25,7 @@ function ($scope, $rootScope, $routeParams, ItemServ, UserItemServ, TaskServ, Us
         $rootScope.errorDialog(response, 'Loading Error !!!');
       }
     );
+    $rootScope.isLoading++;
     $scope.itemList = UserItemServ.query(
       {userId: $scope.userId, taskId: $routeParams.taskId}, 
       function (data) {
@@ -32,12 +36,14 @@ function ($scope, $rootScope, $routeParams, ItemServ, UserItemServ, TaskServ, Us
       }
     );
   } else {
+    $rootScope.isLoading++;
     $scope.task = TaskServ.get(
       {taskId: $routeParams.taskId},
       function (data) {
         $rootScope.isLoading--;
       }
     );
+    $rootScope.isLoading++;
     $scope.itemList = ItemServ.query(
       {taskId: $routeParams.taskId},
       function (data) {
