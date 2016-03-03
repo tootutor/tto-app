@@ -1,4 +1,4 @@
-ttoApp.run(function ($rootScope, $location, $routeParams, $mdSidenav, Restangular, $mdDialog, $http, $mdToast, UserServ, AppServ) {
+ttoApp.run(function ($rootScope, $location, $routeParams, $mdSidenav, Restangular, $mdDialog, $http, $mdToast, ApiServ) {
   $rootScope.version   = appInfo.version;
   $rootScope.apiPath   = appInfo.apiPath;
   $rootScope.icon      = 'home';
@@ -142,7 +142,7 @@ ttoApp.run(function ($rootScope, $location, $routeParams, $mdSidenav, Restangula
   };
   
   $rootScope.checkVersion = function() {
-    AppServ.get(function(data) {
+    ApiServ.App.get(function(data) {
       if (appInfo.version >= data.minVersion) {
         $rootScope.loadDefinition();
         $rootScope.initNotification();
@@ -222,7 +222,7 @@ ttoApp.run(function ($rootScope, $location, $routeParams, $mdSidenav, Restangula
   };
   
   if ($rootScope.token > '') {
-    UserServ.get({userId: $rootScope.userId}, function(data) {
+    ApiServ.User.get({userId: $rootScope.userId}, function(data) {
       if (data.status == 'active') {
         $rootScope.isLoggedIn = true;
         $rootScope.notificationCount = data.notificationCount;

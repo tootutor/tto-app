@@ -1,5 +1,5 @@
-ttoApp.controller('logoutCtrl', ['$scope', '$http', '$rootScope', '$mdDialog', 'AuthServ',
-function ($scope, $http, $rootScope, $mdDialog, AuthServ) {
+ttoApp.controller('logoutCtrl', ['$scope', '$http', '$rootScope', '$mdDialog', 'ApiServ',
+function ($scope, $http, $rootScope, $mdDialog, ApiServ) {
   $rootScope.icon = "lock_open";
   $rootScope.title = "Logout"; 
   $rootScope.showTab = 0;
@@ -12,7 +12,7 @@ function ($scope, $http, $rootScope, $mdDialog, AuthServ) {
 
   function logout() {
     $rootScope.isLoading++;
-    var auth = AuthServ.get({userId: $rootScope.userId}, function () {
+    var auth = ApiServ.Auth.get({userId: $rootScope.userId}, function () {
       auth.$remove({userId: $rootScope.userId}, function () {
         localStorage.setItem('email', '');
         localStorage.setItem('password', '');

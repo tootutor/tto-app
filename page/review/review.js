@@ -1,4 +1,4 @@
-ttoApp.controller('reviewCtrl', ['$scope', '$rootScope', 'TaskServ', 'ItemServ',
+ttoApp.controller('reviewCtrl', ['$scope', '$rootScope', 'ApiServ',
 function ($scope, $rootScope, TaskServ, ItemServ) {
   $rootScope.icon = 'class';
   $rootScope.title = 'Course';
@@ -9,7 +9,7 @@ function ($scope, $rootScope, TaskServ, ItemServ) {
 
   /*
   $rootScope.isLoading++;
-  $scope.taskList = TaskServ.query(
+  $scope.taskList = ApiServ.Task.query(
     {sectionId: 0},
     function (data) {
       $rootScope.isLoading--;
@@ -17,7 +17,7 @@ function ($scope, $rootScope, TaskServ, ItemServ) {
   );
   */
   $rootScope.isLoading++;
-  $scope.itemList = ItemServ.query(
+  $scope.itemList = ApiServ.Item.query(
     {taskId: 0},
     function (data) {
       $rootScope.isLoading--;

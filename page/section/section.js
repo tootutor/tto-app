@@ -1,4 +1,4 @@
-ttoApp.controller('sectionCtrl', ['$scope', '$rootScope', '$routeParams', 'SectionServ', 'UserSectionServ', 'CourseServ',
+ttoApp.controller('sectionCtrl', ['$scope', '$rootScope', '$routeParams', 'ApiServ',
 function ($scope, $rootScope, $routeParams, SectionServ, UserSectionServ, CourseServ) {
   $rootScope.icon = 'class';
   $rootScope.title = 'Course';
@@ -16,7 +16,7 @@ function ($scope, $rootScope, $routeParams, SectionServ, UserSectionServ, Course
   
   if ($scope.processMode == 'user' || $scope.processMode == 'tutor') {
     $rootScope.isLoading++;
-    $scope.sectionList = UserSectionServ.query(
+    $scope.sectionList = ApiServ.UserSection.query(
       {userId: $scope.userId, courseId: $routeParams.courseId}, 
       function (data) {
         $rootScope.isLoading--;
@@ -27,7 +27,7 @@ function ($scope, $rootScope, $routeParams, SectionServ, UserSectionServ, Course
     );
   } else {
     $rootScope.isLoading++;
-    $scope.sectionList = SectionServ.query(
+    $scope.sectionList = ApiServ.Section.query(
       {courseId: $routeParams.courseId},
       function () {
         $rootScope.isLoading--;

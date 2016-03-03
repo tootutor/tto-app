@@ -1,4 +1,4 @@
-ttoApp.controller('taskCtrl', ['$scope', '$rootScope', '$routeParams', 'TaskServ', 'UserTaskServ',
+ttoApp.controller('taskCtrl', ['$scope', '$rootScope', '$routeParams', 'ApiServ',
 function ($scope, $rootScope, $routeParams, TaskServ, UserTaskServ) {
   $rootScope.icon = 'class';
   $rootScope.title = 'Course';
@@ -16,7 +16,7 @@ function ($scope, $rootScope, $routeParams, TaskServ, UserTaskServ) {
 
   if ($scope.processMode == 'user' || $scope.processMode == 'tutor') {
     $rootScope.isLoading++;
-    $scope.taskList = UserTaskServ.query(
+    $scope.taskList = ApiServ.UserTask.query(
       {userId: $scope.userId, sectionId: $routeParams.sectionId}, 
       function (data) {
         $rootScope.isLoading--;
@@ -27,7 +27,7 @@ function ($scope, $rootScope, $routeParams, TaskServ, UserTaskServ) {
     );
   } else {
     $rootScope.isLoading++;
-    $scope.taskList = TaskServ.query(
+    $scope.taskList = ApiServ.Task.query(
       {sectionId: $routeParams.sectionId},
       function (data) {
         $rootScope.isLoading--;

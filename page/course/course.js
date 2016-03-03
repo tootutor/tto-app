@@ -1,5 +1,5 @@
-ttoApp.controller('courseCtrl', ['$scope', '$rootScope', '$routeParams', 'CourseServ', 'UserCourseServ',
-function ($scope, $rootScope, $routeParams, CourseServ, UserCourseServ) {
+ttoApp.controller('courseCtrl', ['$scope', '$rootScope', '$routeParams', 'ApiServ',
+function ($scope, $rootScope, $routeParams, ApiServ) {
   $rootScope.icon = 'class';
   $rootScope.title = 'Course';
   $rootScope.showTab = 0;
@@ -11,13 +11,13 @@ function ($scope, $rootScope, $routeParams, CourseServ, UserCourseServ) {
     $rootScope.component.addCourse = true;
   }
 
-  //$scope.allCategory = CategoryServ.query();
+  //$scope.allCategory = ApiServ.Category.query();
   $scope.userId = $routeParams.userId ? $routeParams.userId : $rootScope.userId;
   $scope.processMode = $rootScope.processMode();
   
   if ($scope.processMode == 'user' || $scope.processMode == 'tutor') {
     $rootScope.isLoading++;
-    $scope.courseList = UserCourseServ.query(
+    $scope.courseList = ApiServ.UserCourse.query(
       {userId: $scope.userId, categoryId: $routeParams.categoryId}, 
       function (data) {
         $rootScope.isLoading--;
@@ -28,7 +28,7 @@ function ($scope, $rootScope, $routeParams, CourseServ, UserCourseServ) {
     );
   } else {
     $rootScope.isLoading++;
-    $scope.courseList = CourseServ.query(
+    $scope.courseList = ApiServ.Course.query(
       {categoryId: $routeParams.categoryId},
       function () {
         $rootScope.isLoading--;

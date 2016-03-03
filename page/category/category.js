@@ -1,5 +1,5 @@
-ttoApp.controller('categoryCtrl', ['$scope', '$rootScope', '$mdDialog', '$routeParams', 'CategoryServ', 'UserCategoryServ',
-function ($scope, $rootScope, $mdDialog, $routeParams, CategoryServ, UserCategoryServ) {
+ttoApp.controller('categoryCtrl', ['$scope', '$rootScope', '$mdDialog', '$routeParams', 'ApiServ',
+function ($scope, $rootScope, $mdDialog, $routeParams, ApiServ) {
   $rootScope.icon = 'class';
   $rootScope.title = 'Course';
   $rootScope.showTab = 0;
@@ -14,14 +14,14 @@ function ($scope, $rootScope, $mdDialog, $routeParams, CategoryServ, UserCategor
   if ($scope.processMode == 'user' || $scope.processMode == 'tutor') {
     $rootScope.component.addCourse = true;
     $rootScope.isLoading++;
-    $scope.allCategory = UserCategoryServ.query({userId : $scope.userId}, function() {
+    $scope.allCategory = ApiServ.UserCategory.query({userId : $scope.userId}, function() {
       $rootScope.isLoading--;
     }, function(response) {
       $rootScope.errorDialog(response, 'Loading Error !!!');
     });
   } else {
     $rootScope.isLoading++;
-    $scope.allCategory = CategoryServ.query(function () {
+    $scope.allCategory = ApiServ.Category.query(function () {
       $rootScope.isLoading--;
     });
   }

@@ -1,5 +1,5 @@
-ttoApp.controller('coinCtrl', ['$scope', '$rootScope', '$mdDialog', '$mdSidenav', 'CoinServ', 'OrderServ', 'UserOrderServ', 'BankServ', 'UserCoinServ',
-function ($scope, $rootScope, $mdDialog, $mdSidenav, CoinServ, OrderServ, UserOrderServ, BankServ, UserCoinServ) {
+ttoApp.controller('coinCtrl', ['$scope', '$rootScope', '$mdDialog', '$mdSidenav', 'ApiServ',
+function ($scope, $rootScope, $mdDialog, $mdSidenav, ApiServ) {
   $rootScope.icon = "stars";
   $rootScope.title = "Coins"; 
   $rootScope.showTab = 0;
@@ -22,28 +22,28 @@ function ($scope, $rootScope, $mdDialog, $mdSidenav, CoinServ, OrderServ, UserOr
    
    function coinCtrlInit() {
     $rootScope.isLoading++;
-    $scope.allBank = BankServ.query(function () {
+    $scope.allBank = ApiServ.Bank.query(function () {
       $rootScope.isLoading--;
     }, function (response) {
       $rootScope.errorDialog(response, 'Loading Error !!!');
     });
 
     $rootScope.isLoading++;
-    $scope.myCoin = UserCoinServ.get({userId: $rootScope.userId}, function () {
+    $scope.myCoin = ApiServ.User.get({userId: $rootScope.userId}, function () {
       $rootScope.isLoading--;
     }, function (response) {
       $rootScope.errorDialog(response, 'Loading Error !!!');
     });
 
     $rootScope.isLoading++;
-    $scope.orderList = UserOrderServ.query({userId: $rootScope.userId}, function () {
+    $scope.orderList = ApiServ.UserOrder.query({userId: $rootScope.userId}, function () {
       $rootScope.isLoading--;
     }, function (response) {
       $rootScope.errorDialog(response, 'Loading Error !!!');
     });
 
     $rootScope.isLoading++;
-    $scope.allPackage = CoinServ.query(function () {
+    $scope.allPackage = ApiServ.Coin.query(function () {
       $rootScope.isLoading--;
     }, function (response) {
       $rootScope.errorDialog(response, 'Loading Error !!!');

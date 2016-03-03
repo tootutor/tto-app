@@ -1,8 +1,8 @@
-ttoApp.controller('activateDialogCtrl', ['$scope', '$rootScope', '$mdDialog', 'AuthServ',
-function($scope, $rootScope, $mdDialog, AuthServ) {
+ttoApp.controller('activateDialogCtrl', ['$scope', '$rootScope', '$mdDialog', 'ApiServ',
+function($scope, $rootScope, $mdDialog, ApiServ) {
 
 	$rootScope.isLoading++;
-	$scope.auth = AuthServ.get({userId: $rootScope.userId}, function () {
+	$scope.auth = ApiServ.Auth.get({userId: $rootScope.userId}, function () {
 		$rootScope.isLoading--;
 	});
 

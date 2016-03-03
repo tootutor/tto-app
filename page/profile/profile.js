@@ -1,5 +1,5 @@
-ttoApp.controller('profileCtrl', ['$scope', '$rootScope', '$mdDialog', 'UserServ',
-function ($scope, $rootScope, $mdDialog, UserServ) {
+ttoApp.controller('profileCtrl', ['$scope', '$rootScope', '$mdDialog', 'ApiServ',
+function ($scope, $rootScope, $mdDialog, ApiServ) {
   $rootScope.icon = "person";
   $rootScope.title = "Profile"; 
   $rootScope.showTab = 0;
@@ -10,7 +10,7 @@ function ($scope, $rootScope, $mdDialog, UserServ) {
 
   $scope.allAvatar = ttoAvatarList();
   $rootScope.isLoading++;
-  $scope.user = UserServ.get({userId: $rootScope.userId}, function(data) {
+  $scope.user = ApiServ.User.get({userId: $rootScope.userId}, function(data) {
     $scope.user.birthdate = new Date(data.birthdate); //Set format for date field
     $rootScope.firstname = data.firstname;
     $rootScope.lastname  = data.lastname;

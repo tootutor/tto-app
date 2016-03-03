@@ -1,5 +1,5 @@
-ttoApp.controller('userCtrl', ['$scope', '$rootScope', '$routeParams', 'UserServ',
-function ($scope, $rootScope, $routeParams, UserServ) {
+ttoApp.controller('userCtrl', ['$scope', '$rootScope', '$routeParams', 'ApiServ',
+function ($scope, $rootScope, $routeParams, ApiServ) {
   $rootScope.icon = 'class';
   $rootScope.title = 'Tutor';
   $rootScope.showTab = 0;
@@ -8,7 +8,7 @@ function ($scope, $rootScope, $routeParams, UserServ) {
   $rootScope.isLoading = 0;
 
   $rootScope.isLoading++;
-  $scope.userList = UserServ.query(
+  $scope.userList = ApiServ.User.query(
     function () {
       $rootScope.isLoading--;
     }

@@ -1,4 +1,4 @@
-ttoApp.controller('logoutDialogCtrl', ['$scope', '$rootScope', '$mdDialog', 'AuthServ',
+ttoApp.controller('logoutDialogCtrl', ['$scope', '$rootScope', '$mdDialog', 'ApiServ',
 function($scope, $rootScope, $mdDialog, AuthServ) {
 
 	$scope.email    = $rootScope.email;
@@ -10,7 +10,7 @@ function($scope, $rootScope, $mdDialog, AuthServ) {
 
 	$scope.logout = function () {
 		$rootScope.isLoading++;
-		var auth = AuthServ.get({userId: $rootScope.userId}, function () {
+		var auth = ApiServ.Auth.get({userId: $rootScope.userId}, function () {
 			auth.$remove({userId: $rootScope.userId}, function () {
 				localStorage.setItem('email', '');
 				localStorage.setItem('password', '');
