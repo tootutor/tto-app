@@ -14,13 +14,15 @@
     <form name="formSelect" flex>
       <md-ktx ng-model="$ctrl.detail.question"></md-ktx>
       <div ng-repeat="select in $ctrl.detail.allSelect" layout="row" layout-align="start center">
-        <md-checkbox ng-model="$ctrl.userDetail.allSelect[$index]" layout-align="start center" ng-disabled="status == 'done'">
-          <i class="fa fa-times-circle" style="color:red" ng-if="select.isAnswer==0"></i>
-          <i class="fa fa-check-circle" style="color:green" ng-if="select.isAnswer==1"></i>
+        <md-checkbox ng-model="$ctrl.userDetail.allSelect[$index]" layout-align="start center" 
+          ng-disabled="$ctrl.status == 'done'"
+        >
+          <i class="fa fa-times-circle" style="color:red" ng-if="($root.role == 'admin' || $ctrl.status == 'done') && select.isAnswer==0"></i>
+          <i class="fa fa-check-circle" style="color:green" ng-if="($root.role == 'admin' || $ctrl.status == 'done') && select.isAnswer==1"></i>
           <ktx ng-model="select.content"></ktx>
         </md-checkbox>
       </div>
-      <md-button class="md-raised md-accent" type="submit" ng-show="formSelect.$valid" 
+      <md-button class="md-raised md-accent" type="submit" ng-show="$ctrl.status != 'done' && formSelect.$valid" 
         ng-click="$ctrl.processSelect($ctrl.item, $ctrl.userDetail);"
       >
         <md-icon>check</md-icon>

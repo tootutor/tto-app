@@ -6,6 +6,7 @@ function ($scope, $rootScope, $routeParams, CourseServ, UserCourseServ) {
   $rootScope.showBack = true;
   $rootScope.component = {};
   $rootScope.component.addCourse = true;
+  $rootScope.isLoading = 0;
 
   //$scope.allCategory = CategoryServ.query();
   $scope.userId = $routeParams.userId ? $routeParams.userId : $rootScope.userId;

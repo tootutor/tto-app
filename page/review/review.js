@@ -5,6 +5,7 @@ function ($scope, $rootScope, TaskServ, ItemServ) {
   $rootScope.showTab = 0;
   $rootScope.showBack = true;
   $rootScope.component = {};
+  $rootScope.isLoading = 0;
 
   /*
   $rootScope.isLoading++;

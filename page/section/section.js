@@ -6,6 +6,7 @@ function ($scope, $rootScope, $routeParams, SectionServ, UserSectionServ, Course
   $rootScope.showBack = true;
   $rootScope.component = {};
   $rootScope.component.addNewSection = true;
+  $rootScope.isLoading = 0;
 
   $scope.userId = $routeParams.userId ? $routeParams.userId : $rootScope.userId;
   $scope.processMode = $rootScope.processMode();

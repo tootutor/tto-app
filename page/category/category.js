@@ -5,6 +5,7 @@ function ($scope, $rootScope, $mdDialog, $routeParams, CategoryServ, UserCategor
   $rootScope.showTab = 0;
   $rootScope.showBack = true;
   $rootScope.component = {};
+  $rootScope.isLoading = 0;
 
   $scope.allCategory = {};
   $scope.userId = $routeParams.userId ? $routeParams.userId : $rootScope.userId;

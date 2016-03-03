@@ -12,8 +12,10 @@ ttoApp.component('itemInput', {
       vm.detail.allInput = [];
     }
     if (vm.item.userContent > '') {
+      vm.status = 'done';
       vm.userDetail = angular.fromJson(vm.item.userContent);
     } else {
+      vm.status = 'start';
       vm.userDetail = {};
       vm.userDetail.allInput = [];
       // initial user value for all select items
@@ -70,7 +72,11 @@ ttoApp.component('itemInput', {
       userItem.point = 0;
       userItem.userContent = angular.toJson(userDetail);
       console.log(userItem);
-      userItem.$save();
+      $rootScope.isLoading++;
+      userItem.$save(function () {
+        vm.status = 'done';
+        $rootScope.isLoading--;
+      });
     }
 
   }

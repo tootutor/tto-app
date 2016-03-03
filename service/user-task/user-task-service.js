@@ -2,7 +2,7 @@ ttoApp.factory('UserTaskServ', function($resource, $rootScope) {
   return $resource(appInfo.apiPath + '/task/:taskId/user/:userId', {userId: '@userId' ,taskId: '@taskId'}, {
 		query: {
       method: 'GET',
-      isArray: true,
+      isArray: true
 		},
 		update: {
       method: 'POST',

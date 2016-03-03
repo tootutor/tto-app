@@ -5,6 +5,7 @@ function ($scope, $rootScope, $routeParams, UserServ) {
   $rootScope.showTab = 0;
   $rootScope.showBack = true;
   $rootScope.component = {};
+  $rootScope.isLoading = 0;
 
   $rootScope.isLoading++;
   $scope.userList = UserServ.query(

@@ -5,8 +5,7 @@ function ($scope, $rootScope, $routeParams, UserItemServ) {
   $rootScope.showTab = 0;
   $rootScope.showBack = true;
   $rootScope.component = {};
-
-  $scope.isNoData = false;
+  $rootScope.isLoading = 0;
 
   userItemCtrlInit();
   

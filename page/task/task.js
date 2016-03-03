@@ -6,6 +6,7 @@ function ($scope, $rootScope, $routeParams, TaskServ, UserTaskServ) {
   $rootScope.showBack = true;
   $rootScope.component = {};
   $rootScope.component.addNewTask = true;
+  $rootScope.isLoading = 0;
 
   $scope.userId = $routeParams.userId ? $routeParams.userId : $rootScope.userId;
   $scope.processMode = $rootScope.processMode();

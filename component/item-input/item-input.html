@@ -18,17 +18,17 @@
         <div layout="row">
           <md-input-container flex>
             <label>Your answer</label>
-            <input ng-model="$ctrl.userDetail.allInput[$index]" required ng-disabled="status == 'done'">
+            <input ng-model="$ctrl.userDetail.allInput[$index]" required ng-disabled="$ctrl.status == 'done'">
           </md-input-container>
-          <md-input-container flex ng-if="$root.role == 'admin' || status ==' done'">
+          <md-input-container flex ng-if="$root.role == 'admin' || $ctrl.status == 'done'">
             <label>Correct answer</label>
             <input ng-model="input.answer">
           </md-input-container>
-          <i class="fa fa-times-circle" style="color:red" ng-if="input.status=='done' && input.answer!=input.userAnswer"></i>
-          <i class="fa fa-check-circle" style="color:green" ng-if="input.status=='done' && input.answer==input.userAnswer"></i>
+          <i class="fa fa-times-circle" style="color:red" ng-if="($root.role == 'admin' || $ctrl.status == 'done') && input.answer!=input.userAnswer"></i>
+          <i class="fa fa-check-circle" style="color:green" ng-if="($root.role == 'admin' || $ctrl.status == 'done') && input.answer==input.userAnswer"></i>
         </div>
       </div>
-      <md-button class="md-raised md-accent" type="submit" ng-show="formInput.$valid" 
+      <md-button class="md-raised md-accent" type="submit" ng-show="$ctrl.status != 'done' && formInput.$valid" 
         ng-click="$ctrl.processInput($ctrl.item, $ctrl.userDetail);"
       >
         <md-icon>check</md-icon>

@@ -5,6 +5,7 @@ function ($scope, $rootScope, $mdDialog, $mdSidenav, CoinServ, OrderServ, UserOr
   $rootScope.showTab = 0;
   $rootScope.showBack = true;
   $rootScope.component = {};
+  $rootScope.isLoading = 0;
   
   $scope.myCoin = 0;
   $scope.newOrder = new OrderServ();

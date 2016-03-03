@@ -6,6 +6,7 @@ function ($scope, $rootScope, $mdDialog, UserServ) {
   $rootScope.showBack = true;
   $rootScope.component = {};
   $rootScope.component.register = true;
+  $rootScope.isLoading = 0;
 
   $scope.allAvatar = ttoAvatarList();
   $scope.user = new UserServ();
