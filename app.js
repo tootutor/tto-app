@@ -6,5 +6,6 @@ var ttoApp = angular.module('app', [
 	'ngMorph', 
 	//'alAngularHero', 
 	'luegg.directives',
-	'ngResource'
+	'ngResource',
+  'onsen'
 ]);
