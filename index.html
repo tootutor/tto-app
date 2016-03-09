@@ -97,6 +97,9 @@
           <md-button class="md-icon-button" ng-if="$root.component.comment" ng-click="$root.showCommentDialog($event)">
             <md-icon>comment</md-icon>
           </md-button>
+          <md-button class="md-icon-button" ng-click="$root.toggleSidenav('right')" hide-gt-md>
+            <md-icon>comment</md-icon>
+          </md-button>
         </div>
       </md-toolbar>
 
@@ -178,6 +181,72 @@
       </md-button>
 
     </div>
+
+    <!-- Left NAV -->
+    <md-sidenav ng-if="$root.isLoggedIn"
+      layout="column" class="md-sidenav-right md-whiteframe-z2" 
+      md-component-id="right" md-is-locked-open="$mdMedia('gt-sm')"
+    >
+      <md-toolbar class="md-warn" layout="row" layout-align="start center">
+        <md-icon>comment</md-icon>
+        <span flex></span>
+        <div layout="column" class="md-toolbar-tools-bottom inset" layout-align="center center">
+        </div>
+      </md-toolbar>
+      <md-content layout-padding flex>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+        A;ljqwlkejkqwe <br>
+      </md-content>
+      <form layout="row" layout-align="center center" flex>
+        <md-input-container>
+          <textarea flex placeholder="Put comment here ..."></textarea>
+        </md-input-container>
+        <md-button class="md-fab">SEND</md-button>
+      </form>
+    </md-sidenav>
     
     <!-- Angular Material Dependencies -->
     <script src="libs/angular/angular.min.js"></script>

@@ -15,48 +15,48 @@
 <md-list>
 
   <md-item ng-if="$root.isLoggedIn" ng-repeat="menu in allMenu">
-  	<md-content class="side-nav-background" ng-click="$root.goRoute(menu.route, menu.mode)">
-	    <md-item-content md-ink-ripple layout="row" layout-align="start center">
-	      <div class="inset">
-	        <md-icon>{{menu.icon}}</md-icon>
-	      </div>
-	      <div class="inset">{{menu.title}}</div>
-	    </md-item-content>
-  	</md-content>
+    <md-content class="side-nav-background" ng-click="$root.goRoute(menu.route, menu.mode)">
+      <md-item-content md-ink-ripple layout="row" layout-align="start center">
+        <div class="inset">
+          <md-icon>{{menu.icon}}</md-icon>
+        </div>
+        <div class="inset">{{menu.title}}</div>
+      </md-item-content>
+    </md-content>
   </md-item>
 
-	<div ng-if="$root.role == 'admin'">
-	  <md-divider></md-divider>
+  <div ng-if="$root.role == 'admin'">
+    <md-divider></md-divider>
 
-	  <md-subheader ng-click="$root.adminShow=!$root.adminShow;">
-	  	Administrator <span ng-show="$root.adminShow">(-)</span><span ng-show="!$root.adminShow">(+)</span>
-	  </md-subheader>
+    <md-subheader ng-click="$root.adminShow=!$root.adminShow;">
+      Administrator <span ng-show="$root.adminShow">(-)</span><span ng-show="!$root.adminShow">(+)</span>
+    </md-subheader>
 
-		<div ng-show="$root.adminShow">
-		  <md-item ng-repeat="adminMenu in allAdminMenu">
-		  	<md-content class="side-nav-background" ng-click="$root.goRoute(adminMenu.route, adminMenu.mode)">
-		      <md-item-content md-ink-ripple layout="row" layout-align="start center">
-		        <div class="inset">
-		          <md-icon>{{adminMenu.icon}}</md-icon>
-		        </div>
-		        <div class="inset">{{adminMenu.title}}</div>
-		      </md-item-content>
-		  	</md-content>
-		  </md-item>
-		</div>	
-	</div>
+    <div ng-show="$root.adminShow">
+      <md-item ng-repeat="adminMenu in allAdminMenu">
+        <md-content class="side-nav-background" ng-click="$root.goRoute(adminMenu.route, adminMenu.mode)">
+          <md-item-content md-ink-ripple layout="row" layout-align="start center">
+            <div class="inset">
+              <md-icon>{{adminMenu.icon}}</md-icon>
+            </div>
+            <div class="inset">{{adminMenu.title}}</div>
+          </md-item-content>
+        </md-content>
+      </md-item>
+    </div>	
+  </div>
 
-	<md-divider></md-divider>
+  <md-divider></md-divider>
 
   <md-item ng-if="$root.isLoggedIn">
-  	<md-content class="side-nav-background" ng-click="logoutDialog($event);">
-	    <md-item-content md-ink-ripple layout="row" layout-align="start center">
-	      <div class="inset">
-	        <md-icon>lock_open</md-icon>
-	      </div>
-	      <div class="inset">Logout</div>
-	    </md-item-content>
-  	</md-content>
+    <md-content class="side-nav-background" ng-click="logoutDialog($event);">
+      <md-item-content md-ink-ripple layout="row" layout-align="start center">
+        <div class="inset">
+          <md-icon>lock_open</md-icon>
+        </div>
+        <div class="inset">Logout</div>
+      </md-item-content>
+    </md-content>
   </md-item>
-	
+  
 </md-list>
