@@ -1,5 +1,5 @@
-ttoApp.controller('categoryCtrl', ['$scope', '$rootScope', '$mdDialog', '$routeParams', 'ApiServ',
-function ($scope, $rootScope, $mdDialog, $routeParams, ApiServ) {
+ttoApp.controller('categoryCtrl', ['$scope', '$rootScope', '$mdDialog', '$routeParams', 'ApiServ', 'DataServ',
+function ($scope, $rootScope, $mdDialog, $routeParams, ApiServ, DataServ) {
   $rootScope.icon = 'class';
   $rootScope.title = 'Course';
   $rootScope.showTab = 0;
@@ -13,17 +13,30 @@ function ($scope, $rootScope, $mdDialog, $routeParams, ApiServ) {
   
   if ($scope.processMode == 'user' || $scope.processMode == 'tutor') {
     $rootScope.component.addCourse = true;
-    $rootScope.isLoading++;
-    $scope.allCategory = ApiServ.UserCategory.query({userId : $scope.userId}, function() {
-      $rootScope.isLoading--;
-    }, function(response) {
-      $rootScope.errorDialog(response, 'Loading Error !!!');
-    });
+    if (DataServ.UserCategory && DataServ.UserCategory.userId == $scope.userId) {
+      $scope.allCategory = DataServ.UserCategory.data;
+    } else {
+      $rootScope.isLoading++;
+      $scope.allCategory = ApiServ.UserCategory.query({userId : $scope.userId}, function(data) {
+        DataServ.UserCategory = {}
+        DataServ.UserCategory.data = data;
+        DataServ.UserCategory.userId = $scope.userId;
+        $rootScope.isLoading--;
+      }, function(response) {
+        $rootScope.errorDialog(response, 'Loading Error !!!');
+      });
+    }
   } else {
-    $rootScope.isLoading++;
-    $scope.allCategory = ApiServ.Category.query(function () {
-      $rootScope.isLoading--;
-    });
+    if (DataServ.Category) {
+      $scope.allCategory = DataServ.Category.data;
+    } else {
+      $rootScope.isLoading++;
+      $scope.allCategory = ApiServ.Category.query(function (data) {
+        DataServ.Category = {}
+        DataServ.Category.data = data;
+        $rootScope.isLoading--;
+      });
+    }
   }
 
   $scope.nextNavigate = function (category) {

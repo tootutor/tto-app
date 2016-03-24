@@ -1,5 +1,5 @@
-ttoApp.controller('courseCtrl', ['$scope', '$rootScope', '$routeParams', 'ApiServ',
-function ($scope, $rootScope, $routeParams, ApiServ) {
+ttoApp.controller('courseCtrl', ['$scope', '$rootScope', '$routeParams', 'ApiServ', 'DataServ',
+function ($scope, $rootScope, $routeParams, ApiServ, DataServ) {
   $rootScope.icon = 'class';
   $rootScope.title = 'Course';
   $rootScope.showTab = 0;
@@ -11,29 +11,42 @@ function ($scope, $rootScope, $routeParams, ApiServ) {
     $rootScope.component.addCourse = true;
   }
 
-  //$scope.allCategory = ApiServ.Category.query();
   $scope.userId = $routeParams.userId ? $routeParams.userId : $rootScope.userId;
   $scope.processMode = $rootScope.processMode();
   
   if ($scope.processMode == 'user' || $scope.processMode == 'tutor') {
-    $rootScope.isLoading++;
-    $scope.courseList = ApiServ.UserCourse.query(
-      {userId: $scope.userId, categoryId: $routeParams.categoryId}, 
-      function (data) {
-        $rootScope.isLoading--;
-      }, function (response) {
-        $rootScope.isLoading = 0;
-        $rootScope.errorDialog(response, 'Loading Error !!!');
-      }
-    );
+    if (DataServ.UserCourse && DataServ.UserCourse.userId == $scope.userId && DataServ.UserCourse.categoryId == $routeParams.categoryId) {
+      $scope.courseList = DataServ.UserCourse.data
+    } else {
+      $rootScope.isLoading++;
+      $scope.courseList = ApiServ.UserCourse.query(
+        {userId: $scope.userId, categoryId: $routeParams.categoryId}, 
+        function (data) {
+          DataServ.UserCourse = {};
+          DataServ.UserCourse.data = data;
+          DataServ.UserCourse.userId = $scope.userId;
+          DataServ.UserCourse.categoryId = $routeParams.categoryId;
+          $rootScope.isLoading--;
+        }, function (response) {
+          $rootScope.isLoading = 0;
+          $rootScope.errorDialog(response, 'Loading Error !!!');
+        }
+      );
+    }
   } else {
-    $rootScope.isLoading++;
-    $scope.courseList = ApiServ.Course.query(
-      {categoryId: $routeParams.categoryId},
-      function () {
-        $rootScope.isLoading--;
-      }
-    );
+    if (DataServ.Course && DataServ.Course.categoryId) {
+      $scope.courseList = DataServ.Course.data;
+    } else {
+      $rootScope.isLoading++;
+      $scope.courseList = ApiServ.Course.query(
+        {categoryId: $routeParams.categoryId},
+        function (data) {
+          DataServ.Course = {};
+          DataServ.Course.data = data;
+          $rootScope.isLoading--;
+        }
+      );
+    }
   }
 
   $scope.nextNavigate = function (course) {
