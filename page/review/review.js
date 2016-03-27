@@ -1,5 +1,5 @@
 ttoApp.controller('reviewCtrl', ['$scope', '$rootScope', 'ApiServ',
-function ($scope, $rootScope, TaskServ, ItemServ) {
+function ($scope, $rootScope, ApiServ) {
   $rootScope.icon = 'class';
   $rootScope.title = 'Course';
   $rootScope.showTab = 0;

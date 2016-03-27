@@ -1,5 +1,5 @@
-ttoApp.controller('registerCtrl', ['$scope', '$rootScope', '$mdDialog', 'UserServ', 
-function ($scope, $rootScope, $mdDialog, UserServ) {
+ttoApp.controller('registerCtrl', ['$scope', '$rootScope', '$mdDialog', 'ApiServ', 
+function ($scope, $rootScope, $mdDialog, ApiServ) {
   $rootScope.icon = "person_add";
   $rootScope.title = "Register"; 
   $rootScope.showTab = 0;
@@ -9,7 +9,7 @@ function ($scope, $rootScope, $mdDialog, UserServ) {
   $rootScope.isLoading = 0;
 
   $scope.allAvatar = ttoAvatarList();
-  $scope.user = new UserServ();
+  $scope.user = new ApiServ.User();
   $scope.user.avatarId = 'avatar-01';
 
   $scope.register = function () {

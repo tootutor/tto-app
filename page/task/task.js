@@ -1,5 +1,5 @@
 ttoApp.controller('taskCtrl', ['$scope', '$rootScope', '$routeParams', 'ApiServ',
-function ($scope, $rootScope, $routeParams, TaskServ, UserTaskServ) {
+function ($scope, $rootScope, $routeParams, ApiServ) {
   $rootScope.icon = 'class';
   $rootScope.title = 'Course';
   $rootScope.showTab = 0;
@@ -82,7 +82,7 @@ function ($scope, $rootScope, $routeParams, TaskServ, UserTaskServ) {
   });
 
   $scope.addNewTask = function () {
-    newTask = new TaskServ();
+    newTask = new ApiServ.Task();
     newTask.editMode = true;
     newTask.taskId = null;
     newTask.sectionId = $routeParams.sectionId;

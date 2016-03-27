@@ -1,5 +1,5 @@
 ttoApp.controller('sectionCtrl', ['$scope', '$rootScope', '$routeParams', 'ApiServ',
-function ($scope, $rootScope, $routeParams, SectionServ, UserSectionServ, CourseServ) {
+function ($scope, $rootScope, $routeParams, ApiServ) {
   $rootScope.icon = 'class';
   $rootScope.title = 'Course';
   $rootScope.showTab = 0;

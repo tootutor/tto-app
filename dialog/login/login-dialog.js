@@ -1,5 +1,5 @@
-ttoApp.controller('loginDialogCtrl', ['$scope', '$rootScope', '$mdDialog', 'AuthServ', '$http',
-function($scope, $rootScope, $mdDialog, AuthServ, $http) {
+ttoApp.controller('loginDialogCtrl', ['$scope', '$rootScope', '$mdDialog', 'ApiServ', '$http',
+function($scope, $rootScope, $mdDialog, ApiServ, $http) {
 
 	$scope.goRegister = function () {
 		$mdDialog.hide();
@@ -11,7 +11,7 @@ function($scope, $rootScope, $mdDialog, AuthServ, $http) {
   }
 
 	$scope.login = function () {
-		var auth = new AuthServ();
+		var auth = new ApiServ.Auth();
 		auth.email = $scope.email;
 		auth.password = $scope.password;
 		$rootScope.isLoading++;
